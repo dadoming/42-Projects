@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 00:45:56 by dadoming          #+#    #+#             */
-/*   Updated: 2021/10/29 03:45:49 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/02 17:24:56 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,3 @@ char *ft_strtrim(char const *s1, char const *set)
     trim[j] = '\0';
     return (trim);
 }
-/*
-int main(void)
-{
-    char *str = "eeeeesta string sera trimedee";
-    char *e = "e";
-
-    printf("%s", ft_strtrim(str, e));
-}
-*/

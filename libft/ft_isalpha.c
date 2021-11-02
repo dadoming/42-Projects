@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 10:47:18 by dadoming          #+#    #+#             */
-/*   Updated: 2021/10/29 03:40:29 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/02 17:13:55 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,17 +21,3 @@ int	ft_isalpha(int c)
 	else
 		return (0);
 }
-/*
-int main()
-{
-	int i = 0;
-	char s[] = "@ABCDEFGHIJKLMNOPQRSTUVWXYZ[";
-	while (s[i] != '\0')
-	{
-		if (ft_isalpha(s[i]) != 0)
-			printf("%c", s[i]);
-		if (ft_isalpha(s[i]) == 0)
-			printf("!");
-		i++;
-	}
-}*/

@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 23:39:15 by dadoming          #+#    #+#             */
-/*   Updated: 2021/10/29 03:44:38 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/02 17:22:41 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,12 +38,3 @@ char *ft_strjoin(const char *s1, const char *s2)
     str[i] = '\0';
     return (str);
 }
-/*
-int main(void)
-{
-    char *s1 = "";
-    char *s2 = "";
-    
-    printf("%s",ft_strjoin(s1, s2));
-}
-*/

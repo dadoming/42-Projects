@@ -6,19 +6,12 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 13:07:07 by dadoming          #+#    #+#             */
-/*   Updated: 2021/10/29 03:45:20 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/02 17:24:14 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-/*
-char f(unsigned int i, char c)
-{
-  char j;
-  j = i + c;
-  return (j);
-}
-*/
+
 char *ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
   int i;

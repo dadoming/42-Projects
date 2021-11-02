@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 20:55:47 by dadoming          #+#    #+#             */
-/*   Updated: 2021/10/29 03:43:49 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/02 17:17:08 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char *ft_strdup(const char *str)
     int i;
 
     i = 0;
-    dup = ft_malloc((1 + ft_strlen(str)) * sizeof(char));
+    dup = malloc((1 + ft_strlen(str)) * sizeof(char));
     if (dup == NULL)
         return (NULL);
     while(str[i] != '\0')
@@ -29,10 +29,3 @@ char *ft_strdup(const char *str)
     dup[i] = '\0';
     return (dup);
 }  
-/*
-int main(void)
-{
-    char s[] = "lololololo";
-    printf("%s", ft_strdup(s));
-}
-*/

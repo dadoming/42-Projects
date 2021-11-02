@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 20:09:10 by dadoming          #+#    #+#             */
-/*   Updated: 2021/10/29 03:45:44 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/02 17:24:48 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,11 +25,3 @@ char *ft_strrchr(const char *str, int c)
 	}
 	return(NULL); 
 }
-/*
-int main(void)
-{
-	char str[] = "akfyd.aldfbl";
-	char *aux = ft_strrchr(str, 'b');
-	printf("%s", aux);
-}
-*/

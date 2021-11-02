@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 18:31:08 by dadoming          #+#    #+#             */
-/*   Updated: 2021/10/29 03:40:00 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/02 17:13:34 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,10 +39,3 @@ int ft_atoi(const char *str)
         return (0);
     return(res * neg);
 }
-/*
-int main(void)
-{
-    char a[] = "  -2147483649";
-    printf("%d", ft_atoi(a));
-}
-*/

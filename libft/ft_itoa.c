@@ -6,13 +6,13 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 18:49:38 by dadoming          #+#    #+#             */
-/*   Updated: 2021/10/29 03:41:10 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/02 17:18:48 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_lenght(int n) //calcula a lenght da string
+static int ft_lenght(int n)
 {
     int len;
 
@@ -32,7 +32,7 @@ int ft_lenght(int n) //calcula a lenght da string
     return (len);
 }
 
-char *ft_filler(int aux, int len, char *str)
+static char *ft_filler(int aux, int len, char *str)
 {
     if (aux == 0)
         str[len - 1] = '0';
@@ -56,18 +56,11 @@ char *ft_itoa(int n)
     long aux;
 
     aux = n;
+    if (aux == -2147483648)
+        return (ft_strdup("-2147483648"));
     len = ft_lenght(aux);
     if(!(str = malloc(sizeof(char) * (len + 1))))
         return (NULL);
     str[len] = '\0';
-    if (aux == -2147483648)
-        return (ft_strdup("-2147483648"));
     return(ft_filler(aux, len, str));
 }
-/*
-int main(void)
-{
-    int n = 0;
-    printf("%s", ft_itoa(n));
-}
-*/

@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 21:18:49 by dadoming          #+#    #+#             */
-/*   Updated: 2021/10/29 03:46:11 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/02 17:25:03 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,10 +38,3 @@ char *ft_substr(char const *str, unsigned int start, size_t len)
     sub[i] = '\0';
     return (sub);
 }
-/*
-int main(void)
-{
-    char *str = "lavaiela";
-    printf("%s", ft_substr(str, 1, 2));
-}
-*/

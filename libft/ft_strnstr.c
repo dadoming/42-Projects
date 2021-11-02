@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 16:16:54 by dadoming          #+#    #+#             */
-/*   Updated: 2021/10/29 03:45:38 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/02 17:24:41 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,11 +37,3 @@ char *ft_strnstr(const char *str, const char *to_find, size_t len)
     }
     return(NULL);
 }
-/*
-int main(void)
-{
-    char hay[] = "teste se encontrou";
-    char nee[] = "encontrou";
-    printf("%s", ft_strnstr(hay, nee, 50));
-}
-*/

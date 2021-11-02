@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 18:36:27 by dadoming          #+#    #+#             */
-/*   Updated: 2021/10/29 03:42:02 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/02 17:20:47 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,11 +26,3 @@ int ft_memcmp(const void *str1, const void *str2, size_t n)
     }
     return (auxstr1[i] - auxstr2[i]);
 }
-/*
-int main(void)
-{
-    char str1[] = "";
-    char str2[] = "";
-
-    printf("%d",ft_memcmp(str1, str2, 0));
-}*/

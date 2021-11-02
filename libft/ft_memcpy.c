@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:38:07 by dadoming          #+#    #+#             */
-/*   Updated: 2021/10/29 03:42:19 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/02 17:20:53 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,13 +28,3 @@ void *ft_memcpy(void *restrict dst, const void *restrict src, size_t n)
 	}
 	return (dst);
 }
-/*
-int main(void)
-{
-	char src[] = "bora la";
-			//	  [-]
-			//		[-]
-	ft_memcpy(src, src + 2, 3);
-	printf("%s", src);
-}
-*/

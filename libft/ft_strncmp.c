@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/20 17:00:53 by dadoming          #+#    #+#             */
-/*   Updated: 2021/10/29 03:45:29 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/02 17:24:33 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,12 +20,3 @@ int ft_strncmp(const char *str1, const char *str2, size_t n)
         i++;
     return(str1[i] - str2[i]);
 }
-/*
-int main(void)
-{
-    char *str1 = "abcd";
-    char *str2 = "bcde";
-
-    printf("%d", ft_strncmp(str1, str2, 2));
-}
-*/

@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 17:07:58 by dadoming          #+#    #+#             */
-/*   Updated: 2021/10/29 03:42:27 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/02 17:21:08 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,12 +25,12 @@ void *memmove(void *dst, const void *src, size_t len)
         return (0);
     if(auxdst > auxsrc)
     {
-        while (++i <= len)                                  //Em casos em que o destino seja maior que o source, temos que 
-            auxdst[len - i] = auxsrc[len - i];              //comecar a copiar da frente para tras, dai o len - i
+        while (++i <= len)                                  
+            auxdst[len - i] = auxsrc[len - i];              
     }                                                
     else
     {
-        while(len-- > 0)                                    //em caso de nao ser necessario, faz-se uma cpy normal
+        while(len-- > 0)
             *auxdst++ = *auxsrc++;
     }    
     return(dst);

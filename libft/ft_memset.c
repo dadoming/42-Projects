@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 15:17:56 by dadoming          #+#    #+#             */
-/*   Updated: 2021/10/29 03:42:32 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/02 17:21:13 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,10 +24,3 @@ void *ft_memset(void *str, int to_swap, size_t len)
 	}
 	return(str);
 }
-/*
-int main(void)
-{
-	char s[] = "ola tudo bem";
-	printf("%s", ft_memset(s, '!', 3));
-}
-*/

@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 17:03:06 by dadoming          #+#    #+#             */
-/*   Updated: 2021/10/29 03:42:51 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/02 17:21:23 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,10 +34,3 @@ void ft_putnbr_fd(int n, int fd)
         ft_putchar_fd(a, fd)
     }
 }
-/*
-int main(void)
-{
-    int a;
-    a = 5;
-    ft_putnbr_fd(a, 1);
-}*/
