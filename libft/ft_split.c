@@ -6,40 +6,41 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/25 15:41:12 by dadoming          #+#    #+#             */
-/*   Updated: 2021/10/29 03:43:38 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/05 00:03:29 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
+#include <stdio.h>
 #include "libft.h"
 
-int ft_amount_of_splits(char const *s, char c)
+static int ft_amount_of_splits(char const *s, char c)
 {
     int split_amount;
     int i;
 
     split_amount = 0;
     i = 0;
-    while(s[i] != '\0')    //contar a quantidade de palavras
+    while(s[i])    //contar a quantidade de palavras
     {
         if (s[i] == c)
-        {
             split_amount++;
-        }
         i++;
+        while(s[i] == c)
+            i++;
     }
     return (split_amount);
 }
 
-int ft_amount_of_letters(char const *s, char c)
+static int ft_amount_of_letters(char const *s, char c)
 {
     static int i; //uma variavel static e inicializada em 0 se nao for inicializada
     int word_amount;
     
     word_amount = 0;
     
-    if (s[i] == c)
+    while (s[i] == c)
         i++;
-    while(s[i] != '\0' && s[i] != c)     // contar a quantidade de letras que cada palavra tendo a variavel
+    while(s[i] && s[i] != c)     // contar a quantidade de letras que cada palavra tendo a variavel
     {                                    // i como static para nao alterar com cada chamada da funcao
         i++;
         word_amount++;
@@ -47,10 +48,10 @@ int ft_amount_of_letters(char const *s, char c)
     return (word_amount);
 }
 
-char **ft_do_the_split(char const *s, char c, int split_amount, char **split, int i, int j, int main_string_iterator)
+static char **ft_do_the_split(char const *s, char c, int split_amount, char **split, int i, int j, int main_string_iterator)
 {
     int word_amount;
-    
+
     while(i < split_amount)
     {
         word_amount = ft_amount_of_letters(s, c) + 1;
@@ -58,6 +59,8 @@ char **ft_do_the_split(char const *s, char c, int split_amount, char **split, in
             return (NULL);
         while (j < word_amount)
         {
+            while (s[main_string_iterator] == c)
+                main_string_iterator++;
             split[i][j++] = (char)s[main_string_iterator];
             main_string_iterator++;
             if(s[main_string_iterator] == c) //  itera um caracter para a frente quando encontra o caracter c, coloca o null
@@ -82,6 +85,7 @@ char **ft_split(char const *s, char c)
     int i;
     int j;
 
+    
     j = 0;
     i = 0;
     main_string_iterator = 0;
@@ -95,16 +99,23 @@ char **ft_split(char const *s, char c)
 /*
 int main(void)
 {
-    char *str = "vai toma";
+    char *str = "     split g   dibfg    dbhsdk     !    ";
     char c = ' ';    
     char **strfinal;
     int i = 0;
     
     strfinal = ft_split(str, c);
-    while (i < ft_amount_of_splits(str, c) + 1)
+    while (i <= ft_amount_of_splits(str, c) + 1)
     {
         printf("%s\n", strfinal[i]);
         i++;
     }
 }
+
+split crasha quando:
+
+--> split nao funciona com uma palavra "             olol" c + ' '
+--> nao funciona se for separado por \0 
+--> if input str == NULL e c = ' ', seg fault ou nao faz return
+-->o output de NULL e suposto aparecer??
 */

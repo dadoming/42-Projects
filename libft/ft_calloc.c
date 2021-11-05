@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 20:30:20 by dadoming          #+#    #+#             */
-/*   Updated: 2021/10/29 03:40:09 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/04 16:10:12 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void *ft_calloc(size_t count, size_t size)
 {
     void *c;
     c = malloc(count * size);
-    if (c == '\0')
+    if (c == NULL)
         return (NULL);
     ft_memset(c, 0, (count * size));
     return(c);

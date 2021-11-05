@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:30:57 by dadoming          #+#    #+#             */
-/*   Updated: 2021/10/29 03:40:05 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/04 16:09:18 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,5 @@
 
 void ft_bzero(void *str, size_t n)
 {
-	if(n == 0)
-		return(str);
 	ft_memset(str, '\0', n);
 }

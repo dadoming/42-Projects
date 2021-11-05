@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 18:00:50 by dadoming          #+#    #+#             */
-/*   Updated: 2021/10/29 03:41:53 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/04 16:54:13 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ int ft_lstsize(t_list *lst)
     int i;
     
     i = 0;
-    while(lst != '\0')
+    while(lst != NULL)
     {
         lst = lst -> next;
         i++;

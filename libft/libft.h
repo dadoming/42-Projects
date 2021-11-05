@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 17:25:03 by dadoming          #+#    #+#             */
-/*   Updated: 2021/10/29 03:47:32 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/05 00:03:56 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ typedef struct  s_list
 }               t_list;
 
 t_list *ft_lstnew(void *content);                                                           //completo?
-void ft_lstaddfront(t_list **lst, t_list *new);                                             //completo?
+void ft_lstadd_front(t_list **lst, t_list *new);                                             //completo?
 int ft_lstsize(t_list *lst);                                                                //completo?
 t_list *ft_lstlast(t_list *lst);                                                            //completo?
 void ft_lstadd_back(t_list **lst, t_list *new);                                             //completo?
@@ -59,13 +59,13 @@ int ft_atoi(const char *str);                                                   
 
 //PART 2
 void *ft_calloc(size_t count, size_t size);                                                 //completo!
-char *ft_strdup(const char *str);                                                           //completo!
+char *ft_strdup(const char *str);                                                           //NOT / IN DOUBT
 
 //PART 3
-char *ft_substr(char const *str, unsigned int start, size_t len);                           //completo!
-char *ft_strjoin(const char *s1, const char *s2);                                           //CORRIGIR!
-char *ft_strtrim(char const *s1, char const *set);                                          //completo!
-char **ft_split(char const *s, char c);                                                     //completa!
+char *ft_substr(char const *str, unsigned int start, size_t len);                           //ERRO MALLOC START >= FT_STRLEN(STR)
+char *ft_strjoin(const char *s1, const char *s2);                                           //MALLOC NAO PROTEGIDO
+char *ft_strtrim(char const *s1, char const *set);                                          //ERRO FULL BLANK
+char **ft_split(char const *s, char c);                                                     //MUITOS ERROS
 char *ft_itoa(int n);                                                                       //completa!
 char *ft_strmapi(char const *s, char (*f)(unsigned int, char));                             //completa!
 void ft_striteri(char *s, void (*f)(unsigned int, char*));                                  //completa!

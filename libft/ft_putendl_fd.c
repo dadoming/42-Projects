@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 16:59:14 by dadoming          #+#    #+#             */
-/*   Updated: 2021/10/29 03:42:48 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/04 16:14:42 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 void ft_putendl_fd(char *s, int fd)
 {
     if (*s == '\0' || fd < 0)
-        return();
+        return;
     ft_putstr_fd(s, fd);
     ft_putchar_fd('\n', fd);
 }

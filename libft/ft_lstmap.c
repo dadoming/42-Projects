@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 19:28:26 by dadoming          #+#    #+#             */
-/*   Updated: 2021/10/29 03:41:47 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/04 18:10:16 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,16 +15,23 @@
 t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void(*del)(void *))
 {
     t_list *newlist;
+    t_list *temp;
     
-    if(lst == NULL)
-        return;
-    while (lst -> next != '\0')
-   {
-        *newlist = malloc(sizeof(t_list));
-        newlist -> content = f(lst -> next);
-        free(*lst -> content);
+    if(lst == NULL || del == NULL || f == NULL)
+        return(NULL);
+    newlist = ft_lstnew(f(lst -> content));
+    temp = newlist;
+    while(lst -> next != NULL)
+    {
         lst = lst -> next;
+        temp -> next = ft_lstnew(f(lst -> content));
+        temp = temp -> next;
+        if(temp == NULL)
+        {
+            ft_lstclear(&newlist, del);
+            return (NULL);
+        }
     }
-    *newlist = malloc(sizeof(t_list));
-    newlist -> next= '\0';
+    temp -> next = NULL;
+    return(newlist);
 }
