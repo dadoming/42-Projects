@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 16:55:28 by dadoming          #+#    #+#             */
-/*   Updated: 2021/11/04 16:16:28 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/07 13:19:01 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@ void ft_putstr_fd(char *s, int fd)
     int i;
 
     i = 0;
-    if (s[i] == '\0' || fd < 0)
+    if (!s || fd < 0)
         return;
     while(s[i] != '\0')
     {

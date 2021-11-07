@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 17:25:03 by dadoming          #+#    #+#             */
-/*   Updated: 2021/11/05 00:03:56 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/07 14:18:04 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,10 +43,10 @@ int ft_isprint(int c);                                                          
 size_t ft_strlen(const char *str);                                                          //completo!
 void *ft_memset(void *str, int to_swap, size_t len);                                        //completo!
 void ft_bzero(void *str, size_t n);                                                         //completo!
-void *ft_memcpy(void *restrict dst, const void *restrict src, size_t n);                    //completo!
+void *ft_memcpy(void *dst, const void *src, size_t n);                                      //completo!
 void *ft_memmove(void *dst, const void *src, size_t len);                                   //completo!
-size_t ft_strlcpy(char * restrict dst, const char * restrict src, size_t dstsize);          //completo!
-size_t ft_strlcat(char * restrict dst, const char * restrict src, size_t dstsize);          //completo!
+size_t ft_strlcpy(char * dst, const char * src, size_t dstsize);                            //completo!
+size_t ft_strlcat(char * dst, const char * src, size_t dstsize);                            //completo!
 int ft_toupper(int letter);                                                                 //completo!
 int ft_tolower(int letter);                                                                 //completo!
 char *ft_strchr(const char *str, int c);                                                    //completo!

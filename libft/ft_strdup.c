@@ -6,11 +6,12 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 20:55:47 by dadoming          #+#    #+#             */
-/*   Updated: 2021/11/04 20:48:05 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/07 13:49:38 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
+#include <stdio.h>
 
 char *ft_strdup(const char *str)
 {
@@ -28,6 +29,6 @@ char *ft_strdup(const char *str)
     }
     dup[i] = '\0';
     return (dup);
-}  
+}
 
 //tambem pode ser feito com memmove

@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 17:13:39 by dadoming          #+#    #+#             */
-/*   Updated: 2021/10/29 03:41:50 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/07 14:53:41 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 t_list *ft_lstnew(void *content)
 {
-    t_list *new_node;
+    t_list  *new_node;
     
     new_node = malloc(sizeof(t_list));
     if(new_node == NULL)

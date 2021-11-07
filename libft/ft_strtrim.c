@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/22 00:45:56 by dadoming          #+#    #+#             */
-/*   Updated: 2021/11/04 21:39:28 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/07 11:43:46 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,26 +15,22 @@
 char *ft_strtrim(char const *s1, char const *set)
 {
     int i;
-    int j;
     int len;
     char *trim;
-
+    
+    if(!s1)
+        return 0;
+    if(!set)
+        return (ft_strdup(s1));
     i = 0;
-    while ((s1[i] != '\0') && ft_strchr(set, s1[i])) 
+    while (s1[i] && ft_strchr(set, s1[i])) 
         i++;
-    len = ft_strlen(s1); 
-    while ((s1[len - 1] != 0) && ft_strchr(set, s1[len - 1])) 
+    len = ft_strlen((char *)s1 + i); 
+    while (len && (s1[len + i - 1] != 0) && ft_strchr(set, s1[len + i - 1])) 
         len--;
-    trim = malloc(len - i + 1);
-    if (trim == NULL)
-        return (NULL);
-    j = 0;
-    while (i < len)
-    {
-        trim[j] = s1[i];
-        j++;
-        i++;
-    }
-    trim[j] = '\0';
+    if (!(trim = malloc(len + 1)))
+        return (0);
+    ft_strlcpy(trim, s1 + i, len + 1);
+    trim[len] = '\0';
     return (trim);
 }

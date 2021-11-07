@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/26 17:03:06 by dadoming          #+#    #+#             */
-/*   Updated: 2021/11/04 16:16:16 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/07 14:11:34 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,10 @@ void ft_putnbr_fd(int n, int fd)
     int a;
 
     if (n == -2147483648)
+    {
         ft_putstr_fd("-2147483648", fd);
+        return;
+    }
     if (n < 0)
     {
         ft_putchar_fd('-', fd);

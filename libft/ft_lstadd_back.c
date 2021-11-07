@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 18:20:57 by dadoming          #+#    #+#             */
-/*   Updated: 2021/11/04 16:37:28 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/07 14:51:17 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,11 +14,11 @@
 
 void ft_lstadd_back(t_list **lst, t_list *new)
 {
-    t_list *temp;
-    
-    if(*lst == NULL)
+    t_list  *temp;
+
+    if (!new)
         return;
-    if(new == NULL)
+    if (!*lst)
     {
         *lst = new;
         return;

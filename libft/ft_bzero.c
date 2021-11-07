@@ -6,13 +6,13 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 16:30:57 by dadoming          #+#    #+#             */
-/*   Updated: 2021/11/04 16:09:18 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/07 14:43:31 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_bzero(void *str, size_t n)
+void	ft_bzero(void *str, size_t n)
 {
 	ft_memset(str, '\0', n);
 }

@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 19:28:26 by dadoming          #+#    #+#             */
-/*   Updated: 2021/11/04 18:10:16 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/07 14:53:34 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,21 +17,21 @@ t_list *ft_lstmap(t_list *lst, void *(*f)(void *), void(*del)(void *))
     t_list *newlist;
     t_list *temp;
     
-    if(lst == NULL || del == NULL || f == NULL)
+    if (!lst || !del || !f)
         return(NULL);
     newlist = ft_lstnew(f(lst -> content));
     temp = newlist;
-    while(lst -> next != NULL)
+    while (lst -> next != NULL)
     {
         lst = lst -> next;
         temp -> next = ft_lstnew(f(lst -> content));
         temp = temp -> next;
-        if(temp == NULL)
+        if (!temp)
         {
             ft_lstclear(&newlist, del);
-            return (NULL);
+            return (0);
         }
     }
     temp -> next = NULL;
-    return(newlist);
+    return (newlist);
 }

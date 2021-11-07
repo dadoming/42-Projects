@@ -6,24 +6,21 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/04 18:19:20 by dadoming          #+#    #+#             */
-/*   Updated: 2021/11/04 18:19:21 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/07 14:51:37 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void ft_lstaddfront(t_list **lst, t_list *new)
+void ft_lstadd_front(t_list **lst, t_list *new)
 {
-    t_list *temp;
-    
-    if(lst == NULL)
+    if(!new)
         return;
-    if(new == NULL)
+    if(!lst)
     {
         *lst = new;
         return;
     }
-    temp = *lst;
+    new -> next = *lst;
     *lst = new;
-    new -> next = temp;
 }

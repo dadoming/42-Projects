@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/18 18:16:56 by dadoming          #+#    #+#             */
-/*   Updated: 2021/10/29 03:45:08 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/07 13:08:50 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 size_t ft_strlen(const char *str)
 {
-	int i; 
+	size_t i; 
 	i = 0;
 	while (str[i] != '\0')
 	{
