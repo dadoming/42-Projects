@@ -61,6 +61,36 @@ char	**ft_split(char const *s, char c)
 	}
 }
 
+char	**ft_split(char const *s, char c)
+{
+	int		end;
+	int		i;
+	int		number_of_splits;
+	char	**split;
+  const char *start;
+
+	i = 0;
+	number_of_splits = ft_amount_of_splits(s, c) + 1;
+	split = (char **)calloc(number_of_splits, 1);
+	if (!split)
+		return (0);
+	while (*s)
+	{
+		while (*s == c)
+			s++;
+    start = s;
+    end = 0;
+		while (*s != c)
+		{
+			end++;
+			s++;
+		}
+    if (*(s - 1) != c )
+      split[i++] = ft_substr(start, 0, end);
+	}
+  return(split);
+}
+
 int	main(void)
 {
 	char	*str;
