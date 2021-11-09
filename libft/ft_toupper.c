@@ -6,15 +6,15 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 18:25:37 by dadoming          #+#    #+#             */
-/*   Updated: 2021/10/29 03:46:24 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/09 15:35:10 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_toupper(int letter)
+int	ft_toupper(int letter)
 {
-	if(letter >= 'a' && letter <= 'z')
+	if (letter >= 'a' && letter <= 'z')
 		letter -= 32;
-	return(letter);
+	return (letter);
 }

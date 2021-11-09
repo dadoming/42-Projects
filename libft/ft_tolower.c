@@ -6,15 +6,15 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/19 19:26:12 by dadoming          #+#    #+#             */
-/*   Updated: 2021/10/29 03:46:19 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/09 15:34:59 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-int ft_tolower(int letter)
+int	ft_tolower(int letter)
 {
-	if(letter >= 'A' && letter <= 'Z')
+	if (letter >= 'A' && letter <= 'Z')
 		letter += 32;
 	return (letter);
 }
