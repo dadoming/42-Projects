@@ -6,12 +6,11 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 20:55:47 by dadoming          #+#    #+#             */
-/*   Updated: 2021/11/09 16:02:05 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/10 14:48:50 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 char	*ft_strdup(const char *str)
 {

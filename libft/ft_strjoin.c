@@ -6,12 +6,11 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 23:39:15 by dadoming          #+#    #+#             */
-/*   Updated: 2021/11/09 16:02:35 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/10 14:48:56 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-#include <stdio.h>
 
 char	*ft_strjoin(const char *s1, const char *s2)
 {

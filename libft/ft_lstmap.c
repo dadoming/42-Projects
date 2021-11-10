@@ -6,32 +6,35 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 19:28:26 by dadoming          #+#    #+#             */
-/*   Updated: 2021/11/09 16:42:43 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/10 16:47:44 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void(*del)(void *))
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	t_list	*newlist;
 	t_list	*temp;
+	t_list	*new_list;
 
-	if (!lst || !del || !f)
+	if (!lst)
+		return (NULL);
+	temp = ft_lstnew(f(lst->content));
+	if (!temp)
 		return (0);
-	newlist = ft_lstnew(f(lst -> content));
-	temp = newlist;
-	while (lst -> next != NULL)
+	new_list = temp;
+	lst = lst->next;
+	while (lst)
 	{
-		lst = lst -> next;
-		temp -> next = ft_lstnew(f(lst -> content));
-		temp = temp -> next;
-		if (!temp)
+		temp->next = ft_lstnew(f(lst->content));
+		if (!temp->next)
 		{
-			ft_lstclear(&newlist, del);
-			return (0);
+			ft_lstclear(&new_list, del);
+			return (NULL);
 		}
+		temp = temp->next;
+		lst = lst->next;
 	}
-	temp -> next = NULL;
-	return (newlist);
+	temp->next = NULL;
+	return (new_list);
 }
