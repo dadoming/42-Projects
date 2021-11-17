@@ -32,7 +32,7 @@ char	*ft_substr(char const *str, unsigned int start, size_t len)
 	sub = ft_calloc((len + 1), sizeof(char));
 	if (!sub)
 		return (0);
-	while (len--)
+	while (len--) // (i != len) talvez a solução correta
 	{
 		sub[i] = str[start + i];
 		i++;
