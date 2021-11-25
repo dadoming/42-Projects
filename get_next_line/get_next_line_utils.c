@@ -6,20 +6,9 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 15:43:50 by dadoming          #+#    #+#             */
-/*   Updated: 2021/11/07 15:54:46 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/25 17:17:30 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-int ft_strlen(char *str)
-{
-    int i;
-
-    i = 0;
-    if (!str)
-        return (0);
-    while (str[i] != '\0')
-        i++;
-    return (i);
-}
