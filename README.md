@@ -6,4 +6,4 @@ Everything is done by myself and, since there is always room for improvement, fe
 Projects:
 > libft: Finished with 108, error on substr, but easily fixable!
 
-> Currently working on get_next_line: still on the thinking process. this one is harder 😜;
+> Currently working on get_next_line: almost done.
