@@ -115,3 +115,339 @@ https://stackoverflow.com/questions/19769542/reading-from-file-using-read-functi
 
 
 https://pubs.opengroup.org/onlinepubs/000095399/functions/read.html
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+*/
+andre get next line:
+
+#include "get_next_line.h"
+########################
+char	*find_last_index(char *str)
+{
+	char	*res;
+	int		i;
+
+	res = malloc(sizeof(char));
+	if (res == NULL || str == NULL || ft_strlen(str) == 0)
+		return (NULL);
+	res[0] = '\0';
+	i = 0;
+	while (str[i] != '\0')
+	{
+		res = str_appendc(res, str[i]);
+		if (str[i] == '\n' || str == NULL)
+			break ;
+		i++;
+	}
+	return (res);
+}
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	char	*new;
+	int		i;
+	int		k;
+
+	if (s1 == NULL || s1 == NULL)
+		return (NULL);
+	new = (char *)malloc(sizeof(char) * (ft_strlen(s1) + ft_strlen(s2) + 1));
+	if (new == NULL)
+		return (NULL);
+	i = -1;
+	while (s1[++i] != '\0')
+		new[i] = s1[i];
+	k = -1;
+	while (s2[++k] != '\0')
+		new[i + k] = s2[k];
+	new[i + k] = '\0';
+	return (new);
+}
+
+void	init_staticstr(char *str)
+{
+	str = (char *)malloc(sizeof(char));
+	str[0] = '\0';
+}
+#########################
+char	*get_next_line(int fd)
+{
+	static char	*str;
+	char		temp[BUFFER_SIZE + 1];
+	char		*res;
+	int			r_count;
+
+	r_count = BUFFER_SIZE;
+	init_staticstr(str);
+	if (str == NULL)
+		str = (char *)malloc(sizeof(char));
+	if (fd < 0 || BUFFER_SIZE < 0 || str == NULL)
+		return (NULL);
+	while (!ft_strchr(str, '\n') && r_count == BUFFER_SIZE)
+	{
+		r_count = read(fd, &temp, BUFFER_SIZE);
+		if (r_count == -1)
+			return (NULL);
+		else if (r_count == 0)
+			break ;
+		temp[r_count] = '\0';
+		str = ft_strjoin(str, temp);
+	}
+	res = find_last_index(str);
+	str += ft_strlen(res);
+	return (res);
+}
+
+void	ft_putstr(char *str)
+{
+	while (*str != '\0')
+		write(1, str++, 1);
+}
+
+int	ft_strlen(char *str)
+{
+	int	i;
+
+	i = 0;
+	if (str == 0)
+		return (0);
+	while (str[i] != '\0')
+		i++;
+	return (i);
+}
+
+char	*ft_strchr(const char *s, int c)
+{
+	int	i;
+	
+	i = 0;
+	while (s[i] != '\0')
+	{
+		if (s[i] == (char)c)
+			return ((char *)s + i);
+		i++;
+	}
+	if (c == '\0')
+		return ((char *)s + i);
+	return (NULL);
+}
+##################
+char	*str_appendc(char *str, char c)
+{
+	char	*temp;
+	int		i;
+
+	temp = (char *)malloc(sizeof(char) * (ft_strlen(str) + 2));
+	if (temp == NULL)
+		return (NULL);
+	i = 0;
+	if (str != 0)
+	{
+		while (str[i] != '\0')
+		{
+			temp[i] = str[i];
+			i++;
+		}
+		free(str);
+	}
+	temp[i++] = c;
+	temp[i] = '\0';
+	return (temp);
+}
+
+t_read	*new_read(void)
+{
+	t_read	*new;
+
+	new = (t_read *)malloc(sizeof(t_read));
+	if (new == NULL)
+		return (NULL);
+	new->r_total = 0;
+	new->r_count = 0;
+	new->temp = '\0';
+	return (new);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+get next line by ruben
+
+#include "get_next_line.h"
+
+char	*ft_get_line(char *save)
+{
+	int		i;
+	char	*s;
+
+	i = 0;
+	if (!save[i])
+		return (NULL);
+	while (save[i] && save[i] != '\n')
+		i++;
+	s = (char *)malloc(sizeof(char) * (i + 2));
+	if (!s)
+		return (NULL);
+	i = 0;
+	while (save[i] && save[i] != '\n')
+	{
+		s[i] = save[i];
+		i++;
+	}
+	if (save[i] == '\n')
+	{
+		s[i] = save[i];
+		i++;
+	}
+	s[i] = '\0';
+	return (s);
+}
+
+char	*ft_save(char *save)
+{
+	int		i;
+	int		c;
+	char	*s;
+
+	i = 0;
+	while (save[i] && save[i] != '\n')
+		i++;
+	if (!save[i])
+	{
+		free(save);
+		return (NULL);
+	}
+	s = (char *)malloc(sizeof(char) * (ft_strlen(save) - i + 1));
+	if (!s)
+		return (NULL);
+	i++;
+	c = 0;
+	while (save[i])
+		s[c++] = save[i++];
+	s[c] = '\0';
+	free(save);
+	return (s);
+}
+
+char	*ft_read_and_save(int fd, char *save)
+{
+	char	*buff;
+	int		read_bytes;
+
+	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
+	if (!buff)
+		return (NULL);
+	read_bytes = 1;
+	while (!ft_strchr(save, '\n') && read_bytes != 0)
+	{
+		read_bytes = read(fd, buff, BUFFER_SIZE);
+		if (read_bytes == -1)
+		{
+			free(buff);
+			return (NULL);
+		}
+		buff[read_bytes] = '\0';
+		save = ft_strjoin(save, buff);
+	}
+	free(buff);
+	return (save);
+}
+
+char	*get_next_line(int fd)
+{
+	char		*line;
+	static char	*save;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (0);
+	save = ft_read_and_save(fd, save);
+	if (!save)
+		return (NULL);
+	line = ft_get_line(save);
+	save = ft_save(save);
+	return (line);
+}
+
+size_t	ft_strlen(char *str)
+{
+	size_t	c;
+
+	c = 0;
+	if (!str)
+		return (0);
+	while (str[c] != '\0')
+		c++;
+	return (c);
+}
+
+char	*ft_strchr(char *s, int c)
+{
+	int	i;
+
+	i = 0;
+	if (!s)
+		return (0);
+	if (c == '\0')
+		return ((char *)&s[ft_strlen(s)]);
+	while (s[i] != '\0')
+	{
+		if (s[i] == (char) c)
+			return ((char *)&s[i]);
+		i++;
+	}
+	return (0);
+}
+
+char	*ft_strjoin(char *s1, char *s2)
+{
+	size_t	i;
+	size_t	c;
+	char	*str;
+
+	if (!s1)
+	{
+		s1 = (char *)malloc(1 * sizeof(char));
+		s1[0] = '\0';
+	}
+	if (!s1 || !s2)
+		return (NULL);
+	str = malloc((ft_strlen(s1) + ft_strlen(s2) + 1) * sizeof(char));
+	if (str == NULL)
+		return (NULL);
+	i = -1;
+	c = 0;
+	if (s1)
+		while (s1[++i] != '\0')
+			str[i] = s1[i];
+	while (s2[c] != '\0')
+		str[i++] = s2[c++];
+	str[ft_strlen(s1) + ft_strlen(s2)] = '\0';
+	free(s1);
+	return (str);
+}

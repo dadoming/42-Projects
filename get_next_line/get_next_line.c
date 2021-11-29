@@ -6,78 +6,162 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 15:47:33 by dadoming          #+#    #+#             */
-/*   Updated: 2021/11/25 17:38:42 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/11/29 21:09:42 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//#include "get_next_line.h"
-#include <stdio.h>
-#include <stdlib.h>
-#include <fcntl.h>
-#include <unistd.h> //read
-#include <string.h>
-
-#ifndef BUFFER_SIZE
-# define BUFFER_SIZE 128
+#include "get_next_line.h"
 /*
-char	get_next_line(int fd)
+char *find_line(char *str)
 {
-	static char		*str;
-	int 			BUFFER_SIZE = 256;
-	char			buf[BUFFER_SIZE];
-	char			*ret;
-	int				read_n;
-	
+	char *output;
+	int i;
 
+	i = 0;
+	output = malloc(sizeof(char) * (ft_strlen(str) + 2));
+	while (str[i] != '\0')
+	{
+		output[i] = str[i];
+		if (str[i] == '\n')
+		{
+			output[i] = str[i];
+			i++;
+			output[i] = '\0';
+			break ;
+		}
+		else if (str[i] == '\0')
+		{
+			output[i] = '\0';
+			break ;
+		}
+		i++;
+		printf("2");
+	}
+	free(str);
+	return(output);
+}
+
+char *get_next_line(int fd)
+{
+	char *buf;
+	int buff_read;
+	static char *str;
+	char *output;
+	
+	buf = malloc(BUFFER_SIZE + 1);
 	str = (char *)malloc(sizeof(char));
 	str[0] = '\0';
-	while (!(strchr(str, '\n')))
+	while (!ft_strchr(str, '\n') && buff_read == BUFFER_SIZE)
 	{
-		read_n = read(fd, &buf, BUFFER_SIZE); //why '&buf'? : 			TO READ BYTE BY BYTE !!
-		if(read_n == -1)// 	-> 	read nao leu nada, retornou -1
+	 	buff_read = read(fd, buf, BUFFER_SIZE);
+		if (buff_read == -1)
 			return (0);
-		else if(read_n == 0) // ->	if finished reading == '\0'
-			break;
-		buf[read_n] = '\0'; // if \n
-		str = ft_strjoin(str, buf); //copia do que foi read para ----> static str !!
+		buf[buff_read] = '\0';
+		str = ft_strjoin(str, buf);
+		printf("1");
 	}
-	ret = ft_output(str);
-	str += ft_strlen(ret); //str vai avancar um numero igual de caracteres == ao que foi lido nesta function call
-	return (ret);
+	free(buf);
+	output = find_line(str);
+	str += ft_strlen(output);
+	return (output);
 }
 */
 
-int numbyte_to_read(char *str)
+char *read_save(char *saved, int fd)
 {
-	int i = 0;
-	
-	while(str[i] != '\0' && str[i] != '\n')
-		i++;
-	return (i);
+	char	*buff;
+	int		read_count;
+
+	buff = malloc (sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buff)
+		return (0);
+	read_count = 1;
+	while (!(ft_strchr (saved, '\n')) && (read_count != 0))
+	{
+		read_count = read (fd, buff, BUFFER_SIZE);
+		if(read_count == -1)
+		{
+			free (buff);
+			return (0);
+		}
+		buff[read_count] = '\0';
+		saved = ft_strjoin(saved, buff);
+	}
+	free (buff);
+	return (saved);
 }
 
-char get_next_line(int fd)
+char *get_output(char *saved)
 {
-	char buf[BUFFER_SIZE + 1];
-	int bytes_read;
-	static int i;
-	char *str;
-	
-	str = (char *)malloc(sizeof(char));
-	str[0] = '\0';
-	
-	while (strchr(str, '\n'))
+	int i;
+	char *output;
+
+	i = 0;
+	if (!saved[i])
+		return (0);
+	while (saved[i] && saved[i] != '\n')
+		i++;
+	output = malloc(sizeof(char) * (i + 2));
+	if (!output)
+		return (0);
+	i = 0;
+	while (saved[i] && saved[i] != '\n')
 	{
-		bytes_read = read(fd, buf, BUFFER_SIZE);
-		if (bytes_read == -1)
-			return (0);
-		else if (bytes_read == 0)
-			break ;
-		
-		buf[bytes_read] = '\0';
+		output[i] = saved[i];
 		i++;
 	}
-	return (buf);
+	if (saved[i] == '\n')
+	{
+		output[i] = saved[i];
+		i++;
+	}
+	output[i] = '\0';
+	return (output);
+}
+
+char *save_extra(char *saved)
+{
+	char *stored;
+	int stored_counter;
+	int i;
+	
+	i = 0;
+	while(saved[i] != '\n' && saved[i] != '\0')
+		i++;
+	if(!saved[i])
+	{
+		free(saved);
+		return(0);
+	}
+	stored = malloc(sizeof(char) * (ft_strlen(saved) - i + 1));
+	if(!stored)
+		return (0);
+	i++;
+	stored_counter = 0;
+	while(saved[stored_counter])
+	{
+		stored[stored_counter] = saved[i];
+		stored_counter++;
+		i++;
+	}
+	stored[stored_counter] = '\0';
+	free(saved);
+	return (stored);
+}
+
+char	*get_next_line(int fd)
+{
+	static char 	*saved;
+	char 			*line;
+
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (0);
+	saved = read_save(saved, fd);
+	if (!saved)
+		return (0);
+	line = get_output(saved);
+	saved = save_extra(saved);
+	return (line);
 }
 
 int main(int argc, char **argv)
@@ -107,5 +191,3 @@ int main(int argc, char **argv)
 		exit(0);
 	}
 }
-
-#endif
