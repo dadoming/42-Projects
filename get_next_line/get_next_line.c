@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 15:47:33 by dadoming          #+#    #+#             */
-/*   Updated: 2021/11/29 21:09:42 by dadoming         ###   ########.fr       */
+/*   Updated: 2021/12/01 15:23:10 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,7 @@ char *get_next_line(int fd)
 }
 */
 
-char *read_save(char *saved, int fd)
+char	*read_save(char *saved, int fd)
 {
 	char	*buff;
 	int		read_count;
@@ -76,9 +76,9 @@ char *read_save(char *saved, int fd)
 	if (!buff)
 		return (0);
 	read_count = 1;
-	while (!(ft_strchr (saved, '\n')) && (read_count != 0))
+	while (!(ft_strchr (saved, '\n')) && (read_count != 0)) //ERRO AQUI, ta a fazer mal a search com o read
 	{
-		read_count = read (fd, buff, BUFFER_SIZE);
+		read_count = read (fd, &buff, BUFFER_SIZE);
 		if(read_count == -1)
 		{
 			free (buff);
@@ -156,10 +156,14 @@ char	*get_next_line(int fd)
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
+	
 	saved = read_save(saved, fd);
-	if (!saved)
+	
+	if (!saved) // ERRO AQUI 
 		return (0);
+	printf("1");
 	line = get_output(saved);
+	
 	saved = save_extra(saved);
 	return (line);
 }

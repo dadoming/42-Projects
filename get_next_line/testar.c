@@ -3,6 +3,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 #include <string.h>
+#define BUFFER_SIZE 1
 
 size_t	ft_strlen(const char *str)
 {
@@ -14,8 +15,7 @@ size_t	ft_strlen(const char *str)
 	return (i);
 }
 
-
-char	*ft_strjoin(const char *s1, const char *s2)
+char	*ft_strjoin(char *s1, char *s2)
 {
 	int		i;
 	int		j;
@@ -40,11 +40,13 @@ char	*ft_strjoin(const char *s1, const char *s2)
 	return (str);
 }
 
-char	*ft_strchr(const char *s, int c)
+char	*ft_strchr(char *s, int c)
 {
 	int	i;
 
 	i = 0;
+	if(!s)
+		return (0);
 	while (s[i] != (unsigned char)c)
 	{
 		if (s[i] == '\0')
@@ -54,41 +56,94 @@ char	*ft_strchr(const char *s, int c)
 	return ((char *)&s[i]);
 }
 
+char *get_line(char *full_string)
+{
+	char *line;
+	int i;
+
+	i = 0;
+	while(full_string[i] != '\n')
+		i++;
+	line = malloc(sizeof(char) * (i + 2));
+	i = 0;
+	while(full_string[i] != '\n' && full_string[i] != '\0')
+	{
+		line[i] = full_string[i];
+		i++;
+	}
+	if(full_string[i] == '\n')
+	{
+		line[i] = '\n';
+		i++;
+	}
+	line[i] = '\0';
+	return (line);
+}
+
+char *read_file(int fd, char *full_string)
+{
+	char *buff;
+	int read_count;
+
+	buff = malloc (sizeof(char) * (BUFFER_SIZE + 1));
+	if (!buff)
+		return (0);
+	read_count = 1;
+	while (!ft_strchr(full_string, '\n') && (read_count != 0))
+	{
+		read_count = read(fd, buff, BUFFER_SIZE);
+		if (read_count == -1)
+		{
+			free (buff);
+			return (0);
+		}
+		buff[read_count] = '\0';
+		full_string = ft_strjoin(full_string, buff);
+	}
+		printf("STEP >>%s<<\n\n", full_string);
+	free(buff);
+	return(full_string);
+}
 
 char *get_next_line(int fd)
 {
-    int print;
-    char buf[256];
-    static char *str;
+	static char *full_string;
+	char *line;
 
-    while(!(ft_strchr(str, '\n')))
-    {
-        print = read(fd, &buf, sizeof(buf));
-        printf("%d\n", print);
-        if(print == -1)
-            return (0);
-        if(print == 0)
-            break;
-        buf[print] = '\0';
-        str = ft_strjoin(str, buf);
-    }
-    return(str);
+	if (fd < 0 || BUFFER_SIZE <= 0)
+		return (0);
+	full_string = read_file(fd, full_string);
+	if (!full_string)
+		return (0);
+	printf("%s", full_string);
+	line = get_line(full_string);
+	return(line);
 }
 
 int main(int argc, char **argv)
 {
-    int print;
-    int fd;
-    char *buf;
-    char *c;
+	int		fd;
+	char	*line;
 
-
-    if (argc == 2)
-    {
-        fd = open(argv[1], O_RDONLY);
-        buf = get_next_line(fd);
-        printf("%s\n", buf);
-    }
-    else
-        printf("erro");
+	if (argc == 2)
+	{
+		fd = open(argv[1], O_RDONLY);
+		if (fd == -1)
+		{
+			printf("ERRO");
+			exit(0);
+		}
+		line = get_next_line(fd);
+		while (line != NULL)
+		{
+			printf("%s", line);
+			printf("\n");
+			line = get_next_line(fd);
+		}
+	}
+	else
+	{
+		printf("error, argc != 2");
+		exit(0);
+	}
 }
