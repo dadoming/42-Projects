@@ -1,8 +1,0 @@
-this
-second line barra n
-3rd line
-does this "ó" print?
-sdfgsdfgvdgfbdsgfb
-hmm
-end
-
