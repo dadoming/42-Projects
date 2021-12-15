@@ -5,3 +5,5 @@ Projects:
 > libft: Finished with 108, error on substr, but easily fixable!
 
 > get_next_line: Completed but hasn't been evaluated yet.
+
+> ft_printf: Beggining
