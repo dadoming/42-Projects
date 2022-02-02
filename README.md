@@ -6,4 +6,4 @@ Projects:
 
 > get_next_line: Completed but hasn't been evaluated yet.
 
-> ft_printf: Beggining
+> ft_printf: Almost ^-^
