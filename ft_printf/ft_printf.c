@@ -1,4 +1,4 @@
-#include "ft_printf.h"
+#include "libftprintf.h"
 
 int check_if_in_type (int c)
 {
@@ -11,22 +11,22 @@ int conversion(char c, va_list arg_ptr)
 {
 	char_counter = 0;
 	if (c == 'c')
-		char_counter += ft_putchar(va_arg(arg_ptr, int));
+		char_counter = ft_putchar(va_arg(arg_ptr, int));
 	else if (c == 's')
-		char_counter += ft_putstr(va_arg(arg_ptr, char *));
+		char_counter = ft_putstr(va_arg(arg_ptr, char *));
  	else if (c == 'd' || c == 'i')
-		char_counter += ft_putnbr(va_arg(arg_ptr, int));
+		char_counter = ft_putnbr(va_arg(arg_ptr, int));
 	 else if (c == 'p')
 	{
-		char_counter += write(1, "0x", 2);
-	 	char_counter += ft_print_pointeraddress(va_arg(arg_ptr, unsigned long), "0123456789abcdef", 16);
-	}
+		char_counter = write(1, "0x", 2);                // PODE FALTAR AQUI UM += , NAO PERCEBO O PORQUE DE CONTAR DESTA FORMA MAS FUNCIONA
+	 	char_counter = ft_print_pointeraddress(va_arg(arg_ptr, unsigned long), "0123456789abcdef", 16);
+  }
 	else if (c == 'u')
-		char_counter += ft_print_unsigned_and_hexa(va_arg(arg_ptr, unsigned int), "0123456789", 10);
+		char_counter = ft_print_unsigned_and_hexa(va_arg(arg_ptr, unsigned int), "0123456789", 10);
 	else if (c == 'x')
-		char_counter += ft_print_unsigned_and_hexa(va_arg(arg_ptr, unsigned int), "0123456789abcdef", 16);	
+		char_counter = ft_print_unsigned_and_hexa(va_arg(arg_ptr, unsigned int), "0123456789abcdef", 16);	
 	else if (c == 'X')
-		char_counter += ft_print_unsigned_and_hexa(va_arg(arg_ptr, unsigned int), "0123456789ABCDEF", 16);
+		char_counter = ft_print_unsigned_and_hexa(va_arg(arg_ptr, unsigned int), "0123456789ABCDEF", 16);
 	return (char_counter);
 }
 
@@ -44,20 +44,16 @@ int ft_printf(char const *format, ...)
 		if(format[i] == '%' && format[i + 1] == '%')
 		{	
 			counter += ft_putchar('%');
-			i += 2;
+			i++;
 		}
 		else if (format[i] == '%' && check_if_in_type (format[i + 1]))
 		{
 			counter += conversion (format[i + 1], arg_ptr);
-			i += 2;
-			//printf("/%d\\", counter);
-		}
-		else
-		{
-			counter += ft_putchar (format[i]);
-			//printf("_%d_", counter);
 			i++;
 		}
+		else
+			counter += ft_putchar (format[i]);
+		i++; // INCREMENTA DOIS PARA CICLOS EM QUE ENCONTRA A % PARA SAIR DO TEXTO DE ARGUMENTOS
 	}
 	va_end (arg_ptr);
 	return (counter);
@@ -135,4 +131,11 @@ int main(void)
   printf("%d\n", main_counter);
   main_counter = ft_printf("MEU:  %X, ", d);
   printf("%d\n", main_counter);
+
+  printf("\n\n### Todos ###\n");
+  main_counter = printf("REAL: %c %d %i %s %p %u %x %X", c, d, d, str, &str, d, d, d);
+  printf("\ncounter: %d\n", main_counter);
+  main_counter = ft_printf("MEU:  %c %d %i %s %p %u %x %X", c, d, d, str, &str, d, d, d);
+  printf("\ncounter: %d\n", main_counter);
+
 }

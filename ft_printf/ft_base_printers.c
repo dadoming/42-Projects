@@ -1,35 +1,35 @@
-#include "ft_printf.h"
+#include "libftprintf.h"
 
-int	ft_print_unsigned_and_hexa(unsigned int nbr, char *base, int no)
+int	ft_print_unsigned_and_hexa(unsigned int arg_num, char *base_string, int base_number)
 {
 	int				len;
 	
 	len = 0;
-	while (base[len] != '\0')
+	while (base_string[len])
 		len++;
-	if (nbr / len != 0)
+	if (arg_num / len != 0)
 	{
-		ft_print_unsigned_and_hexa((nbr / len), base, no);
-		char_counter += ft_putchar(base[nbr % len]);
+		ft_print_unsigned_and_hexa((arg_num / len), base_string, base_number);
+		char_counter += ft_putchar(base_string[arg_num % len]);
 	}
 	else
-		char_counter += ft_putchar(base[nbr % len]);
+		char_counter += ft_putchar(base_string[arg_num % len]);
 	return (char_counter);
 }
 
-int	ft_print_pointeraddress(unsigned long nbr, char *base, int no)
+int	ft_print_pointeraddress(unsigned long arg_num, char *base_string, int base_number)
 {
     int				len;
 	
 	len = 0;
-	while (base[len] != '\0')
+	while (base_string[len])
 		len++;
-	if (nbr / len != 0)
+	if (arg_num / len != 0)
 	{
-		ft_print_pointeraddress((nbr / len), base, no);
-		char_counter += ft_putchar(base[nbr % len]);
+		ft_print_pointeraddress((arg_num / len), base_string, base_number);
+		char_counter += ft_putchar(base_string[arg_num % len]);
 	}
 	else
-		char_counter += ft_putchar(base[nbr % len]);
+		char_counter += ft_putchar(base_string[arg_num % len]);
 	return (char_counter);
 }
