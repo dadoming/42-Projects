@@ -7,3 +7,5 @@ Projects:
 > get_next_line: Completed but hasn't been evaluated yet.
 
 > ft_printf: Completed but hasn't been evaluated yet.
+
+> push_swap: Starting.
