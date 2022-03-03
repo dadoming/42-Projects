@@ -2,6 +2,7 @@
 #include <unistd.h>
 #include <stdio.h>
 //#include "libft.h" //colocar printf na libft
+//procurar integrar o merge sort
 
 int	ft_atoi(const char *str) //ta no libft
 {
