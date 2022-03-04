@@ -1,28 +1,28 @@
-NAME        = libftprintf.a
-HEADER		= libftprintf.h
-INCLUDES	= -Idouble_lst -I.
-FLAGS      	= -Wall -Wextra -Werror -g
-RM          = rm -f
-SRCS        = ft_printf.c ft_printers.c ft_base_printers.c 
-OBJS        = $(SRCS.c=.o)
+NAME        	= libftprintf.a
 
-%.o %.c
-	@gcc $(FLAGS) $(INCLUDES) -c -o $@ $ $(NAME) $(OBJS)
-	@ar -rs $(NAME) $(OBJS)
+CC		= gcc
+CFLAGS		= -Wall -Wextra -Werror
 
-.c.o
-			@$(CC) $(CFLAGS) -c $ -o $(.c=.o)
+RM          	= rm -f
 
-all		$(NAME)
+SRCS        	= ft_printf.c ft_printers.c ft_base_printers.c 
+OBJS        	= $(SRCS:.c=.o)
 
-$(NAME)	$(OBJS)
+.c.o:
+			@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+
+all:		$(NAME)
+
+$(NAME):	$(OBJS)
 			@ar -rcs $(NAME) $(OBJS)
-clean
+clean:
 			$(RM) $(OBJS)
 
-fclean		clean
+fclean:	clean
 			$(RM) $(NAME)
 
-re			fclean all
-ap			all clean
-.PHONY		all clean fclean re 
+re:	fclean all
+
+bonus:	all
+
+.PHONY:	all clean fclean bonus re 
