@@ -99,7 +99,7 @@ int check_input(char **input, int arg_num)
 
 int main(int argc, char, **argv)
 {
-    int a_stack[]; 
+    int a_stack[];
     int b_stack[];
 
     /*
