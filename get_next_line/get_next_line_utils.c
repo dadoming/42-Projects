@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 15:43:50 by dadoming          #+#    #+#             */
-/*   Updated: 2021/12/07 20:37:28 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/03/07 16:55:43 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,9 +46,7 @@ char	*ft_strjoin(char *full_string, char *buff)
 		str[i] = full_string[i];
 	while (buff[j] != '\0')
 	{
-		str[i] = buff[j];
-		i++;
-		j++;
+		str[i++] = buff[j++];
 	}
 	str[i] = '\0';
 	free (full_string);

@@ -6,13 +6,13 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 20:17:05 by dadoming          #+#    #+#             */
-/*   Updated: 2021/12/07 20:37:24 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/03/07 19:04:56 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
-char	*read_file(int fd, char *full_string)
+char	*read_file(int fd, char *text)
 {
 	char	*buff;
 	int		read_count;
@@ -21,7 +21,7 @@ char	*read_file(int fd, char *full_string)
 	if (!buff)
 		return (0);
 	read_count = 1;
-	while (!ft_strchr(full_string, '\n') && (read_count != 0))
+	while (!ft_strchr(text, '\n') && (read_count != 0))
 	{
 		read_count = read(fd, buff, BUFFER_SIZE);
 		if (read_count == -1)
@@ -30,33 +30,32 @@ char	*read_file(int fd, char *full_string)
 			return (0);
 		}
 		buff[read_count] = '\0';
-		full_string = ft_strjoin(full_string, buff);
+		text = ft_strjoin(text, buff);
 	}
-	//printf("STEP >>%s<<\n\n", full_string);
 	free(buff);
-	return (full_string);
+	return (text);
 }
 
-char *get_line(char *full_string)
+char	*get_line(char *text)
 {
 	char	*line;
 	int		i;
 
 	i = 0;
-	if (!full_string[i])
+	if (!text[i])
 		return (0);
-	while (full_string[i] != '\n' && full_string[i] != '\0')
+	while (text[i] != '\n' && text[i] != '\0')
 		i++;
 	line = malloc(sizeof(char) * (i + 2));
 	if (!line)
 		return (0);
 	i = 0;
-	while (full_string[i] != '\n' && full_string[i] != '\0')
+	while (text[i] != '\n' && text[i] != '\0')
 	{
-		line[i] = full_string[i];
+		line[i] = text[i];
 		i++;
 	}
-	if (full_string[i] == '\n')
+	if (text[i] == '\n')
 	{
 		line[i] = '\n';
 		i++;
@@ -65,45 +64,45 @@ char *get_line(char *full_string)
 	return (line);
 }
 
-char	*extra_read(char *full_string)
+char	*extra_read(char *text)
 {
 	int		i;
 	int		j;
 	char	*extra;
 
 	i = 0;
-	while (full_string[i] != '\0' && full_string[i] != '\n')
+	while (text[i] != '\0' && text[i] != '\n')
 		i++;
-	if (!full_string[i])
+	if (!text[i])
 	{
-		free(full_string);
+		free(text);
 		return (0);
 	}
-	extra = malloc(sizeof(char) * (ft_strlen(full_string) - i + 1));
+	extra = malloc(sizeof(char) * (ft_strlen(text) - i + 1));
 	if (!extra)
 		return (0);
 	j = 0;
 	i++;
-	while (full_string[i] != '\0')
+	while (text[i] != '\0')
 	{
-		extra[j++] = full_string[i++];
+		extra[j++] = text[i++];
 	}
 	extra[j] = '\0';
-	free(full_string);
+	free(text);
 	return (extra);
 }
 
 char	*get_next_line(int fd)
 {
-	static char		*full_string;
+	static char		*text[OPEN_MAX];
 	char			*line;
 
 	if (fd < 0 || BUFFER_SIZE <= 0)
 		return (0);
-	full_string = read_file(fd, full_string);
-	if (!full_string)
+	text[fd] = read_file(fd, text[fd]);
+	if (!text[fd])
 		return (0);
-	line = get_line(full_string);
-	full_string = extra_read(full_string);
+	line = get_line(text[fd]);
+	text[fd] = extra_read(text[fd]);
 	return (line);
 }

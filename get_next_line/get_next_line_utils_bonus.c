@@ -6,11 +6,11 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/12/07 20:17:03 by dadoming          #+#    #+#             */
-/*   Updated: 2021/12/07 20:37:35 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/03/07 17:09:33 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 size_t	ft_strlen(char *str)
 {
@@ -46,9 +46,7 @@ char	*ft_strjoin(char *full_string, char *buff)
 		str[i] = full_string[i];
 	while (buff[j] != '\0')
 	{
-		str[i] = buff[j];
-		i++;
-		j++;
+		str[i++] = buff[j++];
 	}
 	str[i] = '\0';
 	free (full_string);
