@@ -1,28 +1,40 @@
-NAME        	= libftprintf.a
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/03/03 14:44:42 by dadoming          #+#    #+#              #
+#    Updated: 2022/03/03 14:44:42 by dadoming         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
 
-CC		= gcc
-CFLAGS		= -Wall -Wextra -Werror
+NAME = libftprintf.a
 
-RM          	= rm -f
+HEADER = ft_printf.h
 
-SRCS        	= ft_printf.c ft_printers.c ft_base_printers.c 
-OBJS        	= $(SRCS:.c=.o)
+FLAGS = -Wall -Wextra -Werror
 
-.c.o:
-			@$(CC) $(CFLAGS) -c $< -o $(<:.c=.o)
+RM = rm -f
 
-all:		$(NAME)
+SRCS = ft_printf.c ft_printers.c ft_base_printers.c
 
-$(NAME):	$(OBJS)
-			@ar -rcs $(NAME) $(OBJS)
+OBJS = $(SRCS:.c=.o)
+
+all:	$(NAME)
+
+$(NAME):
+	gcc $(FLAGS) -c -I. ${HEADER} $(SRCS)
+	ar -rcs $(NAME) $(OBJS)
+
 clean:
-			$(RM) $(OBJS)
+	${RM} $(OBJS)
+	${RM} ft_printf.h.gch
 
 fclean:	clean
-			$(RM) $(NAME)
+	${RM} $(NAME)
 
 re:	fclean all
 
-bonus:	all
-
-.PHONY:	all clean fclean bonus re 
+.PHONY:	all clean fclean re 
