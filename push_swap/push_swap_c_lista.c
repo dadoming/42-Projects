@@ -12,20 +12,38 @@
 
 #include "push_swap.h"
 
-int init_lists(stack_a, stack_b)
+
+typedef t_list stack_l; //(t_list da libft)
+
+init_stack(argc, argv)
 {
+	int i;
 	
+	
+	i = 0;
+	while(argc < i)
+	{
+		if(check_errors(argv[i]))
+		{
+			return( )
+		}
+		?a.content = newnode(ft_atoi(argv[i])); //nome da funcao errado
+		?a.next = &
+	}
 }
 
 int main(int argc, char **argv)
 {
-	int *stack_a;
-	int *stack_b;
+	stack_l *a;
+	stack_l *b;
 
-	init_lists(stack_a, stack_b);
+	if(argc > 1)
+	{
+		a = init_stack(argc, argv); //inicialização do stack a e a sua introdução de valores
+	}
 
 
 	->lstnew to create and alloc node
-	->lstaddfront to add note to beggining of list
+	->lstaddfront to add node to beggining of list
 	
 }
