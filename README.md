@@ -6,6 +6,6 @@ Projects:
 
 > get_next_line: Finished with 125.
 
-> ft_printf: Completed but hasn't been evaluated yet.
+> ft_printf: Finished with 100.
 
 > push_swap: Starting.
