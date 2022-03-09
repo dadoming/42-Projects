@@ -1,16 +1,5 @@
 #include "ft_printf.h"
 
-// linha 34:
-// PODE FALTAR AQUI UM += , NAO PERCEBO O PORQUE DE CONTAR DESTA FORMA MAS FUNCIONA
-
-// linha 73:
-// INCREMENTA DOIS PARA CICLOS EM QUE ENCONTRA A % PARA SAIR DO TEXTO DE ARGUMENTOS
-
-
-
-
-
-
 int main(void)
 {
   char c = '9';
@@ -31,6 +20,18 @@ int main(void)
   ft_printf("%d", main_counter );
 
   printf("\n\n### %%%% ###\n");
+
+  main_counter = ft_printf("MEU: %a bla");
+  printf(" = %d\n", main_counter );
+  main_counter = printf("REAL: %a"); //corrigir este erro
+  printf(" = %d\n", main_counter );
+  
+  main_counter = ft_printf("% a");
+  printf(" %d\n", main_counter );
+  main_counter  = printf("% a");
+  printf(" %d\n", main_counter );
+  
+
   main_counter  = printf("REAL: %% %%%% %%%%%%, ");
   printf("%d\n", main_counter );
   main_counter = ft_printf("MEU:  %% %%%% %%%%%%, ");
@@ -97,6 +98,7 @@ int main(void)
   printf("%d", main_counter );
   
   printf("\n\n### %%x ###\n");
+  ft_printf("\n%x\n", 16);
   main_counter = printf("REAL: %x, ", d);
   printf("%d\n", main_counter);
   main_counter = ft_printf("MEU:  %x, ", d);

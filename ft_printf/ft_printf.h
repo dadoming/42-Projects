@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 16:15:54 by dadoming          #+#    #+#             */
-/*   Updated: 2022/03/07 16:45:03 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/03/09 05:25:21 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,11 +17,13 @@
 # include <unistd.h>
 # include <stdarg.h>
 
+int	g_i; //mudar depois de entregar
+int	g_counter;
 int	g_char_counter;
 
 //MAIN EXECUTION
 int	ft_printf(char const *format, ...);
-int	check_if_in_type(int c);
+int	check(int c);
 int	conversion(char c, va_list arg_ptr);
 
 //PRINTERS
@@ -30,7 +32,9 @@ int	ft_putstr(char *str);
 int	ft_putnbr(int n);
 
 //BASE PRINTERS
-int	ft_print_unsigned_and_hexa(unsigned int nbr, char *base, int no);
-int	ft_print_pointeraddress(unsigned long nbr, char *base, int no);
+int	ft_print_unsigned_and_hexa(unsigned int arg_num,
+		char *base_string);
+int	ft_print_pointeraddress(unsigned long arg_num,
+		char *base_string);
 
 #endif
