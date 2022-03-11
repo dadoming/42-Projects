@@ -10,16 +10,17 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+
 #include "push_swap.h"
 
+t_list *new_node
 
 typedef t_list stack_l; //(t_list da libft)
 
-init_stack(argc, argv)
+void init_stack(argc, argv)
 {
 	int i;
-	
-	
+
 	i = 0;
 	while(argc < i)
 	{
@@ -27,8 +28,24 @@ init_stack(argc, argv)
 		{
 			return( )
 		}
-		?a.content = newnode(ft_atoi(argv[i])); //nome da funcao errado
-		?a.next = &
+		a = malloc(sizeof(t_list));
+		a.content = ft_atoi(argv[i]);
+		a.next = head;
+		a.prev = NULL;
+
+		if (head != NULL)
+			head.prev = a;
+		
+		i++;
+
+		/*
+		a.content = ft_lstnew(ft_atoi(argv[i]));
+		a.next = head;
+		*/
+
+}
+
+
 	}
 }
 
@@ -41,7 +58,7 @@ int main(int argc, char **argv)
 	{
 		a = init_stack(argc, argv); //inicialização do stack a e a sua introdução de valores
 	}
-
+	
 
 	->lstnew to create and alloc node
 	->lstaddfront to add node to beggining of list
