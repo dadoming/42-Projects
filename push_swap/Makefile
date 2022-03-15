@@ -10,3 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
+CC = gcc
+
+FLAGS = -Wall -Wextra -Werror
+
+SRCS = main.c utils.c init_stacks.c
