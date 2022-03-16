@@ -27,7 +27,6 @@ int	ft_atoi(const char *str) //ta no libft
 	return ((int)res * neg);
 }
 
-
 char *ft_substr(char const *s, unsigned int start, size_t len)
 {
 	size_t	i;
@@ -99,4 +98,30 @@ char	**ft_split(char const *s, char c)
 			split[i++] = ft_substr(start, 0, end);
 	}
 	return (split);
+}
+
+int	ft_lstsize(stack *lst)
+{
+	int	i;
+
+	i = 0;
+	while (lst != NULL)
+	{
+		lst = lst -> next;
+		i++;
+	}
+	return (i);
+}
+
+void	ft_lstadd_front(stack **lst, stack *new)
+{
+	if (!new)
+		return ;
+	if (!lst)
+	{
+		*lst = new;
+		return ;
+	}
+	new -> next = *lst;
+	*lst = new;
 }

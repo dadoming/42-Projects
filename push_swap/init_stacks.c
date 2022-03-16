@@ -9,7 +9,7 @@ stack	*add_new_node(int data)
 	new_node = malloc(sizeof(stack));
 	if (new_node == NULL)
 		return (NULL);
-    new_node -> number = data;
+    new_node -> content = data;
 	new_node -> next = NULL;
     return (new_node);
 }
