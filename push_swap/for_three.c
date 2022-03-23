@@ -8,9 +8,10 @@ ambos os casos em que sao necessarias duas chamadas à lista, sa -> ra e sa -> r
 o comando sa é o que é executado primeiro.
 */
 
-int find_nodeth(stack *a, int nodeth)
+stack *find_nodeth(stack *a, int nodeth)
 {
     int i;
+    stack *aux;
 
     i = 0;
     while(i < nodeth)
@@ -18,7 +19,9 @@ int find_nodeth(stack *a, int nodeth)
         a = a->next;
         i++;
     }
-    return(a -> content);
+    aux = a;
+    printf("%d\n\n", aux -> content);
+    return(aux);
 }
 
 
@@ -27,7 +30,7 @@ stack *swap_three(stack *a)
     int i;
 
     i = 1;
-    while(!(a < a -> next && a -> next < find_nodeth(a, 2)))
+    while(i <= 3)
     {
         printf(">>CORREU %dx \n", i);
         if(a < a -> next && a -> next < find_nodeth(a, 2))
@@ -61,3 +64,4 @@ stack *swap_three(stack *a)
     printf("%d\n", a -> content);
     return (a);
 }
+
