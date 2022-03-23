@@ -38,6 +38,9 @@ void ra(stack **stack_a);
 void rb(stack **stack_a);
 void rr(stack **stack_a, stack **stack_b);
 
+//ALGORITHM
+stack *swap_three(stack *a);
+stack *find_nodeth(stack *a, int nodeth);
 
 //UTILS - LIBFT ----> COMPILAR COM LIBFT E COM OS NOMES DAS LISTAS CORRETOS APÓS TER
 //                     ACABADO O PROJETO, DE MOMENTO ESTÁ ASSIM APENAS PARA O FAZER
