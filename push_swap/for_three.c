@@ -1,6 +1,10 @@
 #include "push_swap.h"
 
 /* NOT DONE YET!
+
+Corrigir a forma como o valor sai da funcao find_nodeth e entra
+na condicao do if statement
+
 da para inverter o algoritmo com '!' para ser preciso menos 
 ciclos de while e demorar menos tempo porque:
 
