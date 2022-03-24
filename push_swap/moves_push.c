@@ -22,7 +22,7 @@ void pa(stack **stack_a, stack **stack_b)
             write(1, "pa\n", 3);
             */
     }
-}
+}                       //TESTAR ENVIAR VARIAS FORMAS DE NULL, TESTAR ENDEREÇOS, PERGUNTAR ANDRE
 
 void pb(stack **stack_a, stack **stack_b)
 {
