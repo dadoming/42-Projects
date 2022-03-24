@@ -25,7 +25,7 @@ stack *find_nodeth(stack *a, int nodeth)
     }
     aux = a;
     printf("%d\n\n", aux -> content);
-    return(aux); //testar com um return do a -> next
+    return(aux); //testar com um return do a -> next se bem q tenho a certeza q vai dar ao mesmo
 }
 
 
