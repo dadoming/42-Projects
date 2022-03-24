@@ -125,3 +125,23 @@ void	ft_lstadd_front(stack **lst, stack *new)
 	new -> next = *lst;
 	*lst = new;
 }
+
+stack	*ft_lstlast(stack *lst)
+{
+	if (lst == NULL)
+		return (0);
+	while (lst -> next)
+		lst = lst -> next;
+	return (lst);
+}
+
+void	ft_lstdelone(stack *lst, void (*del)(void *))
+{
+	if (del == NULL)
+		return ;
+	if (lst != NULL)
+	{
+		(*del)(lst -> content);
+		free(lst);
+	}
+}
