@@ -38,6 +38,13 @@ void ra(stack **stack_a);
 void rb(stack **stack_a);
 void rr(stack **stack_a, stack **stack_b);
 
+void rra(stack **stack_a);
+void rrb(stack **stack_b);
+void rrr(stack **stack_a, stack **stack_b);
+
+void pa(stack **stack_a, stack **stack_b);
+void pb(stack **stack_a, stack **stack_b);
+
 //ALGORITHM
 stack *swap_three(stack *a);
 stack *find_nodeth(stack *a, int nodeth);
@@ -52,5 +59,9 @@ size_t  ft_amount_of_splits(char const *s, char c);
 char    **ft_split(char const *s, char c);
 
 int	ft_lstsize(stack *lst);
+stack	*ft_lstlast(stack *lst);
+void	ft_lstadd_front(stack **lst, stack *new);
+void	ft_lstdelone(stack *lst, void (*del)(void *));
+
 
 #endif
