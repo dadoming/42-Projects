@@ -25,7 +25,7 @@ int main(int argc, char **argv)
     if (argc > 1)
         a = init_stacks(argc, argv);
     //if (argc ) //criar varios meios de para dar sort consoante o valor
-    
+        b = NULL;
 
     /* TEST MOVES:
     
