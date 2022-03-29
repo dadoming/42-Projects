@@ -1,9 +1,9 @@
-#include "push_swap"
+#include "push_swap.h"
 
-void pa(stack **stack_a, stack **stack_b)
+void pa(t_list **stack_a, t_list **stack_b)
 {
     int holder;
-    stack *new_head_b;
+    t_list *new_head_b;
     
     if(ft_lstsize(*stack_b) > 0)
     {
@@ -24,10 +24,10 @@ void pa(stack **stack_a, stack **stack_b)
     }
 }                       //TESTAR ENVIAR VARIAS FORMAS DE NULL, TESTAR ENDEREÇOS, PERGUNTAR ANDRE
 
-void pb(stack **stack_a, stack **stack_b)
+void pb(t_list **stack_a, t_list **stack_b)
 {
     int holder;
-    stack *new_head_a;
+    t_list *new_head_a;
     
     if(ft_lstsize(*stack_a) > 0)
     {

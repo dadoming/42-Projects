@@ -2,11 +2,11 @@
 #include <stdlib.h>
 #include "push_swap.h"
 
-stack	*add_new_node(int data)
+t_list	*add_new_node(int data)
 {
-	stack	*new_node;
+	t_list	*new_node;
 
-	new_node = malloc(sizeof(stack));
+	new_node = malloc(sizeof(t_list));
 	if (new_node == NULL)
 		return (NULL);
     new_node -> content = data;
@@ -14,10 +14,10 @@ stack	*add_new_node(int data)
     return (new_node);
 }
 
-stack *init_stacks_string(char **splitted_argv)
+t_list *init_stacks_string(char **splitted_argv)
 {
-    stack *head_node;
-    stack *tmp;
+    t_list *head_node;
+    t_list *tmp;
     int i;
     
     i = 0;
@@ -43,10 +43,10 @@ stack *init_stacks_string(char **splitted_argv)
     return (head_node);
 }
 
-stack *init_stacks(int argc, char **argv)
+t_list *init_stacks(int argc, char **argv)
 {
-    stack *head_node;
-    stack *tmp;
+    t_list *head_node;
+    t_list *tmp;
     int i;
 
     if(argc == 2)

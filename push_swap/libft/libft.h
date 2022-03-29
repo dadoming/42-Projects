@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 17:25:03 by dadoming          #+#    #+#             */
-/*   Updated: 2021/11/10 16:57:40 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/03/29 17:59:44 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,9 +19,10 @@
 //BONUS
 typedef struct s_list
 {
-	void			*content;
+	int content;
 	struct s_list	*next;
 }		t_list;
+
 
 t_list	*ft_lstnew(void *content);
 void	ft_lstadd_front(t_list **lst, t_list *new);

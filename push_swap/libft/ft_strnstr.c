@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 16:16:54 by dadoming          #+#    #+#             */
-/*   Updated: 2022/03/07 19:30:14 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/03/29 16:22:45 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,7 @@ char	*ft_strnstr(const char *str, const char *to_find, size_t len)
 
 	i = 0;
 	j = 0;
-	n = strlen(to_find);
+	n = ft_strlen(to_find);
 	if (*to_find == '\0')
 		return ((char *)str);
 	while (str[i] != '\0')

@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/28 19:23:20 by dadoming          #+#    #+#             */
-/*   Updated: 2021/11/09 15:19:08 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/03/29 18:01:00 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ void	ft_lstiter(t_list *lst, void (*f)(void *))
 {
 	while (lst != NULL)
 	{
-		f(lst -> content);
+		f(lst);
 		lst = lst -> next;
 	}
 }

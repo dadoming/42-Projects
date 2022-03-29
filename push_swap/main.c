@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 19:20:40 by dadoming          #+#    #+#             */
-/*   Updated: 2022/03/16 16:42:01 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/03/29 19:27:45 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,26 +18,25 @@
 
 int main(int argc, char **argv)
 {
-    stack *a;
-    stack *b;
+    t_list *a;
+    t_list *b;
 
     a = NULL;
     if (argc > 1)
         a = init_stacks(argc, argv);
     //if (argc ) //criar varios meios de para dar sort consoante o valor
         b = NULL;
+    swap_three(&a); //algoritmo feito
+    
 
     /* TEST MOVES:
-    
     sa(&a);
     ra(&a);
-    
     */
-
-    //swap
     
     /* 
     TEST OUTPUT:
+    */
     while (a -> next)
     {
         printf("%d ", a -> content);
@@ -45,6 +44,4 @@ int main(int argc, char **argv)
     }
     printf("%d\n", a -> content);
     return(0);
-    */
-    
 }

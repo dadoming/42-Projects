@@ -1,9 +1,11 @@
 #include "push_swap.h"
 
-static void rotate(stack **head_of_stack)
+static void rotate(t_list **head_of_stack)
 {
-    stack *top_node;
-    stack *temp;
+    t_list *top_node;
+    t_list *temp;
+
+    top_node = NULL;
 
     if(*head_of_stack && ft_lstsize(*head_of_stack) > 1)
     top_node = *head_of_stack;
@@ -15,7 +17,7 @@ static void rotate(stack **head_of_stack)
     top_node -> next = NULL;
 }
 
-void ra(stack **stack_a)
+void ra(t_list **stack_a)
 {
     if(*stack_a)
     {
@@ -24,7 +26,7 @@ void ra(stack **stack_a)
     }
 }
 
-void rb(stack **stack_b)
+void rb(t_list **stack_b)
 {
     if(*stack_b)
     {
@@ -33,7 +35,7 @@ void rb(stack **stack_b)
     }
 }
 
-void rr(stack **stack_a, stack **stack_b)
+void rr(t_list **stack_a, t_list **stack_b)
 {
     rotate (stack_a);
     rotate (stack_b);

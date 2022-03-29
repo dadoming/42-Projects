@@ -1,9 +1,9 @@
 #include "push_swap.h"
 
-static void rev_rotate(stack **head_of_stack)
+static void rev_rotate(t_list **head_of_stack)
 {
-    stack *temp;
-    stack *bot;
+    t_list *temp;
+    t_list *bot;
 
     if(ft_lstsize(*head_of_stack) > 1)
     {
@@ -17,7 +17,7 @@ static void rev_rotate(stack **head_of_stack)
     }
 }
 
-void rra(stack **stack_a)
+void rra(t_list **stack_a)
 {
     if(ft_lstsize(*stack_a) > 1)
     {
@@ -26,7 +26,7 @@ void rra(stack **stack_a)
     }
 }
 
-void rrb(stack **stack_b)
+void rrb(t_list **stack_b)
 {
     if(ft_lstsize(*stack_b) > 1)
     {
@@ -35,7 +35,7 @@ void rrb(stack **stack_b)
     }
 }
 
-void rrr(stack **stack_a, stack **stack_b)
+void rrr(t_list **stack_a, t_list **stack_b)
 {
     rev_rotate(stack_a);
     rev_rotate(stack_b);

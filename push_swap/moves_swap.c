@@ -7,11 +7,11 @@ functions, we make them static. Another reason for making functions static can
 be reuse of the same function name in other files.
 */
 
-static void swap(stack **head_of_stack)
+static void swap(t_list **head_of_stack)
 {
-    stack *first;
-    stack *second;
-    stack *third;
+    t_list *first;
+    t_list *second;
+    t_list *third;
 
     first = *head_of_stack;
     second = (*head_of_stack) -> next;
@@ -21,7 +21,7 @@ static void swap(stack **head_of_stack)
     first ->next = third;
 }
 
-void sa(stack **stack_a)
+void sa(t_list **stack_a)
 {
     if(ft_lstsize(*stack_a) > 1)
     {
@@ -30,8 +30,7 @@ void sa(stack **stack_a)
     }
 }
 
-
-void sb(stack **stack_b)
+void sb(t_list **stack_b)
 {
     if(ft_lstsize(*stack_b) > 1)
     {
@@ -40,8 +39,7 @@ void sb(stack **stack_b)
     }
 }
 
-
-void ss(stack **stack_a, stack **stack_b)
+void ss(t_list **stack_a, t_list **stack_b)
 {
     if(ft_lstsize(*stack_a) > 1)
         swap (stack_a);
