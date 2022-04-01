@@ -42,7 +42,15 @@ void pa(t_list **stack_a, t_list **stack_b);
 void pb(t_list **stack_a, t_list **stack_b);
 
 //ALGORITHM
-t_list *swap_three(t_list **a);
+t_list *sort_three(t_list **a);
+t_list *sort_f_f(t_list **a, t_list **b);
+t_list sort_four(t_list **a, t_list **b);
+t_list sort_five(t_list **a, t_list **b);
+
+
+void	push(t_list **s, t_list *new);
+int	*pop(t_list **s);
+
 
 //UTILS
 

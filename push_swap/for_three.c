@@ -52,17 +52,25 @@ _______________________________
 
 */
 
-t_list *swap_three(t_list **a)
+t_list *sort_three(t_list **a)
 {
     int i;
 
     i = 1;
+    if(ft_lstsize(*a) == 2)
+    {
+        if(!((*a) -> content < (*a) -> next -> content))
+            sa(a);
+        return (*a);
+    }
     while(i <= 3)
     {
-        if((*a) -> content < (*a) -> next -> content && (*a) -> next -> content < (*a) -> next -> next -> content && (*a) -> content < (*a) -> next -> next -> content )
+        if((*a) -> content < (*a) -> next -> content && 
+                (*a) -> next -> content < (*a) -> next -> next -> content && 
+                (*a) -> content < (*a) -> next -> next -> content )
             return(*a);
         else if(((*a) -> content < (*a) -> next -> content && (*a) -> next -> content > (*a) -> next -> next -> content) &&
-            ((*a) -> content > (*a) -> next -> next -> content && (*a) -> next -> next -> content < (*a) -> next -> content))
+                ((*a) -> content > (*a) -> next -> next -> content && (*a) -> next -> next -> content < (*a) -> next -> content))
                 rra(a);
         else if(( (*a) -> content > (*a) -> next -> content && (*a) -> next -> content  < (*a) -> next -> next -> content ) &&
                 ( (*a) -> next -> next -> content < (*a) -> content && (*a) -> content > (*a) -> next -> content))

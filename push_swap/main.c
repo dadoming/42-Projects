@@ -22,11 +22,18 @@ int main(int argc, char **argv)
     t_list *b;
 
     a = NULL;
+    b = NULL;
     if (argc > 1)
+    {
+        //if(check input errors)
+        //if(input 1 numero)
         a = init_stacks(argc, argv);
-    //if (argc ) //criar varios meios de para dar sort consoante o valor
-        b = NULL;
-    swap_three(&a); //algoritmo feito
+        pa(&a, &b);
+        if(ft_lstsize(a) <= 3)
+            sort_three(&a);
+        if(ft_lstsize(a) <= 5)
+            sort_f_f(&a, &b);
+    }
     
 
     /* TEST MOVES:
