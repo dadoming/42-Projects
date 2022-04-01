@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/03/07 19:20:40 by dadoming          #+#    #+#             */
-/*   Updated: 2022/03/29 19:27:45 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/04/01 15:37:13 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,41 @@ int main(int argc, char **argv)
         //if(check input errors)
         //if(input 1 numero)
         a = init_stacks(argc, argv);
-        pa(&a, &b);
         if(ft_lstsize(a) <= 3)
             sort_three(&a);
         if(ft_lstsize(a) <= 5)
-            sort_f_f(&a, &b);
+            sort_less_five(&a, &b);
     }
-    
-
     /* TEST MOVES:
+    
+    pa(&a, &b);
+    pb(&a, &b);
+    pb(&a, &b);
+
     sa(&a);
     ra(&a);
     */
-    
-    /* 
-    TEST OUTPUT:
-    */
+    printf("Stack a: ");
     while (a -> next)
     {
         printf("%d ", a -> content);
         a = a -> next;
     }
     printf("%d\n", a -> content);
+    if(b != NULL)
+    {
+        printf("Stack b: ");
+        while (b -> next)
+        {
+            printf("%d ", b -> content);
+            b = b -> next;
+        }
+        printf("%d\n", b -> content);
+    }
+    /* 
+    TEST OUTPUT:
+    */
+    
+    
     return(0);
 }

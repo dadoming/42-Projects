@@ -1,40 +1,43 @@
 #include "push_swap.h"
-/*
+
 void pa(t_list **stack_a, t_list **stack_b)
 {
-    int holder;
-    t_list *new_head_b;
+    t_list *pop;
+    int new_head_value;
     
     if(ft_lstsize(*stack_b) > 0)
     {
-            holder = (*stack_b) -> content;
-            new_head_b = (*stack_b) -> next;
-            ft_lstdelone(*stack_b, NULL);
-            *stack_b = new_head_b;
-            ft_lstadd_front(stack_a, add_new_node(holder));
-            write(1, "pa\n", 3);
+        pop = *stack_b;
+        *stack_b = (*stack_b) -> next;
+        new_head_value = pop -> content;
+        //pop->next = *stack_a;
+        ft_lstdelone(pop, NULL);
+        ft_lstadd_front(stack_a, add_new_node(new_head_value));
+        write(1, "pa\n", 3);
     }
 }
 
 void pb(t_list **stack_a, t_list **stack_b)
 {
     t_list *pop;
-    int *new_head_value;
+    int new_head_value;
     
     if(ft_lstsize(*stack_a) > 0)
     {
         pop = *stack_a;
         *stack_a = (*stack_a) -> next;
-        *new_head_value = pop -> content;
-        printf("1 bug\n");
+        new_head_value = pop -> content;
+        //pop->next = *stack_b;
         ft_lstdelone(pop, NULL);
-        printf("1 bug\n");
-
-        ft_lstadd_front(stack_b, add_new_node(*new_head_value));
-        write(1, "pb\n", 3)
+        ft_lstadd_front(stack_b, add_new_node(new_head_value));
+        write(1, "pb\n", 3);
     }
 }
-*/
+
+
+
+
+/*
 
 void	push(t_list **s, t_list *new)
 {
@@ -76,3 +79,4 @@ void	pb(t_list **a, t_list **b)
 		write(1, "pb\n", 3);
 	}
 }
+*/
