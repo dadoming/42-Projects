@@ -416,7 +416,7 @@ pipe2[2]
                       |         PIPE 2          |
               READ <- |-------------------------| -> [X] READ [X]
      
-
+https://www.youtube.com/watch?v=8Q9CPWuRC6o
 
 int main(void)
 {
