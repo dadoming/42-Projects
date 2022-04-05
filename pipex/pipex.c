@@ -1,9 +1,9 @@
-#include <unistd.h> //fork function
+#include <unistd.h> //fork() and pipe() function
 #include <stdio.h>
-#include <sys/wait.h>
-#include <errno.h>
-#include <time.h>
-#include <stdlib.h>
+#include <sys/wait.h> //wait()
+#include <errno.h> //not neccessary
+#include <time.h>  //same
+#include <stdlib.h> //same(?)
 
 
 /*
