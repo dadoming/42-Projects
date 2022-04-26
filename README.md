@@ -9,3 +9,5 @@ Projects:
 > ft_printf: Finished with 100.
 
 > push_swap: Starting.
+
+> pipex: Starting.
