@@ -5,6 +5,8 @@
 #include <sys/wait.h>
 
 /*
+https://bigpel66.oopy.io/library/42/inner-circle/8#cac891f86985437d844b189891d7aa3c
+
 Shell command:
      
      < file1 cmd1 | cmd2 > file2
