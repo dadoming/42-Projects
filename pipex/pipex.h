@@ -12,6 +12,9 @@
 #include "libft/libft.h"
 
 //INFO_VAR
+typedef char* string;
+typedef char** ;//comecar a usar isto para sintaxe mais bonita 
+
 typedef struct s_pipex{
     
     pid_t pid1;
