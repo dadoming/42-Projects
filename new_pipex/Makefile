@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/05/06 13:04:49 by dadoming          #+#    #+#              #
+#    Updated: 2022/05/06 15:24:44 by dadoming         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = pipex
 
 LIBFT = libft/libft.a
@@ -8,23 +20,14 @@ CC = gcc
 
 FLAGS = -Wextra -Wall -Werror -o
 
-SRCS = pipex.c get_next_line.c error_handling.c
+SRCS = pipex.c get_next_line.c here_doc.c error_handling.c childs.c var_init.c free.c
 
 all: ${LIBFT}
 	@echo Compiling...
 	@${CC} ${FLAGS} ${NAME} ${SRCS} ${LIBFT} -I.${HEADER}
-
-#bonus: ${LIBFT}
-#	@echo Compiled.
-#	@${CC} ${FLAGS} ${NAME} ${SRCS_B} ${LIBFT} -I.${HEADER_B}
 
 ${NAME}: ${LIBFT} ${SRCS}
 
 ${LIBFT}:
 	cd libft/ && make bonus
 	cd libft/ && make clean
-#$(NAME): libft.a				https://github.com/protsaq/pipex/blob/master/Makefile
-#	gcc $(CFLAGS) -I $(HDRS) -L. -l ft -D BONUS=0 $(SRCS) $(DEFAULT) $(MAIN) -o $(NAME)
-#											^
-#bonus: libft.a								Ɐ
-#	gcc $(CFLAGS) -I $(HDRS) -L. -l ft -D BONUS=1 $(SRCS) $(BONUS) $(MAIN) -o $(NAME)
