@@ -12,6 +12,22 @@
 
 #include "pipex.h"
 
+/*
+	Finish the main function;
+	
+	Install valgrind, check the free's
+	https://valgrind.org/docs/manual/quick-start.html;
+	
+	Start writing on a notepad/upgrade already all the libft functions that need a rework and 
+	check memory usage with valgrind;
+	-> strjoin
+	-> split
+	-> substr
+	-> calloc (?)
+	
+*/
+
+
 int main(int argc, char **argv, char **envp)
 {
     t_pipex pipex;
@@ -40,23 +56,25 @@ int main(int argc, char **argv, char **envp)
     {
         child_processes(&pipex);
     }
+	close_pipes(&pipex);
+    waitpid(-1, NULL, 0);
+    free_all(&pipex);
     return (0);
 }
 
 int check_input(int argc, char **argv)
 {
-    if(argv[1] && ft_strncmp(argv[2], "here_doc",9) == 0)
+    if(argv[1] && ft_strncmp(argv[1], "here_doc", 9) == 0)
     {
         if(argc < 6)
         {
             return (-1);
         }
     }
-    else 
-        if(argc < 5)
-        {
-            return (-1);
-        }
+    else if(argc < 5)
+    {
+	    return (-1);
+    }
     return (0);
 }
 
