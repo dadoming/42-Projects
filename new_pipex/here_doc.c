@@ -6,13 +6,13 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 13:04:42 by dadoming          #+#    #+#             */
-/*   Updated: 2022/05/06 15:30:46 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/05/11 16:56:18 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "pipex.h"
 
-void get_here_doc_input(t_pipex *pipex)
+void get_here_doc_input(t_pipex *pipex, char **argv)
 {
     int file;
     int limiter_len;
@@ -27,26 +27,21 @@ void get_here_doc_input(t_pipex *pipex)
     }
 
     // Stores the limiter values
-    limiter = pipex -> argv[2];
+    limiter = argv[2];
     limiter_len = ft_strlen(limiter);
     
     // Gets line from input and writes it to temporary file
-    write(STDOUT_FILENO, "here_doc > ", 12);
-    buffer = get_next_line(STDIN_FILENO);
-    while(ft_strncmp(limiter, buffer, limiter_len) != 0)
+    while(1)
     {
+            write(STDOUT_FILENO, "here_doc > ", 12);
+            buffer = get_next_line(STDIN_FILENO);
+            if(ft_strncmp(limiter, buffer, limiter_len) == 0)
+                break ;
             write(file, buffer, ft_strlen(buffer));
             write(file, "\n", 1);
-            write(STDOUT_FILENO, "here_doc > ", 12);
             free(buffer);
-            buffer = get_next_line(STDIN_FILENO);
-            if(buffer < 0)
-            {
-                exit(1);
-            }
     }
     free(buffer);
-    close(STDIN_FILENO);
     close(file);
     pipex -> infile = open("heredoc_storer", O_RDONLY);
     

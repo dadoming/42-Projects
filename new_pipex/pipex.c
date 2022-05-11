@@ -6,27 +6,17 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 13:04:46 by dadoming          #+#    #+#             */
-/*   Updated: 2022/05/06 16:05:38 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/05/11 19:07:34 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "pipex.h"
-
 /*
-	Finish the main function;
-	
-	Install valgrind, check the free's
-	https://valgrind.org/docs/manual/quick-start.html;
-	
-	Start writing on a notepad/upgrade already all the libft functions that need a rework and 
-	check memory usage with valgrind;
-	-> strjoin
-	-> split
-	-> substr
-	-> calloc (?)
-	
+$> cmd1 << LIMITER | cmd2 >> file2
+
+$> ./pipex here_doc LIMITER cmd1 cmd2 file2
 */
 
+#include "pipex.h"
 
 int main(int argc, char **argv, char **envp)
 {
@@ -36,27 +26,49 @@ int main(int argc, char **argv, char **envp)
     {
         msgOnly("Wrong input. Invalid number of arguments.");
     }
-    initialize_vars(&pipex, argc, argv, envp);
-    open_files(&pipex);
+    
+    if(ft_strncmp("here_doc", argv[1], 9) == 0)
+        pipex.here_doc = 1;
+    else
+        pipex.here_doc = 0;
+
+    open_files(&pipex, argv, argc);
     if(pipex.here_doc == 1)
     {
-        get_here_doc_input(&pipex);
+        get_here_doc_input(&pipex, argv);
     }
-    find_path(&pipex, envp);
-    if(!pipex.path_to_command)
-    {
-        free_and_exit(&pipex);
-    }
-    make_pipes(&pipex);
+    
+    /* 
+    Command counter:
+    //  ./pipex infile -command1 command2- outfile                                  argc => 5 - 3
+    //  ./pipex infile -command1 command2 command3- outfile                         argc => 6 - 3     for w/out here_doc: argc - 3
+    //  ./pipex infile -command1 command2 command3 command4- outfile                argc => 7 - 3 
+
+    //  ./pipex here_doc limiter -command1 command2- outfile                        argc => 6 - 4
+    //  ./pipex here_doc limiter -command1 command2 command3- outfile               argc => 7 - 4     for here_doc:       argc - 4
+    //  ./pipex here_doc limiter -command1 command2 command3 command4- outfile      argc => 8 - 4
+    */
+   
+    pipex.command_counter = argc - 3 - (pipex.here_doc);
+    
+    pipex.pipe_nbr = 2 * ((pipex.command_counter) - 1);
+    
+    pipex.pipe_fd = (int *)malloc(sizeof(int) * (pipex.pipe_nbr));
     if(!pipex.pipe_fd)
-    {
-        msgError("Main > Pipe");
-    }
-    while((pipex.child_num)++ < (pipex.command_counter) - 1)
-    {
-        child_processes(&pipex);
-    }
-	close_pipes(&pipex);
+        msgError("main -> pipe_fd");
+
+    pipex.found_path = find_path(envp);
+    pipex.path_to_command = ft_split(pipex.found_path, ':');
+    if(!pipex.path_to_command)
+        free_and_exit(&pipex);
+    
+    make_pipes(&pipex);
+    
+    pipex.child_num = -1;
+    while(++(pipex.child_num) < pipex.command_counter)
+        child_processes(pipex, argv, envp);
+
+    close_pipes(&pipex);
     waitpid(-1, NULL, 0);
     free_all(&pipex);
     return (0);
@@ -64,36 +76,28 @@ int main(int argc, char **argv, char **envp)
 
 int check_input(int argc, char **argv)
 {
-    if(argv[1] && ft_strncmp(argv[1], "here_doc", 9) == 0)
-    {
-        if(argc < 6)
-        {
-            return (-1);
-        }
-    }
-    else if(argc < 5)
-    {
-	    return (-1);
-    }
+    if (argv[1] && ft_strncmp(argv[2], "here_doc",9) == 0 && argc < 6)
+        return (-1);
+    else if (argc < 5)
+        return (-1);
     return (0);
 }
 
-void find_path(t_pipex *pipex, char **envp)
+char *find_path(char **envp)
 {
     char **path;
 
 	while (*envp && ft_strncmp(*envp, "PATH=", 5) != 0)
 		envp++;
 	path = ft_split(*envp, ':');
-    path[0] = path[0] + 5;
-    pipex -> path_to_command = path;
+    return (path[0] + 5);
 }
 
-int open_files(t_pipex *pipex)
+int open_files(t_pipex *pipex, char **argv, int argc)
 {
     if(pipex -> here_doc == 0)
     {
-        pipex -> infile = open(pipex -> argv[1], O_RDONLY);
+        pipex -> infile = open(argv[1], O_RDONLY);
         if(pipex -> infile == -1)
         {
             //testar se tudo funciona sem infile 
@@ -101,14 +105,10 @@ int open_files(t_pipex *pipex)
         }
     }
     if (pipex -> here_doc == 1)
-	{
-        pipex -> outfile = open(pipex -> argv[1], O_WRONLY | O_CREAT | O_APPEND, 0000644);
-    }
-    else
-    {
-        pipex -> outfile = open(pipex -> argv[pipex -> argc - 1], O_CREAT | O_WRONLY | O_TRUNC, 0000644);
-    }
-    if(pipex -> outfile < 0)
+        pipex -> outfile = open(argv[argc - 1], O_WRONLY | O_CREAT | O_APPEND, 0000644);
+    else if (pipex -> here_doc == 0)
+        pipex -> outfile = open(argv[argc - 1], O_CREAT | O_WRONLY | O_TRUNC, 0000644);
+    if (pipex -> outfile < 0)
     {
         msgError("open_files > OPEN OUTFILE");
     }
@@ -120,9 +120,9 @@ void make_pipes(t_pipex *pipex)
     int i;
 
     i = 0;
-    while (i < pipex -> pipe_nbr - 1)
+    while (i < (pipex -> pipe_nbr) - 1)
     {
-        if(pipe(&pipex -> pipe_fd[2 * i]) < 0)
+        if(pipe(pipex -> pipe_fd + 2 * i) < 0)
         {
             free_all(pipex);
         }
@@ -135,7 +135,7 @@ void close_pipes(t_pipex *pipex)
     int i;
 
     i = 0;
-    while(i < pipex -> pipe_nbr)
+    while(i < (pipex -> pipe_nbr))
     {
         close(pipex -> pipe_fd[i]);
         i++;
