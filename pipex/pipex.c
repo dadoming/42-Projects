@@ -18,6 +18,31 @@ $> ./pipex here_doc LIMITER cmd1 cmd2 file2
 
 #include "pipex.h"
 
+void initialization(t_pipex *pipex, char **argv, int argc, char **envp)
+{
+    if(ft_strncmp("here_doc", argv[1], 8) == 0)
+    {
+        pipex -> here_doc = 1;
+        get_here_doc_input(pipex, argv);
+    }
+    else
+        pipex -> here_doc = 0;
+    /* 
+    Command counter:
+    //  ./pipex infile -command1 command2 command3- outfile                         argc - 3     for w/out here_doc: argc - 3
+
+    //  ./pipex here_doc limiter -command1 command2 command3- outfile               argc - 4     for here_doc:       argc - 4
+    */
+    pipex -> command_counter = argc - 3 - (pipex -> here_doc);
+    pipex -> pipe_nbr = 2 * ((pipex -> command_counter) - 1);
+    pipex -> pipe_fd = (int *)malloc(sizeof(int) * (pipex -> pipe_nbr));
+    if(!(pipex -> pipe_fd))
+        msgError("main -> pipe_fd");
+    pipex -> path_to_command = find_path(envp);
+    if(!(pipex -> path_to_command))
+        free_and_exit(pipex);
+}
+
 int main(int argc, char **argv, char **envp)
 {
     t_pipex pipex;
@@ -27,38 +52,10 @@ int main(int argc, char **argv, char **envp)
         msgOnly("Wrong input. Invalid number of arguments.");
         exit(1);
     }
-    
-    if(ft_strncmp("here_doc", argv[1], 8) == 0)
-        pipex.here_doc = 1;
-    else
-        pipex.here_doc = 0;
-
+    initialization(&pipex, argv, argc, envp);
     open_files(&pipex, argv, argc);
-    if(pipex.here_doc == 1)
-    {
-        get_here_doc_input(&pipex, argv);
-    }
-    
-    /* 
-    Command counter:
-    //  ./pipex infile -command1 command2 command3- outfile                         argc - 3     for w/out here_doc: argc - 3
-
-    //  ./pipex here_doc limiter -command1 command2 command3- outfile               argc - 4     for here_doc:       argc - 4
-    */
-   
-    pipex.command_counter = argc - 3 - (pipex.here_doc);
-    pipex.pipe_nbr = 2 * ((pipex.command_counter) - 1);
-    
-    pipex.pipe_fd = (int *)malloc(sizeof(int) * (pipex.pipe_nbr));
-    if(!pipex.pipe_fd)
-        msgError("main -> pipe_fd");
-        
-    pipex.path_to_command = find_path(envp);
-    if(!pipex.path_to_command)
-        free_and_exit(&pipex);
     
     make_pipes(&pipex);
-    
     pipex.child_num = -1;
     while(++(pipex.child_num) < pipex.command_counter)
         child_processes(pipex, argv, envp);
