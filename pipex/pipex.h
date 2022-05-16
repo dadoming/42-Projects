@@ -49,6 +49,7 @@ int open_files(t_pipex *pipex, char **argv, int argc);
 void make_pipes(t_pipex *pipex);
 void close_pipes(t_pipex *pipex);
 int check_input(int argc, char **argv);
+void initialization(t_pipex *pipex, char **argv, int argc, char **envp);
 
 // CHILDS
 void child_processes(t_pipex pipex, char **argv, char **envp);
