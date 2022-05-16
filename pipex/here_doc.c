@@ -25,6 +25,7 @@ void get_here_doc_input(t_pipex *pipex, char **argv)
     }
 
     // Gets line from input and writes it to temporary file
+    // No need of \n cause get_next_line already sets new line in each enter-key click 
     while(1)
     {
         write(STDOUT_FILENO, "pipe heredoc> ", 14);
@@ -32,7 +33,7 @@ void get_here_doc_input(t_pipex *pipex, char **argv)
         if(buffer[ft_strlen(argv[2])] == '\n' && ft_strncmp(argv[2], buffer, ft_strlen(argv[2])) == 0)
             break ;
         write(file, buffer, ft_strlen(buffer));
-        write(file, "\n", 1);
+        //write(file, "\n", 1);
         free(buffer);
     }
     free(buffer);
@@ -46,3 +47,4 @@ void get_here_doc_input(t_pipex *pipex, char **argv)
         msgError("get_here_doc_input -> OPEN STORER");
     }
 }
+
