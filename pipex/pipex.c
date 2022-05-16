@@ -41,13 +41,9 @@ int main(int argc, char **argv, char **envp)
     
     /* 
     Command counter:
-    //  ./pipex infile -command1 command2- outfile                                  argc => 5 - 3
-    //  ./pipex infile -command1 command2 command3- outfile                         argc => 6 - 3     for w/out here_doc: argc - 3
-    //  ./pipex infile -command1 command2 command3 command4- outfile                argc => 7 - 3 
+    //  ./pipex infile -command1 command2 command3- outfile                         argc - 3     for w/out here_doc: argc - 3
 
-    //  ./pipex here_doc limiter -command1 command2- outfile                        argc => 6 - 4
-    //  ./pipex here_doc limiter -command1 command2 command3- outfile               argc => 7 - 4     for here_doc:       argc - 4
-    //  ./pipex here_doc limiter -command1 command2 command3 command4- outfile      argc => 8 - 4
+    //  ./pipex here_doc limiter -command1 command2 command3- outfile               argc - 4     for here_doc:       argc - 4
     */
    
     pipex.command_counter = argc - 3 - (pipex.here_doc);
