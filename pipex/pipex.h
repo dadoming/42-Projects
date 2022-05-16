@@ -1,50 +1,71 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   pipex.h                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/06 13:04:52 by dadoming          #+#    #+#             */
+/*   Updated: 2022/05/16 17:22:48 by dadoming         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #ifndef PIPEX_H
 # define PIPEX_H
 
-//ERROR HANDLING
-# define COMMAND_NOT_FOUND "Command not found"
+// INCLUDES
+# include <stdio.h>
+# include <errno.h>
+# include <unistd.h>
+# include <fcntl.h>
+# include <sys/wait.h>
 
-//INCLUDES
-#include <stdio.h>
-#include <unistd.h>
-#include <fcntl.h>
-#include <sys/wait.h>
-#include "libft/libft.h"
+# include "libft/libft.h"
+# include "gnl/get_next_line.h"
 
-//INFO_VAR
-typedef char* string;
-typedef char** ;//comecar a usar isto para sintaxe mais bonita 
-
+// VARIABLES
 typedef struct s_pipex{
+    pid_t pid;
     
-    pid_t pid1;
-    pid_t pid2;
     int infile;
     int outfile;
-    int fd[2];
-    char *path;
-    char **command_path;
-    char *cmd;
-    char **cmd_arg;
 
-}   t_pipex ;
+    int here_doc;
+    
+    int *pipe_fd;
 
+    int child_num;
+    int command_counter;
+    int pipe_nbr;
 
-//PIPEX
-int main(int argc, char **argv, char **envp);
-int *open_files(t_pipex *pipex, char **argv, int argc);
-void first_child(t_pipex pipex, char **argv, char **envp);
-void second_child(t_pipex pipex, char **argv, char **envp);
+    char **path_to_command;
+    char **command_arg;
+    char *command;
+} t_pipex;
 
-//VAR_MANAGE
-char *find_path(char **envp);
-char *analyze_command(char **paths, char *command);
-
-//PIPEX_UTILS
-int check_number_args(int argc);
-void msg_werror(char *error_message);
-void free_child(t_pipex *pipex);
-void free_parent(t_pipex *pipex);
+// PIPEX
+char **find_path(char **envp);
+int open_files(t_pipex *pipex, char **argv, int argc);
+void make_pipes(t_pipex *pipex);
 void close_pipes(t_pipex *pipex);
+int check_input(int argc, char **argv);
+
+// CHILDS
+void child_processes(t_pipex pipex, char **argv, char **envp);
+char *get_command(char *command, char **path_to_command);
+void pipe_dupper(int zero, int one);
+
+// ERROR_HANDLING
+void msgOnly(char *msg);
+void msgError(char *where);
+void msgErrOutput(char *where, char *error);
+
+// HERE_DOC
+void get_here_doc_input(t_pipex *pipex, char **argv);
+
+//FREE
+void free_child(t_pipex *pipex);
+void free_and_exit(t_pipex *pipex);
+void free_all(t_pipex *pipex);
 
 #endif
