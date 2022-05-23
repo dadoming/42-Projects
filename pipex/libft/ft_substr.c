@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 21:18:49 by dadoming          #+#    #+#             */
-/*   Updated: 2021/11/10 14:19:41 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/05/23 19:09:15 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ char	*ft_substr(char const *str, unsigned int start, size_t len)
 	sub = ft_calloc((len + 1), sizeof(char));
 	if (!sub)
 		return (0);
-	while (len--) // (i != len) talvez a solução correta
+	while (len--)
 	{
 		sub[i] = str[start + i];
 		i++;

@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 15:43:57 by dadoming          #+#    #+#             */
-/*   Updated: 2022/05/16 17:17:46 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/05/23 19:06:32 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ char		*get_line(char *full_string);
 char		*extra_read(char *full_string);
 char		*ft_strjoiner(char *full_string, char *buff);
 char		*ft_strsearchr(char *s, int c);
-size_t		ft_strlength(char *str);
+size_t		ft_strl(char *str);
 
 #endif

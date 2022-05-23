@@ -6,13 +6,13 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 15:43:50 by dadoming          #+#    #+#             */
-/*   Updated: 2022/05/11 18:17:58 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/05/23 19:06:17 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "get_next_line.h"
 
-size_t	ft_strlength(char *str)
+size_t	ft_strl(char *str)
 {
 	size_t	i;
 
@@ -39,7 +39,7 @@ char	*ft_strjoiner(char *full_string, char *buff)
 		return (0);
 	j = 0;
 	i = -1;
-	str = malloc(sizeof(char) * (ft_strlength(full_string) + ft_strlength(buff) + 1));
+	str = malloc(sizeof(char) * (ft_strl(full_string) + ft_strl(buff) + 1));
 	if (!str)
 		return (0);
 	while (full_string[++i] != '\0')

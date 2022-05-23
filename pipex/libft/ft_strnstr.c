@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/10/21 16:16:54 by dadoming          #+#    #+#             */
-/*   Updated: 2021/12/01 18:42:48 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/05/23 19:09:04 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,13 +37,4 @@ char	*ft_strnstr(const char *str, const char *to_find, size_t len)
 		i++;
 	}
 	return (NULL);
-}
-
-int main(void)
-{
-	char *needle = "123";
-	char *haystack = "abc123aaa";
-
-	printf("%s\n", ft_strnstr(haystack, needle, -1));
-	printf("%s", strnstr(haystack, needle, -1));
 }
