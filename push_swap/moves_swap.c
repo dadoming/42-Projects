@@ -1,11 +1,16 @@
-#include "push_swap.h"
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   moves_swap.c                                       :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/05/24 19:34:40 by dadoming          #+#    #+#             */
+/*   Updated: 2022/05/24 19:35:07 by dadoming         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
 
-/*
-Unlike global functions in C, access to static functions is restricted to the 
-file where they are declared. Therefore, when we want to restrict access to 
-functions, we make them static. Another reason for making functions static can 
-be reuse of the same function name in other files.
-*/
+#include "push_swap.h"
 
 static void swap(t_list **head_of_stack)
 {
