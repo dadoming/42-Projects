@@ -6,7 +6,7 @@
 #    By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/06 13:04:49 by dadoming          #+#    #+#              #
-#    Updated: 2022/05/16 17:19:12 by dadoming         ###   ########.fr        #
+#    Updated: 2022/05/24 17:36:38 by dadoming         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,7 @@ CC = gcc
 
 FLAGS = -Wextra -Wall -Werror -o
 
-SRCS = pipex.c here_doc.c error_handling.c childs.c free.c
+SRCS = pipex.c here_doc.c error_handling.c childs.c free.c pipes.c
 
 all: ${LIBFT}
 	@echo Compiling...

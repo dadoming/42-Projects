@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/16 18:08:03 by dadoming          #+#    #+#             */
-/*   Updated: 2022/05/23 18:43:54 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/05/24 17:30:05 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ void	free_and_exit(t_pipex *pipex)
 	free(pipex -> pipe_fd);
 	close(pipex -> infile);
 	close(pipex -> outfile);
-	msg_only("No path found in ENVP");
+	msg_only("No path found in ENVP\n");
 	exit(1);
 }
 

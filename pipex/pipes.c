@@ -1,32 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_strncmp.c                                       :+:      :+:    :+:   */
+/*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/20 17:00:53 by dadoming          #+#    #+#             */
-/*   Updated: 2022/05/16 17:47:14 by dadoming         ###   ########.fr       */
+/*   Created: 2022/05/24 17:34:33 by dadoming          #+#    #+#             */
+/*   Updated: 2022/05/24 17:35:02 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
-#include <stdint.h>
+#include "pipex.h"
 
-
-int	ft_strncmp(const char *s1, const char *s2, size_t n)
+void	make_pipes(t_pipex *pipex)
 {
-	uint8_t	*str1;
-	uint8_t	*str2;
+	int	i;
 
-	str1 = (uint8_t *)s1;
-	str2 = (uint8_t *)s2;
-	while ((*str1 || *str2) && n--)
+	i = 0;
+	while (i < (pipex -> pipe_nbr) - 1)
 	{
-		if (*str1 != *str2)
-			return (*str1 - *str2);
-		str1++;
-		str2++;
+		if (pipe(pipex -> pipe_fd + 2 * i) < 0)
+		{
+			free_all(pipex);
+		}
+		i++;
 	}
-	return (0);
+}
+
+void	close_pipes(t_pipex *pipex)
+{
+	int	i;
+
+	i = 0;
+	while (i < (pipex -> pipe_nbr))
+	{
+		close(pipex -> pipe_fd[i]);
+		i++;
+	}
 }

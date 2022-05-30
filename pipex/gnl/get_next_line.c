@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 15:47:33 by dadoming          #+#    #+#             */
-/*   Updated: 2022/05/11 18:17:12 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/05/24 17:11:08 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,7 +78,7 @@ char	*extra_read(char *text)
 		free(text);
 		return (0);
 	}
-	extra = malloc(sizeof(char) * (ft_strlength(text) - i + 1));
+	extra = malloc(sizeof(char) * (ft_strl(text) - i + 1));
 	if (!extra)
 		return (0);
 	j = 0;
