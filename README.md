@@ -8,6 +8,6 @@ Projects:
 
 > ft_printf: Finished with 100.
 
-> push_swap: Starting.
+> push_swap: Almost.
 
-> pipex: Starting.
+> pipex: Missing Eval.
