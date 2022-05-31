@@ -15,6 +15,14 @@
 /*
 Command counter:
 
+>>>>
+
+http://www.cs.loyola.edu/~jglenn/702/S2005/Examples/dup2.html
+
+>>>>
+
+
+
 ./pipex infile -command1 command2 command3- outfile
 -> for w/out here_doc: argc - 3
 
