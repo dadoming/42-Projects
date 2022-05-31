@@ -10,6 +10,8 @@
 #                                                                              #
 # **************************************************************************** #
 
+#need to finish makefile commands
+
 NAME = pipex
 
 LIBFT = libft/libft.a
