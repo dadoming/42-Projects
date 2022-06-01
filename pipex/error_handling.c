@@ -37,7 +37,12 @@ void	msg_err_output(char *where, char *error)
 
 int	check_input(int argc, char **argv)
 {
-	if ((ft_strncmp(argv[1], "here_doc", 8) == 0) && argc < 6)
+	if(argc == 1)
+	{
+		msg_only("No arguments passed");
+		return(-1);
+	}
+	else if ((ft_strncmp(argv[1], "here_doc", 8) == 0) && argc < 6)
 	{
 		msg_only("\nInvalid number of arguments.\n");
 		msg_only("Input:\n./pipex here_doc EOF \"cmd1\" \"cmd2\"");
