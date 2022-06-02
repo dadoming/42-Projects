@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:23:10 by dadoming          #+#    #+#             */
-/*   Updated: 2022/05/25 01:34:53 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/06/02 16:00:20 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,34 +28,29 @@ int lst_is_ordered(t_list *a)
     }
     return(1);
 }
-
+/*
 int check_input_string(char **arg)
-{   
+{
     int i = 0;
-    while (arg[i] != 0)
+    while (arg[i] != '\0')
     {
-        if((ft_isdigit(arg[i][0]) == 0) || ((arg[i][0] == '-' || arg[i][0] == '+') 
-        && ft_isdigit(arg[i][1]) == 0))
+        if(ft_isdigit(arg[i]) == 0)
         {
-            return(-1);
+            return (-1);
         }
         i++;
     }
     return (0);
 }
 
-    // Verificar para os casos de o input ser -1
-    // ou +2 etc etc.
-
-int check_input(char **argv, int argc)
+//int check_input(char **argv, int argc)
 {
     if(argc == 2)
         return (check_input_string(ft_split(argv[1], ' ')));
     int i = 1;
-    while (argv[i] != NULL)
+    while (argv[i] != '\0')
     {
-        if((ft_isdigit(argv[i][0]) == 0) || ((argv[i][0] == '-' || argv[i][0] == '+') 
-        && ft_isdigit(argv[i][1]) == 0))
+        if(ft_isdigit(argv[i]) == 0)
         {
             return(-1);
         }
@@ -63,6 +58,7 @@ int check_input(char **argv, int argc)
     }
     return (0);
 }
+*/
 
 int main(int argc, char **argv)
 {
@@ -73,8 +69,8 @@ int main(int argc, char **argv)
     b = NULL;
     if (argc > 1)
     {
-        if(check_input(argv, argc) == -1)
-            return (-1);
+        //if(check_input(argv, argc) == -1)
+          //  return (-1);
         a = init_stacks(argc, argv);
         while(1)
         {
@@ -88,8 +84,8 @@ int main(int argc, char **argv)
                 sort_four(&a, &b);
             else if(ft_lstsize(a) == 5)
                 sort_five(&a, &b);
-            // else if(ft_lstsize(a) > 5)
-            //     sort_big()
+            else if(ft_lstsize(a) > 5)
+                sort_big(&a, &b);
             break ; //  take this off when finished
         }
     }

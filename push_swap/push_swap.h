@@ -22,7 +22,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
-
 #include "libft/libft.h"
 
 //PUSH_SWAP UTILS
@@ -54,6 +53,6 @@ t_list *sort_five(t_list **a, t_list **b);
 
 // INPUT
 int check_input(char **argv, int argc);
-int check_input_string(char **arg);
+int check_input_string(char *arg);
 
 #endif
