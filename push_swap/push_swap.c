@@ -10,6 +10,8 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+//https://medium.com/nerd-for-tech/push-swap-tutorial-fa746e6aba1e -> radix sort
+
 #include "push_swap.h"
 
 int lst_is_ordered(t_list *a)
