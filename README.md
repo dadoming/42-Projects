@@ -10,4 +10,4 @@ Projects:
 
 > push_swap: Almost.
 
-> pipex: Missing Eval.
+> pipex: Finished with 125.
