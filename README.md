@@ -11,3 +11,5 @@ Projects:
 > push_swap: Almost.
 
 > pipex: Finished with 125.
+
+> so_long: Initing and inting
