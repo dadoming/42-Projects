@@ -20,23 +20,25 @@ HEADER = window.h
 
 CC = gcc
 
-FLAGS = -Wextra -Wall -Werror
+#FLAGS = -Wextra -Wall -Werror -o
 
 SRCS = so_long.c
 
 RM = rm -f
 
+#${FLAGS}
+
 all:
 	@echo Compiling...
-	@${CC} ${FLAGS} ${NAME} ${SRCS} -I.${HEADER}
+	@${CC} ${NAME} ${SRCS} -I.${HEADER}
 
 ${NAME}: ${SRCS}
 
 clean:
-	@echo "Cleaning outfile if outfile is named outfile..."
+	@echo "Cleaning nothing"
 
 fclean: clean
-	@echo "Cleaning nada"
+	@echo "Cleaning so_long"
 	@${RM} ${NAME}
 
 re: fclean all
