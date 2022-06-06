@@ -6,40 +6,68 @@
 #    By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/05 18:06:31 by dadoming          #+#    #+#              #
-#    Updated: 2022/06/05 18:23:14 by dadoming         ###   ########.fr        #
+#    Updated: 2022/06/06 22:13:52 by dadoming         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = so_long
 
-#LIBFT = libft/libft.a
+LIBFT = libft/libft.a
 
-#GNL = gnl/get_next_line.c gnl/get_next_line_utils.c
+GNL = gnl/get_next_line.c gnl/get_next_line_utils.c
 
-HEADER = window.h
+INCLUDES = /includes
 
 CC = gcc
 
-#FLAGS = -Wextra -Wall -Werror -o
+FLAGS = -Wextra -Wall -Werror -o
 
 SRCS = so_long.c
 
 RM = rm -f
 
-#${FLAGS}
 
-all:
-	@echo Compiling...
-	@${CC} ${NAME} ${SRCS} -I.${HEADER}
+all: ${LIBFT}
+	@${CC} ${FLAGS} ${NAME} -I /usr/local/include ${SRCS} ${GNL} ${LIBFT} -L /usr/local/lib/ -lmlx -framework OpenGL -framework Appkit -I.${INCLUDES} 
+	
+	@printf "                                    \r"
+	@printf "\033[2;32m               DONE!            \r"
+	@sleep 0.2
+	@printf "\033[1;;32m               DONE! \n"
+	@sleep 0.3
 
-${NAME}: ${SRCS}
+${NAME}: ${LIBFT} ${SRCS}
+
+${LIBFT}:
+	@cd libft/ && make bonus
+	@cd libft/ && make clean
+
+man:
+	@echo ""
+	@echo "gcc -I /usr/local/include so_long.c -L /usr/local/lib/ -lmlx -framework OpenGL -framework Appkit"
+	@echo ""
+	@echo "man /usr/share/man/man3/mlx.1"
+	@echo "man /usr/share/man/man3/mlx_new_window.1"
+	@echo "man /usr/share/man/man3/mlx_new_image.1"
+	@echo "man /usr/share/man/man3/mlx_pixel_put.1"
+	@echo "man /usr/share/man/man3/mlx_loop.1"
+	@echo ""
 
 clean:
-	@echo "Cleaning nothing"
 
 fclean: clean
-	@echo "Cleaning so_long"
 	@${RM} ${NAME}
+	@${RM} ${LIBFT}
+	@printf "\033[1;91m       CLEANING\r"
+		@sleep 0.2
+		@printf "       CLEANING .\r"
+		@sleep 0.2
+		@printf "       CLEANING . . \r"
+		@sleep 0.2
+		@printf "       CLEANING . . . \r"
+		@sleep 0.2
+		@printf "                                     \r"
 
 re: fclean all
-	@echo "Done! 😃"
+
+.PHONY: all man clean fclean re

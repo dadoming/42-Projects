@@ -6,98 +6,99 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 18:06:39 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/05 18:20:17 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/06/06 22:38:51 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <mlx.h>
-#include <stdio.h>
-#include <unistd.h>
-#include "window.h"
+#include "so_long.h"
 
-
-//	https://pulgamecanica.herokuapp.com/posts/7/show
-
-/*
-
-    Compile:
-    |________  gcc -I /usr/local/include so_long.c -L /usr/local/lib/ -lmlx -framework OpenGL -framework Appkit
-
-    Manual entry for MiniLibX functions:
-
-    |mlx_init                            -> man /usr/share/man/man3/mlx.1
-    |.... Initialization and Necessities
-    |
-    |manage windows                      -> man /usr/share/man/man3/mlx_new_window.1
-    |.... New window
-    |.... Clear window
-    |.... Destroy window
-    |
-    |manipulate images                   -> man /usr/share/man/man3/mlx_new_image.1
-    |.... New images
-    |.... Store color inside images
-    |.... XPM images
-    |
-    |draw inside window                  -> man /usr/share/man/man3/mlx_pixel_put.1
-    |.... Color management
-    |.... PixelPut and StringPut
-    |
-    |handle keyboard or mouse events     -> man /usr/share/man/man3/mlx_loop.1
-
-*/
-
-// typedef struct	s_data {
-// 	void	*img;
-// 	char	*addr;
-// 	int		bits_per_pixel;
-// 	int		line_length;
-// 	int		endian;
-// }				t_data;
-
-// void	my_mlx_pixel_put(t_data *data, int x, int y, int color)
-// {
-// 	char	*dst;
-
-// 	dst = data->addr + (y * data->line_length + x * (data->bits_per_pixel / 8));
-// 	*(unsigned int*)dst = color;
-// }
-
-int key_press(int key, void *o)
+// Close window + needs to free everything
+int x_close_window(win_s *ptr)
 {
-    (void) o;
-    return key;
+    mlx_clear_window (ptr -> mlx, ptr -> win);
+    mlx_destroy_window (ptr -> mlx, ptr -> win);
+    exit(0);
 }
 
-int main(void)
+int key_close_window(int key, win_s *ptr)
 {
-    win_l *ptr = NULL;
-
-    //  Title screen
-    ptr -> mlx = mlx_init();
-    if(!ptr -> mlx)
-        return(1);
-    ptr -> win = mlx_new_window(ptr -> mlx, 800, 500, "so_long");
-    if(!ptr -> win)
-        return 2;
-    // t_data	img;
-    // img.img = mlx_new_image(ptr.mlx, 800, 500);
-	// img.addr = mlx_get_data_addr(img.img, &img.bits_per_pixel, &img.line_length, &img.endian);
-	// my_mlx_pixel_put(&img, 400, 250, 0x009966FF);
-    // mlx_put_image_to_window(ptr.mlx, ptr.win, img.img, 0, 0);
-    
-    int key = mlx_key_hook(ptr -> win, key_press, 0);
-    printf("%d\n", key);
     if(key == 53)
     {
         mlx_clear_window (ptr -> mlx, ptr -> win);
         mlx_destroy_window (ptr -> mlx, ptr -> win);
+        exit(0);
     }
-    mlx_loop(ptr -> mlx);
+    return(0);
+}
+
+
+//int argc, char **argv
+
+/*
+Um mapa é um conjunto de caracteres:
+0 -> empty space
+1 -> wall
+C -> collectible
+E -> map exit
+P -> player starting position
+*/
+
+int main(int argc, char **argv)
+{
+    (void) argc;
     
+    win_s ptr;
+    //void *img;
+    //char *path_ground = "./floor_32x32.xpm";
+    //int img_width;
+    //int img_height;
     
-    
-    
-    
-    
+
+    /*
+        preciso de descobrir a quantidade de memoria que preciso
+        de alojar
+        neste caso
+        char **map;
+        map = (char **)malloc(height_of_file)
+    */
+
+    // Reads and prints map on terminal
+    int map_file = open(argv[1], O_RDONLY);
+    int i = 0;
+    while (i < 9)
+    {
+        printf("%s", get_next_line(map_file));
+        i++;
+    }
+
+    // Open screen
+    ptr.mlx = mlx_init();
+    if(!ptr.mlx)
+        return(1);
+
+    // Create window map1 16height 8width
+    ptr.win = mlx_new_window(ptr.mlx, 800, 400, "so_long");
+    if(!ptr.win)
+        return (2);
+
+    // Load image to variable
+    // img_height = 32;
+    // img_width = 32;
+    // img = mlx_xpm_file_to_image(ptr.mlx, path_ground, &img_width, &img_height);
+
+    // Print image to window
+    // while(i < 16)
+    // {
+    //     if(!(mlx_put_image_to_window(ptr.mlx, ptr.win, img, 32, 32)))
+    //         return(3);
+    // }
+
+    // Key event to close window
+    mlx_hook(ptr.win, 2, 1L << 0, &key_close_window, &ptr);
+    mlx_hook(ptr.win, 17, 1L << 2, &x_close_window, &ptr);
+
+    // To keep the key input active
+    mlx_loop(ptr.mlx);
+
     return (0);
 }
