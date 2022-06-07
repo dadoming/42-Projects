@@ -1,29 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window.h                                           :+:      :+:    :+:   */
+/*   error.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/06 16:16:40 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/07 21:01:06 by dadoming         ###   ########.fr       */
+/*   Created: 2022/06/07 19:54:36 by dadoming          #+#    #+#             */
+/*   Updated: 2022/06/07 20:50:44 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef WINDOW_H
-#define WINDOW_H
+#include "so_long.h"
 
-typedef struct window_s{
-    void *mlx;
-    void *win;
-    int map_file;
-    int height;
-    int width;
-    char **map;
-    int door;
-    int p_s_position;
-    int zero;
-    int one;
-}               win_s;
+// Prints error message on the screen followed by \n
+void error_msg(char *str)
+{
+    int i;
 
-#endif
+    i = 0;
+    while(str[i])
+    {
+        write(1, &str[i], 1);
+        i++;
+    }
+    write(1, "\n", 1);
+}
