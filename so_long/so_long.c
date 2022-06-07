@@ -10,6 +10,20 @@
 /*                                                                            */
 /* ************************************************************************** */
 
+//https://www.pixilart.com/draw/make-ur-own-hazmat-suit-73491734f4d3109 -- fazer boneco + 6(?) sprites de hazmat
+// nada=0  
+// corpo=0--pes==0--helmet===1
+// corpo=0--helmet==0--pes===1
+// pes=0--corpo==0--helmet===1 
+// pes=0--helmet==0--corpo===1
+// helmet=0--corpo==0--pes===1 
+// helmet=0--pes==0--corpo===1
+// helmet=0--corpo=0--pes===1   
+// if(sprite==fullbody)
+//  can pass
+// else
+//  die
+
 #include "so_long.h"
 
 // Close window + needs to free everything
