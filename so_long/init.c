@@ -6,11 +6,12 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 20:38:39 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/07 21:06:28 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/06/07 21:23:56 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
+#include <unistd.h>
 
 // Initializes variables upon verification
 int initialization(win_s *value, char *arg)
