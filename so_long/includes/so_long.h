@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:19:41 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/07 21:16:35 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/06/08 15:40:44 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@
 
 // checker.c
 int check_valid_map(char *str);
+int check_map_positions(char **map, win_s *w);
 
 
 // window.c
@@ -38,7 +39,5 @@ void error_msg(char *str);
 
 // init.c
 int initialization(win_s *value, char *arg);
-
-
 
 #endif
