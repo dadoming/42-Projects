@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:19:41 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/08 15:40:44 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/06/09 14:53:30 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "mlx.h"
 #include "window.h"
+#include "game.h"
 #include "../libft/libft.h"
 #include "../gnl/get_next_line.h"
 #include <stdio.h>

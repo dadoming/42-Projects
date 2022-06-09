@@ -6,7 +6,7 @@
 #    By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/05 18:06:31 by dadoming          #+#    #+#              #
-#    Updated: 2022/06/07 21:06:54 by dadoming         ###   ########.fr        #
+#    Updated: 2022/06/09 14:58:56 by dadoming         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,7 +20,7 @@ INCLUDES = /includes
 
 CC = gcc
 
-FLAGS = -Wextra -Wall -Werror -o
+FLAGS = -Wextra -Wall -Werror
 
 SRCS = so_long.c read_map_file.c window.c error.c init.c checker.c
 
@@ -28,7 +28,7 @@ RM = rm -f
 
 
 all: ${LIBFT}
-	@${CC} ${FLAGS} ${NAME} -I /usr/local/include ${SRCS} ${GNL} ${LIBFT} -L /usr/local/lib/ -lmlx -framework OpenGL -framework Appkit -I.${INCLUDES} 
+	@${CC} ${FLAGS} -o ${NAME} -I /usr/local/include ${SRCS} ${GNL} ${LIBFT} -L /usr/local/lib/ -lmlx -framework OpenGL -framework Appkit -I.${INCLUDES} 
 	
 	@printf "                                    \r"
 	@printf "\033[2;32m               DONE!            \r"
