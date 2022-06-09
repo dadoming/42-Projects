@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 20:38:39 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/08 15:44:38 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/06/09 16:45:15 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ int initialization(win_s *value, char *arg)
         error_msg("Your map size does not meet the requirements");
         return (3);
     }
-
+    
     // Function to check map variables
     if(check_map_positions(value -> map, value) == 0)
     {

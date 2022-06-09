@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/24 19:23:10 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/02 16:00:20 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/06/09 16:12:40 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,8 +86,8 @@ int main(int argc, char **argv)
                 sort_four(&a, &b);
             else if(ft_lstsize(a) == 5)
                 sort_five(&a, &b);
-            else if(ft_lstsize(a) > 5)
-                sort_big(&a, &b);
+//            else if(ft_lstsize(a) > 5)
+  //              sort_big(&a, &b);
             break ; //  take this off when finished
         }
     }
