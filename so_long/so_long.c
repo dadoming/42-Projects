@@ -14,6 +14,8 @@
 
 //mktt
 //https://opengameart.org/content/animated-pirate-captain
+// adicionar funcao para calcular a posicao do navio if ((width / 2) < i)
+
 
 void print_map(win_s *w, img_s *img)
 {
