@@ -12,4 +12,4 @@ Projects:
 
 > pipex: Finished with 125.
 
-> so_long: Initing and inting
+> so_long: Missing player movement and right map print
