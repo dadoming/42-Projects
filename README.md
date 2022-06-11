@@ -1,5 +1,5 @@
 # 42 Projects
-Here is where I'll upload all the projects done at 42 Lisboa!
+List of all projects done at 42 Lisboa
 
 Projects:
 > libft: Finished with 108, error on substr, but easily fixable!
@@ -12,4 +12,4 @@ Projects:
 
 > pipex: Finished with 125.
 
-> so_long: Initing and inting
+> so_long: Missing player movement and right map print
