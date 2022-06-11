@@ -6,7 +6,7 @@
 #    By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/05 18:06:31 by dadoming          #+#    #+#              #
-#    Updated: 2022/06/09 14:58:56 by dadoming         ###   ########.fr        #
+#    Updated: 2022/06/11 15:59:21 by dadoming         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,7 +22,12 @@ CC = gcc
 
 FLAGS = -Wextra -Wall -Werror
 
-SRCS = so_long.c read_map_file.c window.c error.c init.c checker.c
+SRCS = srcs/so_long.c \
+		srcs/window.c \
+		srcs/error.c \
+		srcs/init.c \
+		srcs/checker.c \
+		srcs/print.c \
 
 RM = rm -f
 
