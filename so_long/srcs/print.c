@@ -1,36 +1,71 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   print.c                                            :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/06/15 15:43:58 by dadoming          #+#    #+#             */
+/*   Updated: 2022/06/16 02:06:20 by dadoming         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "so_long.h"
 
-// Prints initial map
-void print_initial_map(win_s *w)
+// Prints tile
+void	print_background(t_win *w, int x, int y)
 {
-    int i = 0;
-    int j = 0;
-    while(i < w -> height)
-    {
-        while (j < w -> width)
-        {
-            if (w -> map[i][j] == '1')
-                mlx_put_image_to_window(w -> mlx, w -> win, w -> wall_image, j * (w -> size_width), i * (w -> size_height));
-            else
-                mlx_put_image_to_window(w -> mlx, w -> win, w -> floor_image, j * (w -> size_width), i * (w -> size_height));
-            if(w -> map[i][j] == 'C')
-                mlx_put_image_to_window(w -> mlx, w -> win, w -> coin_image, j * (w -> size_width), i * (w -> size_height));
-            else if(w -> map[i][j] == 'E')
-            {
-                mlx_put_image_to_window(w -> mlx, w -> win, w -> wall_image, j * (w -> size_width), i * (w -> size_height));
-                mlx_put_image_to_window(w -> mlx, w -> win, w -> exit_image, j * (w -> size_width), i * (w -> size_height));
-            }
-            else if(w -> map[i][j] == 'B')
-                mlx_put_image_to_window(w -> mlx, w -> win, w -> bomb_image, j * (w -> size_width), i * (w -> size_height));
-            else if(w -> map[i][j] == 'P')
-            {
-                mlx_put_image_to_window(w -> mlx, w -> win, w -> p_img_1, j * (w -> size_width), i * (w -> size_height));
-                w -> p_x = j;
-                w -> p_y = i;
-            }
-            j++;
-        }
-        j = 0;
-        i++;
-    }
+	if (w -> map[y][x] == '1')
+		mlx_put_image_to_window(w->mlx, w->win, w->wall_image1,
+			x * (w->size_width), y * (w->size_height));
+	else
+		mlx_put_image_to_window(w -> mlx, w -> win, w -> floor_image,
+			x * (w -> size_width), y * (w -> size_height));
+}
+
+// Prints Objects
+void	print_objects(t_win *w, int x, int y)
+{
+	if (w -> map[y][x] == 'C')
+		mlx_put_image_to_window(w->mlx, w->win, w->coin_image,
+			x * (w->size_width), y * (w->size_height));
+	else if (w -> map[y][x] == 'E')
+	{
+		mlx_put_image_to_window(w->mlx, w->win, w->exit_image,
+			x * (w->size_width), y * (w->size_height));
+	}
+	else if (w -> map[y][x] == 'B')
+		mlx_put_image_to_window(w->mlx, w->win, w->enemy_image,
+			x * (w->size_width), y * (w->size_height));
+	else if (w -> map[y][x] == 'P')
+	{
+		mlx_put_image_to_window(w->mlx, w->win, w->p_img_down,
+			x * (w->size_width), y * (w->size_height));
+		w -> p_x = x;
+		w -> p_y = y;
+	}
+}
+
+// Prints initial map
+void	print_initial_map(t_win *w, char **map)
+{
+	int	x;
+	int	y;
+
+	y = 0;
+	while (y < w->height)
+	{
+		x = 0;
+		while (x < w->width)
+		{
+			print_background(w, x, y);
+			if (map[y][x] == 'C' || map[y][x] == 'B' ||
+				map[y][x] == 'P' || map[y][x] == 'E')
+			{
+				print_objects(w, x, y);
+			}
+			x++;
+		}
+		y++;
+	}
 }

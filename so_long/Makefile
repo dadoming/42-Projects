@@ -6,7 +6,7 @@
 #    By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/05 18:06:31 by dadoming          #+#    #+#              #
-#    Updated: 2022/06/11 15:59:21 by dadoming         ###   ########.fr        #
+#    Updated: 2022/06/15 23:10:36 by dadoming         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -21,6 +21,7 @@ INCLUDES = /includes
 CC = gcc
 
 FLAGS = -Wextra -Wall -Werror
+#-fsanitize=address
 
 SRCS = srcs/so_long.c \
 		srcs/window.c \
@@ -28,6 +29,8 @@ SRCS = srcs/so_long.c \
 		srcs/init.c \
 		srcs/checker.c \
 		srcs/print.c \
+		srcs/move.c \
+		srcs/animations.c \
 
 RM = rm -f
 
