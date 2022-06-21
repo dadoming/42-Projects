@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 18:06:39 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/21 04:20:07 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/06/21 18:24:18 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,5 +32,6 @@ int	main(int argc, char **argv)
 	mlx_hook(w.win, 2, 1L << 0, key_event, &w);
 	mlx_hook(w.win, 17, 1L << 2, x_close_window, &w);
 	mlx_loop(w.mlx);
+	ft_exit_game(&w);
 	return (0);
 }

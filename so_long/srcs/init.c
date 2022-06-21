@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 20:38:39 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/21 04:19:33 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/06/21 18:55:32 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	initialization(t_win *value, char *arg)
 
 void	load_all_imgs1(t_win *w)
 {
+	w->sprites_loaded = 1;
 	w -> wall_image1 = mlx_xpm_file_to_image(w -> mlx, "./sprites/wall.xpm",
 			&(w -> size_width), &(w -> size_height));
 	w -> floor_image = mlx_xpm_file_to_image(w -> mlx, "./sprites/floor.xpm",
@@ -89,7 +90,7 @@ char	**get_map_table(int fd, char **map, int count)
 	if (s)
 		map = get_map_table(fd, map, count + 1);
 	if (!map)
-		map = malloc(sizeof(char *) * count + 1);
+		map = malloc(sizeof(char *) * (count + 1));
 	map[count] = s;
 	count++;
 	return (map);

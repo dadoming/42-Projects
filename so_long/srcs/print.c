@@ -6,13 +6,12 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:43:58 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/16 02:06:20 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/06/21 18:38:39 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// Prints tile
 void	print_background(t_win *w, int x, int y)
 {
 	if (w -> map[y][x] == '1')
@@ -23,7 +22,6 @@ void	print_background(t_win *w, int x, int y)
 			x * (w -> size_width), y * (w -> size_height));
 }
 
-// Prints Objects
 void	print_objects(t_win *w, int x, int y)
 {
 	if (w -> map[y][x] == 'C')
@@ -46,7 +44,6 @@ void	print_objects(t_win *w, int x, int y)
 	}
 }
 
-// Prints initial map
 void	print_initial_map(t_win *w, char **map)
 {
 	int	x;
@@ -68,4 +65,12 @@ void	print_initial_map(t_win *w, char **map)
 		}
 		y++;
 	}
+}
+
+void	print_string(t_win *w)
+{
+	w->m_count = ft_itoa(w->move_count);
+	mlx_string_put(w -> mlx, w -> win, 4, 6, 123746, w -> m_count);
+	if (w->m_count > 0)
+		free(w->m_count);
 }

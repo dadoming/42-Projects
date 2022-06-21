@@ -6,19 +6,28 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 20:36:09 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/20 21:21:14 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/06/21 18:02:16 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// Function to check map variables
+int	check_variables(char c)
+{
+	if (c == '1' || c == '\n' || c == '\0' || c == 'C' || c == '0'
+		|| c == 'P' || c == 'E' || c == 'B')
+		return (1);
+	return (0);
+}
+
 int	check_map_positions(char **map, t_win *w, int x, int y)
 {
 	while (map[y] != 0)
 	{
 		while (map[y][x] != '\n' && map[y][x] != '\0')
 		{
+			if (check_variables(map[y][x]) == 0)
+				return (0);
 			if ((map[0][x] != '1') || map[w -> height - 1][x] != '1')
 				return (0);
 			else if (map[y][0] != '1' || map[y][w -> width - 1] != '1')
@@ -39,7 +48,6 @@ int	check_map_positions(char **map, t_win *w, int x, int y)
 	return (1);
 }
 
-// Checks map file name
 int	check_valid_map(const char *str)
 {
 	int	i;

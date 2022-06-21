@@ -6,7 +6,7 @@
 #    By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/05 18:06:31 by dadoming          #+#    #+#              #
-#    Updated: 2022/06/21 04:16:44 by dadoming         ###   ########.fr        #
+#    Updated: 2022/06/21 18:55:53 by dadoming         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,10 +18,9 @@ GNL = gnl/get_next_line.c gnl/get_next_line_utils.c
 
 INCLUDES = /includes
 
-CC = gcc
+CC = clang
 
-FLAGS = -Wextra -Wall -Werror
-#-fsanitize=address
+FLAGS = -Wextra -Wall -Werror -fsanitize=address
 
 SRCS = srcs/so_long.c \
 		srcs/window.c \

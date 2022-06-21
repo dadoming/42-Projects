@@ -6,16 +6,12 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 19:54:36 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/20 18:14:00 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/06/21 18:02:25 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-/*
-** Prints error message on the screen 
-** Exits program
-*/
 void	error_msg(char *str)
 {
 	int	i;

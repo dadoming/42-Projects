@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:19:41 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/21 04:24:27 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/06/21 18:54:33 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_window{
 	char	**map;
 	int		width;
 	int		height;
+	int		sprites_loaded;
 	void	*wall_image1;
 	void	*enemy_image;
 	void	*floor_image;
@@ -51,7 +52,6 @@ typedef struct s_window{
 	void	*exit_1;
 	void	*exit_2;
 	void	*exit_3;
-	void	*caught_image;
 	void	*p_img_up;
 	void	*p_img_down;
 	void	*p_img_left;
@@ -72,6 +72,8 @@ typedef struct s_window{
 int		check_valid_map(const char *str);
 // Check map variables
 int		check_map_positions(char **map, t_win *w, int x, int y);
+// Checks correct input of letters in map
+int		check_variables(char c);
 
 /* <<< window.c >>> */
 //
@@ -100,6 +102,8 @@ void	print_background(t_win *w, int x, int y);
 void	print_objects(t_win *w, int x, int y);
 // Prints inital map
 void	print_initial_map(t_win *w, char **map);
+// Prints string on game
+void	print_string(t_win *w);
 
 /* <<< move.c >>> */
 //
@@ -117,8 +121,8 @@ int		loop_engine(t_win *w);
 void	*get_ball_side(t_win *w);
 // Makes the balls roll
 void	ball_roll(t_win *w);
-// Puts move_counter on screen dynamically
-void	string_on_screen(t_win *w);
+// Checks size of move_string to print only the neccessary nbr of boxes
+void	calculate_str_back(t_win *w);
 // Makes Gengar spin when game is over as victory
 void	victory(t_win *w);
 // Makes player unable to move and enables spin win animation

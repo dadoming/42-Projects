@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 20:57:01 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/21 04:17:25 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/06/21 18:36:24 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ int	key_event(int key, t_win *w)
 			put_back(w, key, w->p_x, w->p_y);
 		mlx_put_image_to_window(w->mlx, w->win, which_side(w, key),
 			w->p_x * w->size_width, w->p_y * w->size_height);
-		string_on_screen(w);
+		calculate_str_back(w);
 	}
 	else
 		return (0);

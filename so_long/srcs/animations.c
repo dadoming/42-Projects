@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 22:17:59 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/21 04:24:46 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/06/21 18:34:26 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void	ball_roll(t_win *w)
 	}
 }
 
-void	string_on_screen(t_win *w)
+void	calculate_str_back(t_win *w)
 {
 	int	i;
 	int	squares;
@@ -131,6 +131,5 @@ void	string_on_screen(t_win *w)
 			i * (w->size_width), 0);
 		i++;
 	}
-	w->m_count = ft_itoa(w->move_count);
-	mlx_string_put(w -> mlx, w -> win, 8, 8, 123746, w -> m_count);
+	print_string(w);
 }

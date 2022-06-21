@@ -6,14 +6,14 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2021/11/07 15:43:57 by dadoming          #+#    #+#             */
-/*   Updated: 2022/05/23 19:06:32 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/06/21 18:50:00 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef GET_NEXT_LINE_H
 # define GET_NEXT_LINE_H
 # ifndef BUFFER_SIZE
-#  define BUFFER_SIZE 128
+#  define BUFFER_SIZE 42
 # endif
 
 //LIBRARIES
