@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 20:36:09 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/15 22:16:19 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/06/20 21:21:14 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,14 +40,13 @@ int	check_map_positions(char **map, t_win *w, int x, int y)
 }
 
 // Checks map file name
-int	check_valid_map(char *str)
+int	check_valid_map(const char *str)
 {
-	char	**checker;
+	int	i;
 
-	if (!strchr(str, '.'))
-		return (1);
-	checker = ft_split(str, '.');
-	if (ft_strncmp(checker[1], "ber", 3) == 0 && !checker[2])
-		return (0);
-	return (1);
+	i = ft_strlen(str) - 1;
+	while (i >= 0 && str[i] != '.')
+		i--;
+	str = str + i;
+	return (!ft_strncmp(str, ".ber", 5));
 }

@@ -6,7 +6,7 @@
 #    By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/05 18:06:31 by dadoming          #+#    #+#              #
-#    Updated: 2022/06/15 23:10:36 by dadoming         ###   ########.fr        #
+#    Updated: 2022/06/21 04:16:44 by dadoming         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,8 @@ SRCS = srcs/so_long.c \
 		srcs/print.c \
 		srcs/move.c \
 		srcs/animations.c \
+		srcs/close.c \
+		srcs/img_control.c \
 
 RM = rm -f
 

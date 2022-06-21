@@ -6,34 +6,42 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 20:38:39 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/16 01:37:15 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/06/21 04:19:33 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-
 void	initialization(t_win *value, char *arg)
 {
-	if (check_valid_map(arg) != 0)
+	if (check_valid_map(arg) == 0)
 		error_msg("Map filename is invalid");
-	// missing free(map_file)?
 	value -> map_file = open(arg, O_RDONLY);
 	if (value -> map_file < 0)
+	{
+		close(value -> map_file);
 		error_msg("Unable to find file");
+	}
 	value -> map = get_map_table(value -> map_file, value -> map, 0);
 	if (!(value -> map))
-		error_msg("Couldn't read map");
-	// free(tudo)
+	{
+		ft_exit_game(value);
+		msg("Couldn't read map");
+	}
 	get_map_sizes(value);
 	if (value -> width <= 2 || value -> height <= 2)
-		error_msg("Invalid map sizes");
-	// free(tudo)
+	{
+		msg("Invalid map sizes");
+		ft_exit_game(value);
+	}
 	if (check_map_positions(value -> map, value, 0, 0) == 0)
-		error_msg("Invalid map components");
+	{
+		msg("Invalid map components");
+		ft_exit_game(value);
+	}
 }
 
-void	load_all_imgs(t_win *w)
+void	load_all_imgs1(t_win *w)
 {
 	w -> wall_image1 = mlx_xpm_file_to_image(w -> mlx, "./sprites/wall.xpm",
 			&(w -> size_width), &(w -> size_height));
@@ -49,6 +57,11 @@ void	load_all_imgs(t_win *w)
 			"./sprites/Pokeball2.xpm", &(w -> size_width), &(w -> size_height));
 	w -> coin_image3 = mlx_xpm_file_to_image(w -> mlx,
 			"./sprites/Pokeball3.xpm", &(w -> size_width), &(w -> size_height));
+	load_all_imgs2(w);
+}
+
+void	load_all_imgs2(t_win *w)
+{
 	w -> p_img_down = mlx_xpm_file_to_image(w -> mlx,
 			"./sprites/Gengar_Down.xpm",
 			&(w -> size_width), &(w -> size_height));
@@ -60,6 +73,12 @@ void	load_all_imgs(t_win *w)
 	w -> p_img_right = mlx_xpm_file_to_image(w -> mlx,
 			"./sprites/Gengar_Right.xpm",
 			&(w -> size_width), &(w -> size_height));
+	w -> exit_1 = mlx_xpm_file_to_image(w -> mlx,
+			"./sprites/Exit_left.xpm", &(w -> size_width), &(w -> size_height));
+	w -> exit_2 = mlx_xpm_file_to_image(w -> mlx,
+			"./sprites/Exit_right.xpm", &(w->size_width), &(w->size_height));
+	w -> exit_3 = mlx_xpm_file_to_image(w -> mlx,
+			"./sprites/Exit_upside.xpm", &(w->size_width), &(w->size_height));
 }
 
 char	**get_map_table(int fd, char **map, int count)

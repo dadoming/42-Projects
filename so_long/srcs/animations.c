@@ -6,21 +6,47 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 22:17:59 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/16 02:11:57 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/06/21 04:24:46 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
 
-// Loop hook
+void	victory(t_win *w)
+{
+	static int	delay;
+	static int	i;
+
+	mlx_put_image_to_window(w->mlx, w->win, w->exit_image,
+		w->p_x * w->size_width, w->p_y * w->size_height);
+	if (i == 0)
+		mlx_put_image_to_window(w->mlx, w->win, w->exit_1,
+			w->p_x * w->size_width, w->p_y * w->size_height);
+	if (i == 1)
+		mlx_put_image_to_window(w->mlx, w->win, w->exit_3,
+			w->p_x * w->size_width, w->p_y * w->size_height);
+	if (i == 2)
+		mlx_put_image_to_window(w->mlx, w->win, w->exit_2,
+			w->p_x * w->size_width, w->p_y * w->size_height);
+	if (i == 3)
+		mlx_put_image_to_window(w->mlx, w->win, w->p_img_down,
+			w->p_x * w->size_width, w->p_y * w->size_height);
+	i++;
+	if (i > 3)
+		i = 0;
+	if (delay++ > 10)
+		ft_exit_game(w);
+}
+
 int	loop_engine(t_win *w)
 {
 	static int	delay;
 
-	if (++delay < 5000)
+	if (++delay < 3000)
 		return (0);
-	if ((delay % 5) == 0)
-		ball_roll(w);
+	if (w -> winn)
+		victory(w);
+	ball_roll(w);
 	delay = 0;
 	return (w != 0);
 }
@@ -33,7 +59,7 @@ void	*get_ball_side(t_win *w)
 	if (ctrl == -1)
 	{
 		check *= -1;
-		ctrl++;
+		ctrl = 0;
 		return (w->coin_image2);
 	}
 	if (ctrl == 0)
@@ -47,7 +73,7 @@ void	*get_ball_side(t_win *w)
 	if (ctrl == 1)
 	{
 		check *= -1;
-		ctrl--;
+		ctrl = 0;
 		return (w->coin_image3);
 	}
 	return (0);
@@ -55,9 +81,11 @@ void	*get_ball_side(t_win *w)
 
 void	ball_roll(t_win *w)
 {
-	int	y;
-	int	x;
+	int		y;
+	int		x;
+	void	*helper;
 
+	helper = get_ball_side(w);
 	x = 0;
 	y = 0;
 	while (y < w->height)
@@ -69,7 +97,7 @@ void	ball_roll(t_win *w)
 			{
 				mlx_put_image_to_window(w->mlx, w->win, w->floor_image,
 					x * (w->size_width), y * (w->size_height));
-				mlx_put_image_to_window(w->mlx, w->win, get_ball_side(w),
+				mlx_put_image_to_window(w->mlx, w->win, helper,
 					x * (w->size_width), y * (w->size_height));
 			}
 			x++;
@@ -80,9 +108,29 @@ void	ball_roll(t_win *w)
 
 void	string_on_screen(t_win *w)
 {
-	mlx_put_image_to_window(w->mlx, w->win, w->wall_image1, 0, 0);
-	if (w->move_count > 100)
-		mlx_put_image_to_window(w->mlx, w->win, w->wall_image1, 32, 0);
+	int	i;
+	int	squares;
+	int	num;
+
+	squares = 100;
+	num = 1;
+	i = 0;
+	while (i < w->move_count)
+	{
+		if (squares == i)
+		{
+			num++;
+			squares *= 10;
+		}
+		i++;
+	}
+	i = 0;
+	while (i < num)
+	{
+		mlx_put_image_to_window(w->mlx, w->win, w->wall_image1,
+			i * (w->size_width), 0);
+		i++;
+	}
 	w->m_count = ft_itoa(w->move_count);
 	mlx_string_put(w -> mlx, w -> win, 8, 8, 123746, w -> m_count);
 }

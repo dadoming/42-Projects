@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 19:54:36 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/15 15:46:49 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/06/20 18:14:00 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,4 +28,17 @@ void	error_msg(char *str)
 	}
 	write(1, "\n", 1);
 	exit(1);
+}
+
+void	msg(char *str)
+{
+	int	i;
+
+	i = 0;
+	while (str[i])
+	{
+		write(1, &str[i], 1);
+		i++;
+	}
+	write(1, "\n", 1);
 }

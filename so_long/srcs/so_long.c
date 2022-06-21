@@ -6,13 +6,11 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/05 18:06:39 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/16 01:53:51 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/06/21 04:20:07 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "so_long.h"
-
-//mktt
 
 int	main(int argc, char **argv)
 {
@@ -24,7 +22,7 @@ int	main(int argc, char **argv)
 	w.mlx = mlx_init();
 	if (!w.mlx)
 		return (3);
-	load_all_imgs(&w);
+	load_all_imgs1(&w);
 	w.win = mlx_new_window(w.mlx, w.width * w.size_width,
 			w.height * w.size_height, "so_long");
 	if (!w.win)
