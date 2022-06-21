@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:19:41 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/21 18:54:33 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/06/21 19:05:38 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ typedef struct s_window{
 	char	**map;
 	int		width;
 	int		height;
+	int		floor_back;
 	int		sprites_loaded;
 	void	*wall_image1;
 	void	*enemy_image;

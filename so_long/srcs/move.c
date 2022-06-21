@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 20:57:01 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/21 18:36:24 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/06/21 19:01:34 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,7 @@ int	key_press(t_win *w, int key)
 		w -> p_y += 1;
 	if ((key == D || key == A || key == W || key == S)
 		&& w -> map[w->p_y][w->p_x] == 'E' && w -> caught == w -> c)
-	{
 		exit_game_win(w);
-	}
 	if (valid_key(key, w) && w->map[w->p_y][w->p_x] == '1')
 		w -> move_count -= 1;
 	return (1);
@@ -67,6 +65,7 @@ int	valid_key(int key, t_win *w)
 
 void	exit_game_win(t_win *w)
 {
+	msg("You won, yey!");
 	w -> map[w->p_y + 1][w->p_x] = '1';
 	w -> map[w->p_y][w->p_x + 1] = '1';
 	w -> map[w->p_y - 1][w->p_x] = '1';

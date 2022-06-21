@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 04:16:19 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/21 04:17:31 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/06/21 19:05:43 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,28 +14,29 @@
 
 void	put_back(t_win *w, int key, int x, int y)
 {
-	int	floor_back;
-
-	floor_back = 0;
-	if ((key == W && ++floor_back) && w->map[y][x] != '1')
+	w->floor_back = 0;
+	if ((key == W && ++w->floor_back) && w->map[y][x] != '1')
 		y += 1;
-	if ((key == A && ++floor_back) && w->map[y][x] != '1')
+	if ((key == A && ++w->floor_back) && w->map[y][x] != '1')
 		x += 1;
-	if ((key == S && ++floor_back) && w->map[y][x] != '1')
+	if ((key == S && ++w->floor_back) && w->map[y][x] != '1')
 		y -= 1;
-	if ((key == D && ++floor_back) && w->map[y][x] != '1')
+	if ((key == D && ++w->floor_back) && w->map[y][x] != '1')
 		x -= 1;
 	if (w->map[w->p_y][w->p_x] == 'C')
 		catch(w);
 	if (w->map[w->p_y][w->p_x] == 'B')
+	{
+		msg("You lost! :(");
 		ft_exit_game(w);
+	}
 	if (w->map[y][x] == 'E')
 	{
-		floor_back = 0;
+		w->floor_back = 0;
 		mlx_put_image_to_window(w->mlx, w->win, w->exit_image,
 			x * w->size_width, y * w->size_height);
 	}
-	if (floor_back)
+	if (w->floor_back)
 		mlx_put_image_to_window(w->mlx, w->win, w->floor_image,
 			x * w->size_width, y * w->size_height);
 }

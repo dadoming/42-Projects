@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 03:30:34 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/21 18:55:17 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/06/21 20:09:53 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,5 +53,6 @@ void	ft_exit_game(t_win *w)
 		mlx_destroy_window(w->mlx, w->win);
 	if ((w->sprites_loaded) == 1)
 		free_sprites(w);
+	//system("leaks so_long");
 	exit(0);
 }
