@@ -13,12 +13,6 @@
 #ifndef PUSH_SWAP_H
 # define PUSH_SWAP_H
 
-# define FIRST  (*a)-> content
-# define SECOND (*a)-> next -> content
-# define THIRD  (*a)-> next -> next -> content
-# define FORTH  (*a)-> next -> next -> next -> content
-# define FIFTH  (*a)-> next -> next -> next -> next -> content
-
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
@@ -45,11 +39,11 @@ void pa(t_list **stack_a, t_list **stack_b);
 void pb(t_list **stack_a, t_list **stack_b);
 
 // ALGORITHM
-int lst_is_ordered(t_list *a);
-t_list *sort_two(t_list **a);
-t_list *sort_three(t_list **a);
-t_list *sort_four(t_list **a, t_list **b);
-t_list *sort_five(t_list **a, t_list **b);
+int     lst_is_ordered(t_list *a);
+void    sort_two(t_list **a);
+void    sort_three(t_list **a);
+void    sort_four(t_list **a, t_list **b);
+void    sort_five(t_list **a, t_list **b);
 
 // INPUT
 int check_input(char **argv, int argc);

@@ -12,36 +12,39 @@
 
 #include "push_swap.h"
 
-t_list	*sort_two(t_list **a)
+void	sort_two(t_list **a)
 {
 	if ((*a)-> content > (*a)-> next -> content)
 		sa(a);
-	return (*a);
 }
 
-t_list	*sort_three(t_list **a)
+void	sort_three(t_list **a)
 {
-	if ((THIRD < SECOND && SECOND > FIRST))
+	if (((*a)-> next -> next -> content < (*a)-> next -> content
+			&& (*a)-> next -> content > (*a)->content))
 	{
-		if (FIRST > THIRD)
+		if ((*a)->content > (*a)-> next -> next -> content)
 			rra(a);
-		else if (FIRST < THIRD)
+		else
 		{
 			rra(a);
 			sa(a);
 		}
 	}
-	else if (FIRST > SECOND && SECOND < THIRD)
+	else if ((*a)->content > (*a)-> next -> content
+			&& (*a)-> next -> content < (*a)-> next -> next -> content)
 	{
-		if(FIRST > THIRD)
+		if((*a)->content > (*a)-> next -> next -> content)
 			ra(a);
-		else if(FIRST < THIRD)
+		else
 			sa(a);
 	}
-	else if(FIRST > SECOND && FIRST > THIRD && SECOND > THIRD)
+	else if((*a)->content > (*a)-> next -> content && 
+		(*a)->content > (*a)-> next -> next -> content && 
+		(*a)-> next -> content > (*a)-> next -> next -> content)
 	{
 		sa(a);
 		rra(a);
 	}
-	return (*a);
 }
+

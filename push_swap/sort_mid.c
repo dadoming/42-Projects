@@ -12,64 +12,59 @@
 
 #include "push_swap.h"
 
-static void *last_is_biggest(t_list **a, t_list **b)
+static void last_is_biggest(t_list **a, t_list **b)
 {
 	pa(a, b);
 	ra(a);
-	return(*a);
 }
 
-static void *biggest_before_last(t_list **a, t_list **b)
+static void biggest_before_last(t_list **a, t_list **b)
 {
 	rra(a);
 	pa(a, b);
 	ra(a);
 	ra(a);
-	return(*a);
 }
 
-static void *sort_smallest(t_list **a, t_list **b)
+static void sort_smallest(t_list **a, t_list **b)
 {
 	pa(a, b);
 	sa(a);
-	return(*a);
 }
 
-t_list	*sort_four(t_list **a, t_list **b)
+void	sort_four(t_list **a, t_list **b)
 {
 	pb(a, b);
 	sort_three(a);
-	if (FIRST > (*b)-> content)
+	if ((*a)-> content > (*b)-> content)
 		pa(a, b);
-	else if ((*b)-> content > THIRD)
+	else if ((*b)-> content > (*a)-> next -> next -> content)
 		last_is_biggest(a, b);
-	else if ((*b)-> content > SECOND)
+	else if ((*b)-> content > (*a)-> next -> content)
 	{
 		biggest_before_last(a, b);
 	}
-	else if ((*b)-> content > FIRST)
+	else if ((*b)-> content > (*a)-> content)
 		sort_smallest(a, b);
-	return (*a);
 }
 
-t_list *sort_five(t_list **a, t_list **b)
+void sort_five(t_list **a, t_list **b)
 {
 	pb(a, b);
 	sort_four(a, b);
-	if(FIRST > (*b)-> content)
+	if((*a)-> content > (*b)-> content)
 		pa(a, b);
-	else if(FORTH < (*b)-> content)
+	else if((*a)-> next -> next -> next -> content < (*b)-> content)
 		last_is_biggest(a, b);
-	else if(THIRD < (*b)-> content)
+	else if((*a)-> next -> next -> content < (*b)-> content)
 		biggest_before_last(a, b);
-	else if(SECOND < (*b)-> content)
+	else if((*a)-> next -> content < (*b)-> content)
 	{
 		ra(a);
 		pa(a, b);
 		sa(a);
 		rra(a);
 	}
-	else if(FIRST < (*b)-> content)
+	else if((*a)-> content < (*b)-> content)
 		sort_smallest(a, b);
-	return(*a);
 }
