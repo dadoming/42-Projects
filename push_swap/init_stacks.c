@@ -2,74 +2,53 @@
 #include <stdlib.h>
 #include "push_swap.h"
 
-t_list	*add_new_node(int data)
-{
-	t_list	*new_node;
-
-	new_node = malloc(sizeof(t_list));
-	if (new_node == NULL)
-		return (NULL);
-    new_node -> content = data;
-	new_node -> next = NULL;
-    return (new_node);
-}
-
 t_list *init_stacks_string(char **splitted_argv)
 {
-    t_list *head_node;
+    t_list *head;
     t_list *tmp;
     int i;
     
     i = 0;
-    head_node = NULL;
-    while (splitted_argv[i])
+    if(check_errors(splitted_argv) == -1)
+        return(NULL);
+    head = ft_lstnew(ft_atoi(splitted_argv[i++]));
+    tmp = head;
+    while (splitted_argv[i] != 0)
     {
-        //fazer a seguir  if(check_errors(argv[i]))
-        //                  return NULL;
-        if(i == 0)
-        {
-            head_node = add_new_node(ft_atoi(splitted_argv[i]));
-            head_node -> next = tmp;
-            tmp = head_node;
-        }
-        else
-        {
-            tmp -> next = add_new_node(ft_atoi(splitted_argv[i]));
-            tmp = tmp -> next;
-        }
+        tmp -> next = ft_lstnew(ft_atoi(splitted_argv[i]));
+        tmp = tmp -> next;
         i++;
     }
     tmp -> next = NULL;
-    return (head_node);
+    i = 0;
+    while(splitted_argv[i])
+    {
+        free(splitted_argv[i]);
+        i++;
+    }
+    free(splitted_argv[i]);
+    return (head);
 }
 
 t_list *init_stacks(int argc, char **argv)
 {
-    t_list *head_node;
+    t_list *head;
     t_list *tmp;
     int i;
 
     if(argc == 2)
         return (init_stacks_string(ft_split(argv[1], ' ')));
     i = 1;
-    head_node = NULL;
+    if(check_errors(argv) == -1)
+        return NULL;
+    head = ft_lstnew(ft_atoi(argv[i++]));
+    tmp = head;
     while (i < argc)
     {
-        //fazer a seguir  if(check_errors(argv[i]))
-        //                  return NULL;
-        if(i == 1)
-        {
-            head_node = add_new_node(ft_atoi(argv[i]));
-            head_node -> next = tmp;
-            tmp = head_node;
-        }
-        else
-        {
-            tmp -> next = add_new_node(ft_atoi(argv[i]));
-            tmp = tmp -> next;
-        }
+        tmp -> next = ft_lstnew(ft_atoi(argv[i]));
+        tmp = tmp -> next;
         i++;
     }
     tmp -> next = NULL;
-    return (head_node);
+    return (head);
 }
