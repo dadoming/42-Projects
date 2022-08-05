@@ -21,13 +21,15 @@ CC = gcc
 FLAGS = -Wall -Wextra -Werror -o
 
 SRCS = push_swap.c \
-	stacks_init.c \
+	init_stacks.c \
 	moves_push.c \
 	moves_revrotate.c \
 	moves_rotate.c \
 	moves_swap.c \
 	sort_little.c \
 	sort_mid.c \
+	sort_big.c \
+	check_errors.c \
 
 all: ${LIBFT}
 	@echo Compiling...
