@@ -19,24 +19,24 @@
 #include "libft/libft.h"
 
 //PUSH_SWAP UTILS
-t_list   *init_stacks_string(char **splitted_argv);
-t_list   *init_stacks(int argc, char **argv);
+t_list  *init_stacks_string(char **splitted_argv);
+t_list  *init_stacks(int argc, char **argv);
 
 //MOVES
-void sa(t_list **stack_a);
-void sb(t_list **stack_b);
-void ss(t_list **stack_a, t_list **stack_b);
+void    sa(t_list **stack_a);
+void    sb(t_list **stack_b);
+void    ss(t_list **stack_a, t_list **stack_b);
 
-void ra(t_list **stack_a);
-void rb(t_list **stack_a);
-void rr(t_list **stack_a, t_list **stack_b);
+void    ra(t_list **stack_a);
+void    rb(t_list **stack_a);
+void    rr(t_list **stack_a, t_list **stack_b);
 
-void rra(t_list **stack_a);
-void rrb(t_list **stack_b);
-void rrr(t_list **stack_a, t_list **stack_b);
+void    rra(t_list **stack_a);
+void    rrb(t_list **stack_b);
+void    rrr(t_list **stack_a, t_list **stack_b);
 
-void pa(t_list **stack_a, t_list **stack_b);
-void pb(t_list **stack_a, t_list **stack_b);
+void    pa(t_list **stack_a, t_list **stack_b);
+void    pb(t_list **stack_a, t_list **stack_b);
 
 // ALGORITHM
 int     lst_is_ordered(t_list *a);
@@ -44,9 +44,14 @@ void    sort_two(t_list **a);
 void    sort_three(t_list **a);
 void    sort_four(t_list **a, t_list **b);
 void    sort_five(t_list **a, t_list **b);
+void    radix(t_list **a, t_list **b);
+void    sort_big(t_list **a, t_list **b);
 
 // INPUT
-int check_input(char **argv, int argc);
-int check_input_string(char *arg);
+int     check_input(char **argv, int argc);
+int     check_input_string(char *arg);
+int     check_errors(char **str);
+
+
 
 #endif
