@@ -30,64 +30,33 @@ int lst_is_ordered(t_list *a)
     }
     return(1);
 }
-/*
-int check_input_string(char **arg)
-{
-    int i = 0;
-    while (arg[i] != '\0')
-    {
-        if(ft_isdigit(arg[i]) == 0)
-        {
-            return (-1);
-        }
-        i++;
-    }
-    return (0);
-}
-
-//int check_input(char **argv, int argc)
-{
-    if(argc == 2)
-        return (check_input_string(ft_split(argv[1], ' ')));
-    int i = 1;
-    while (argv[i] != '\0')
-    {
-        if(ft_isdigit(argv[i]) == 0)
-        {
-            return(-1);
-        }
-        i++;
-    }
-    return (0);
-}
-*/
 
 int main(int argc, char **argv)
 {
     t_list *a;
     t_list *b;
+    int list_size;
 
     a = NULL;
     b = NULL;
     if (argc > 1)
     {
-        //if(check_input(argv, argc) == -1)
-          //  return (-1);
         a = init_stacks(argc, argv);
-        while(1)
+        list_size = ft_lstsize(a);
+        if(!a)
+            return(-1);
+        while(lst_is_ordered(a) != 0)
         {
-            if(lst_is_ordered(a) == 0)
-                break ;
-            else if(ft_lstsize(a) == 2)
+            if(list_size == 2)
                 sort_two(&a);
-            else if(ft_lstsize(a) == 3)
+            else if(list_size == 3)
                 sort_three(&a);
-            else if(ft_lstsize(a) == 4)
+            else if(list_size == 4)
                 sort_four(&a, &b);
-            else if(ft_lstsize(a) == 5)
+            else if(list_size == 5)
                 sort_five(&a, &b);
-//            else if(ft_lstsize(a) > 5)
-  //              sort_big(&a, &b);
+            else
+                sort_big(&a, &b);
             break ; //  take this off when finished
         }
     }
@@ -96,7 +65,7 @@ int main(int argc, char **argv)
     printf("Stack a: ");
     while (a -> next)
     {
-        printf("%d ", a -> content);
+        printf("%d ", a->content);
         a = a -> next;
     }
     printf("%d\n", a -> content);
@@ -110,6 +79,6 @@ int main(int argc, char **argv)
         }
         printf("%d\n", b -> content);
     }
-    
+
     return(0);
 }
