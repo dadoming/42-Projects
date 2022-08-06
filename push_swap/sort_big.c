@@ -30,9 +30,9 @@ void radix(t_list **a, t_list **b)
         ++max_bits;
     int i = 0;
     int j = 0;
-    while (i < max_bits)
+    while (i <= max_bits)
     {
-        while (++j < size)
+        while (j++ < size)
         {
             int num = (*a)->content;
             if(((num >> i) & 1) == 1)
@@ -42,10 +42,10 @@ void radix(t_list **a, t_list **b)
         }
         j = 0;
         i++;
-    }
-    while(b)
-    {
-        pa(a, b);
+        while(ft_lstsize(*b) > 0)
+        {
+            pa(a, b);
+        }
     }
 }
 
