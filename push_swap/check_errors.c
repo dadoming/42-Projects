@@ -73,7 +73,7 @@ static int check_repeat(char **str)
         j = i + 1;
         while (str[j] != 0)
         {
-            if(ft_strncmp(str[i], str[j], ft_strlen(str[j])) == 0)
+            if(ft_strncmp(str[i], str[j], ft_strlen(str[j]) + ft_strlen(str[j])) == 0)
                 return (-1);
             j++;
         }
