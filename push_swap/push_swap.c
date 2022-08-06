@@ -45,7 +45,7 @@ int main(int argc, char **argv)
         list_size = ft_lstsize(a);
         if(!a)
             return(-1);
-        while(lst_is_ordered(a) != 0)
+        if(lst_is_ordered(a) != 0)
         {
             if(list_size == 2)
                 sort_two(&a);
@@ -57,7 +57,6 @@ int main(int argc, char **argv)
                 sort_five(&a, &b);
             else
                 sort_big(&a, &b);
-            break ; //  take this off when finished
         }
     }
     
