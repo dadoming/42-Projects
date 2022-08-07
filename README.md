@@ -1,4 +1,4 @@
-> libft: Finished with 108, error on substr, but easily fixable!
+> libft: Finished with 108.
 
 > get_next_line: Finished with 125.
 
