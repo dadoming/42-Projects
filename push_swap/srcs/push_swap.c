@@ -18,7 +18,6 @@ int lst_is_ordered(t_list *a)
     {
         if(a -> next == NULL)
         {
-            printf("List is all ordered!\n");
             return (0);
         }
         if(a -> content < a -> next -> content)

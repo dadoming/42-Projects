@@ -8,3 +8,4 @@
 
 read -p "Enter nums: " ARG
 ./push_swap $ARG | ./checker_linux $ARG
+

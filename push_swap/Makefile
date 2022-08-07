@@ -30,6 +30,7 @@ SRCS = srcs/push_swap.c \
 	srcs/sort_mid.c \
 	srcs/sort_big.c \
 	srcs/check_errors.c \
+	srcs/sort_big_utils.c \
 
 all: ${LIBFT}
 	@echo Compiling...
