@@ -12,7 +12,7 @@
 
 #include "../push_swap.h"
 
-void radix(t_list **a, t_list **b)
+void radix(t_list **a, t_list **b, int *radixs_array)
 {
     int size = ft_lstsize(*a);
     int max_num = size - 1; // the biggest number in stack a will be size - 1
@@ -28,13 +28,15 @@ void radix(t_list **a, t_list **b)
     //              13>>4 = 0
     while (max_num >> max_bits != 0)
         ++max_bits;
+
+    
     int i = 0;
     int j = 0;
     while (i <= max_bits)
     {
         while (j++ < size)
         {
-            int num = (*a)->content;
+            int num = get_position((*a)->content, radixs_array);
             if(((num >> i) & 1) == 1)
                 ra(a);
             else
@@ -51,5 +53,12 @@ void radix(t_list **a, t_list **b)
 
 void sort_big(t_list **a, t_list **b)
 {
-    radix(a, b);
+    // I believe it does not need a terminator 0 nor can it take it
+    // else it will just add the value of 0 to the array we are working with
+    int *radixs_array;
+
+    radixs_array = malloc(ft_lstsize(a) * sizeof(int));
+    get_radix_array(&radixs_array, a);
+    radix(a, b, radixs_array);
+    free(radixs_array);
 }
