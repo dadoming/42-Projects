@@ -55,10 +55,5 @@ void sort_big(t_list **a, t_list **b)
 {
     // I believe it does not need a terminator 0 nor can it take it
     // else it will just add the value of 0 to the array we are working with
-    int *radixs_array;
-
-    radixs_array = malloc(ft_lstsize(a) * sizeof(int));
-    get_radix_array(&radixs_array, a);
-    radix(a, b, radixs_array);
-    free(radixs_array);
+    radix(a, b);
 }

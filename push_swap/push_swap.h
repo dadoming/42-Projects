@@ -41,6 +41,9 @@ void    pb(t_list **stack_a, t_list **stack_b);
 // ALGORITHM
 int     lst_is_ordered(t_list *a);
 int     get_position(int a_num, int *radixs_array);
+int     get_smallest_elem(t_list **a, int size);
+int     get_next_smallest_elem(int smallest, t_list **a);
+void    get_radix_array(int *radixs_array, t_list **a);
 void    sort_two(t_list **a);
 void    sort_three(t_list **a);
 void    sort_four(t_list **a, t_list **b);
@@ -49,12 +52,10 @@ void    sort_big(t_list **a, t_list **b);
 void    radix(t_list **a, t_list **b);
 
 
-
 // INPUT
 int     check_input(char **argv, int argc);
 int     check_input_string(char *arg);
 int     check_errors(char **str);
-
 
 
 #endif

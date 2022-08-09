@@ -56,7 +56,7 @@ int main(int argc, char **argv)
                 sort_big(&a, &b);
         }
     }
-    /*
+    
     //  PRINT
     printf("Stack a: ");
     while (a -> next)
@@ -75,6 +75,6 @@ int main(int argc, char **argv)
         }
         printf("%d\n", b -> content);
     }
-    */
+    
     return(0);
 }
