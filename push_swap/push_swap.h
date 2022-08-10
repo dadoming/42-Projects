@@ -21,6 +21,7 @@
 //PUSH_SWAP UTILS
 t_list  *init_stacks_string(char **splitted_argv);
 t_list  *init_stacks(int argc, char **argv);
+void    free_list(t_list **a);
 
 //MOVES
 void    sa(t_list **stack_a);
@@ -41,16 +42,15 @@ void    pb(t_list **stack_a, t_list **stack_b);
 // ALGORITHM
 int     lst_is_ordered(t_list *a);
 int     get_position(int a_num, int *radixs_array);
-int     get_smallest_elem(t_list **a, int size);
-int     get_next_smallest_elem(int smallest, t_list **a);
-void    get_radix_array(int *radixs_array, t_list **a);
 void    sort_two(t_list **a);
 void    sort_three(t_list **a);
 void    sort_four(t_list **a, t_list **b);
 void    sort_five(t_list **a, t_list **b);
 void    sort_big(t_list **a, t_list **b);
-void    radix(t_list **a, t_list **b);
-
+void    radix(t_list **a, t_list **b, int *radixs_array, int size);
+void    load_array(t_list **a, int *radixs_array, int size);
+void    quicksort_array(int *array, int size);
+void    ft_swap(int *a, int *b);
 
 // INPUT
 int     check_input(char **argv, int argc);

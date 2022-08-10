@@ -7,20 +7,11 @@ static int check_size_of(char **str);
 int check_errors(char **str)
 {
     if(check_repeat(str) == -1)
-    {
-        printf("Repeat checker\n");
         return (-1);
-    }
     if(check_if_is_number(str) == -1)
-    {
-        printf("Checker if is only number checker\n");
         return (-1);
-    }
     if(check_size_of(str) == -1)
-    {
-        printf("Size of checker\n");
         return (-1);
-    }
     return (0);
 }
 
