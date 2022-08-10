@@ -12,9 +12,8 @@
 
 #include "../push_swap.h"
 
-void radix(t_list **a, t_list **b, int *radixs_array)
+void radix(t_list **a, t_list **b, int *radixs_array, int size)
 {
-    int size = ft_lstsize(*a);
     int max_num = size - 1; // the biggest number in stack a will be size - 1
     int max_bits = 0;
 
@@ -28,13 +27,11 @@ void radix(t_list **a, t_list **b, int *radixs_array)
     //              13>>4 = 0
     while (max_num >> max_bits != 0)
         ++max_bits;
-
-    
-    int i = 0;
-    int j = 0;
-    while (i <= max_bits)
+    int i = -1;
+    int j = -1;
+    while (++i < max_bits)
     {
-        while (j++ < size)
+        while (++j < size)
         {
             int num = get_position((*a)->content, radixs_array);
             if(((num >> i) & 1) == 1)
@@ -42,8 +39,7 @@ void radix(t_list **a, t_list **b, int *radixs_array)
             else
                 pb(a, b);
         }
-        j = 0;
-        i++;
+        j = -1;
         while(ft_lstsize(*b) > 0)
         {
             pa(a, b);
@@ -55,5 +51,12 @@ void sort_big(t_list **a, t_list **b)
 {
     // I believe it does not need a terminator 0 nor can it take it
     // else it will just add the value of 0 to the array we are working with
-    radix(a, b);
+    int *radixs_array;
+    int size = ft_lstsize(*a);
+
+    radixs_array = malloc(size * sizeof(int));
+    load_array(a, radixs_array, size);
+    quicksort_array(radixs_array, size);
+    radix(a, b, radixs_array, size);
+    free(radixs_array);
 }

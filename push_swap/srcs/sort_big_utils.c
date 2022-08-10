@@ -10,54 +10,37 @@ int get_position(int a_num, int *radixs_array)
     return (i);
 }
 
-/*
-Get all the positions of the array, 
- making the lowest number become the first one
- and so sucessively
-*/
-void get_radix_array(int *radixs_array, t_list **a)
+void load_array(t_list **a, int *radixs_array, int size)
 {
-    int i = 1;
-    int smallest;
-    int size = ft_lstsize(a);
+    int i = 0;
+    t_list *temp = *a;
 
-    smallest = get_smallest_elem(a, size);
-    radixs_array[0] = smallest;
-    while (size)
+    while (i < size)
     {
-        radixs_array[i] = get_next_smallest_elem(smallest, a);
-        smallest = radixs_array[i];
-        size--;
+        radixs_array[i] = temp -> content;
+        temp = temp -> next;
         i++;
     }
 }
 
-int get_smallest_elem(t_list **a, int size)
+void ft_swap(int *a, int *b)
 {
-    int smallest;
-
-    smallest = (*a)->content;
-    while (size)
-    {
-        if ((*a)->content < smallest)
-            smallest = (*a) -> content;
-        (*a) = (*a) -> next;
-        size--;
-    }
-    return (smallest);
+    int c = *a;
+    *a = *b;
+    *b = c;
 }
 
-int get_next_smallest_elem(int smallest, t_list **a)
+void quicksort_array(int *array, int size)
 {
-    int size = ft_lstsize(a);
-    int new_smallest;
-
-    while (size)
+    int i = 0;
+    while (i < size)
     {
-        if((*a)->content > smallest)
-            new_smallest = (*a)->content;
-        size--;
-        (*a) = (*a) ->next;
+        if (array[i] > array[i + 1])
+        {
+            ft_swap(&array[i], &array[i + 1]);
+            i = 0;
+        }
+        else 
+            i++;
     }
-    return (new_smallest);
 }
