@@ -7,11 +7,20 @@ static int check_size_of(char **str);
 int check_errors(char **str)
 {
     if(check_repeat(str) == -1)
+    {
+        write(STDERR_FILENO, "Error\n", 7);
         return (-1);
+    }
     if(check_if_is_number(str) == -1)
+    {
+        write(STDERR_FILENO, "Error\n", 7);
         return (-1);
+    }
     if(check_size_of(str) == -1)
+    {
+        write(STDERR_FILENO, "Error\n", 7);
         return (-1);
+    }
     return (0);
 }
 
