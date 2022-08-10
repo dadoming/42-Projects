@@ -15,15 +15,15 @@
 void pa(t_list **stack_a, t_list **stack_b)
 {
     t_list *pop;
-    int new_head_value;
     
+    if (*stack_b == NULL)
+		    return ;
     if(ft_lstsize(*stack_b) > 0)
     {
         pop = *stack_b;
-        *stack_b = (*stack_b) -> next;
-        new_head_value = pop -> content;
-        //ft_lstdelone(pop, NULL);
-        ft_lstadd_front(stack_a, ft_lstnew(new_head_value));
+        *stack_b = pop -> next;
+        pop->next = NULL;
+        ft_lstadd_front(stack_a, pop);
         write(1, "pa\n", 3);
     }
 }
@@ -31,15 +31,15 @@ void pa(t_list **stack_a, t_list **stack_b)
 void pb(t_list **stack_a, t_list **stack_b)
 {
     t_list *pop;
-    int new_head_value;
-    
+
+    if (*stack_a == NULL)
+		return ;
     if(ft_lstsize(*stack_a) > 0)
     {
         pop = *stack_a;
-        *stack_a = (*stack_a) -> next;
-        new_head_value = pop -> content;
-        //ft_lstdelone(pop, NULL);
-        ft_lstadd_front(stack_b, ft_lstnew(new_head_value));
+        *stack_a = pop -> next;
+        pop -> next = NULL;
+        ft_lstadd_front(stack_b, pop);
         write(1, "pb\n", 3);
     }
 }
