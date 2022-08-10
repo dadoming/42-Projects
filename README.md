@@ -4,8 +4,10 @@
 
 > ft_printf: Finished with 100.
 
-> push_swap: Almost.
+> push_swap: Needs evaluation.
 
 > pipex: Finished with 125.
 
 > so_long: Finished with 124.
+
+> philosophers: Thinking.
