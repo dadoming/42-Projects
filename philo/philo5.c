@@ -17,7 +17,7 @@ void* print_prime(void* arg)
     free(arg);
 }
 
-int main(int argc, char **argv)
+int main(void)
 {
     pthread_t t[10];
     int i = 0;
