@@ -24,3 +24,6 @@ philo8:
 
 philo9: 
 	@gcc -g -pthread philo9.c -o philo && ./philo
+
+philo10: 
+	@gcc -g -pthread philo10.c -o philo && ./philo
