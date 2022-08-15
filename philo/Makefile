@@ -27,3 +27,15 @@ philo9:
 
 philo10: 
 	@gcc -g -pthread philo10.c -o philo && ./philo
+
+philo11: 
+	@gcc -g -pthread philo11.c -o philo && ./philo
+
+philo12: 
+	@gcc -g -pthread philo12.c -o philo && ./philo
+
+philo13: 
+	@gcc -g -pthread philo13.c -o philo && ./philo
+
+philo15: 
+	@gcc -g -pthread philo15.c -o philo && ./philo
