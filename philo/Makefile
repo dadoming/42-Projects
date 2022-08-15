@@ -1,41 +1,24 @@
-philo1: 
-	@gcc -g -pthread philo1.c -o philo && ./philo
+NAME = 		philo
 
-philo2: 
-	@gcc -g -pthread philo2.c -o philo && ./philo
+HEADER = 	includes/philo.h
+#HEADER_BONUS
 
-philo3: 
-	@gcc -g -pthread philo3.c -o philo && ./philo
+SRCS = 		srcs/main.c \
+	   		srcs/lib_utils.c \
+			srcs/load_and_check.c \
+#SRCS_BONUS
 
-philo4: 
-	@gcc -g -pthread philo4.c -o philo && ./philo
+CC = gcc
 
-philo5: 
-	@gcc -g -pthread philo5.c -o philo && ./philo
+FLAGS = -Wextra -Wall -Werror #-fsanitize=address
 
-philo6: 
-	@gcc -g -pthread philo6.c -o philo && ./philo
+RM = rm -f
 
-philo7: 
-	@gcc -g -pthread philo7.c -o philo && ./philo
+m:
+	@${CC} ${FLAGS} -g -pthread ${SRCS} -o ${NAME} -I.${HEADER}
 
-philo8: 
-	@gcc -g -pthread philo8.c -o philo && ./philo
+bonus:
 
-philo9: 
-	@gcc -g -pthread philo9.c -o philo && ./philo
+clean:
 
-philo10: 
-	@gcc -g -pthread philo10.c -o philo && ./philo
-
-philo11: 
-	@gcc -g -pthread philo11.c -o philo && ./philo
-
-philo12: 
-	@gcc -g -pthread philo12.c -o philo && ./philo
-
-philo13: 
-	@gcc -g -pthread philo13.c -o philo && ./philo
-
-philo15: 
-	@gcc -g -pthread philo15.c -o philo && ./philo
+re:
