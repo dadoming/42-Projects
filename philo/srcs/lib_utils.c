@@ -26,29 +26,7 @@ int	ft_atoi(const char *str)
 	return ((int)res * neg);
 }
 
-int check_if_is_number(char **str)
-{
-    int i;
-    int j;
 
-    i = 1;
-    j = 0;
-    while (str[i])
-    {
-        if(!((str[i][j] == '+' ) || (str[i][j] >= '0' && str[i][j] <= '9')))
-            return (-1);
-        j++;
-        while (str[i][j] != '\0')
-        {
-            if (!(str[i][j] >= '0' && str[i][j] <= '9'))
-                return (-1);
-            j++;
-        }
-        j = 0;
-        i++;
-    }
-    return (0);
-}
 
 void err_msg(char *str)
 {
