@@ -20,7 +20,7 @@ typedef struct s_cond
 typedef struct s_philo
 {
     t_cond *condition;
-    pthread_t *philosophers;
+    pthread_t *philosopher;
 
 }   t_philo;
 
