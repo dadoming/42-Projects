@@ -5,6 +5,7 @@ HEADER = 	includes/philo.h
 SRCS = 		srcs/main.c \
 	   		srcs/lib_utils.c \
 			srcs/load_and_check.c \
+			srcs/close_t.c \
 
 CC = gcc
 
