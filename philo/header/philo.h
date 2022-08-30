@@ -23,7 +23,7 @@ typedef struct      s_philo
     pthread_t       *philosopher;
     pthread_mutex_t *fork ;
     pthread_mutex_t assign ;
-    int p_index;
+    int             p_index;
 
 }                   t_philo;
 

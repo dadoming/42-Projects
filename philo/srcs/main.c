@@ -23,12 +23,6 @@ void *routine(void* philo_struct)
         pthread_mutex_unlock(&p->fork[ph_nr]);
         pthread_mutex_unlock(&p->fork[ph_nr + 1]);
     }
-    /*
-    while (alive(p) == 0)
-    {
-        pthread_mutex_lock()
-    }
-    */
     return (0);
 }
 
@@ -37,7 +31,7 @@ int create_philos(t_philo *p)
 {
     int i = 0;
     p -> philosopher = malloc(sizeof(pthread_t) * p->rules->nr_philo);
-    while (i < p -> rules->nr_philo)
+    while (i < p->rules->nr_philo)
     {
         if(pthread_create(&p->philosopher[i], NULL, &routine, (void*)p) != 0)
         {
