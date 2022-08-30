@@ -24,6 +24,7 @@ int check_and_load(t_philo *p, int argc, char **argv)
 // Load input values
 int load_args(t_philo *p, int argc, char **argv)
 {
+    p -> p_index = 0;
     p->rules = malloc(sizeof(t_rules));
     p->rules->nr_philo = ft_atoi(argv[1]);
     p->rules->time_to_die = ft_atoi(argv[2]);

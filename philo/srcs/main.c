@@ -7,10 +7,22 @@ void *routine(void* philo_struct)
     int ph_nr;
 
     p = (t_philo*) philo_struct;
+    pthread_mutex_lock(&p->assign);
     usleep(100000);
     ph_nr = p->p_index++;
     pthread_mutex_unlock(&p->assign);
     printf("I am philosopher %d\n", ph_nr + 1);
+    
+    if(ph_nr % 2 == 0)
+    {
+        pthread_mutex_lock(&p->fork[ph_nr]);
+        printf("Philosopher %d picked up 1 fork\n", ph_nr + 1);
+        pthread_mutex_lock(&p->fork[ph_nr + 1]);
+        printf("Philosopher %d picked up 2 forks\n", ph_nr + 1);
+        printf("-Philosopher %d started eating\n", ph_nr + 1);
+        pthread_mutex_unlock(&p->fork[ph_nr]);
+        pthread_mutex_unlock(&p->fork[ph_nr + 1]);
+    }
     /*
     while (alive(p) == 0)
     {
@@ -25,10 +37,8 @@ int create_philos(t_philo *p)
 {
     int i = 0;
     p -> philosopher = malloc(sizeof(pthread_t) * p->rules->nr_philo);
-    p -> p_index = 0;
     while (i < p -> rules->nr_philo)
     {
-        pthread_mutex_lock(&p->assign);
         if(pthread_create(&p->philosopher[i], NULL, &routine, (void*)p) != 0)
         {
             printf("Error creating thread: %d\n", i);
