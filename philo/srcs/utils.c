@@ -1,6 +1,5 @@
 #include "../header/philo.h"
 
-// Stdlib's atoi
 int	ft_atoi(const char *str)
 {
 	int			i;
@@ -50,14 +49,6 @@ int check_if_is_number(char **str)
         i++;
     }
     return (0);
-}
-
-// Return time in microseconds / 1000
-long get_timestamp()
-{
-    struct timeval t;
-    gettimeofday(&t, NULL);
-    return (t.tv_usec); 
 }
 
 // Prints message to stderr

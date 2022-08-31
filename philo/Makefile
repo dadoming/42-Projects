@@ -3,9 +3,13 @@ NAME = 		philo
 HEADER = 	includes/philo.h
 
 SRCS = 		srcs/main.c \
-	   		srcs/lib_utils.c \
-			srcs/load_and_check.c \
-			srcs/close_t.c \
+	   		srcs/utils.c \
+			srcs/parser.c \
+			srcs/time.c \
+			srcs/threads.c \
+			srcs/close.c \
+			srcs/print.c \
+			srcs/actions.c \
 
 CC = gcc
 
