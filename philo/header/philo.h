@@ -26,8 +26,9 @@
 
 typedef struct      s_mutex
 {
-    pthread_mutex_t fork[200];
+    pthread_mutex_t fork[202];
     pthread_mutex_t write;
+    pthread_mutex_t dead;
 
 }                   t_mutex;
 
@@ -46,7 +47,10 @@ typedef struct      s_table
 {
     t_rules         rules;
     t_mutex         mutex;
-    int             dead;
+    int             end;
+    int             index_death;
+    int             how_many_ate;
+    long long int   time_end;
 
 }                   t_table;
 
@@ -56,6 +60,7 @@ typedef struct      s_philo
     int             hand[2];
     t_table         *table;
     int             x_eaten;
+    long long       delta_death;
 
 }                   t_philo;
 
@@ -72,6 +77,9 @@ void        start_timer(t_table *t);
 int         ft_atoi(const char *str);
 int         check_if_is_number(char **str);
 void        err_msg(char *str);
+int         ft_strcmp(char *s1, char *s2);
+
+void	*ft_memset(void *s, int c, size_t n);
 
 /*
 **  close_t.c
@@ -101,15 +109,23 @@ int         join_threads(pthread_t *th, t_table *t);
 /*
 **  print.c
 */
-void        print_status(t_philo *p, char *status, char *color);
+int         print_status(t_philo *p, char *status, char *color);
 
 /*
 **  actions.c
 */
-int eat(t_philo *p);
-int _sleep(t_philo *p);
-int think(t_philo *p);
-void pick(t_philo *p);
-void action(long long timer);
+int         eat(t_philo *p);
+int         _sleep(t_philo *p);
+int         think(t_philo *p);
+void        pick_forks(t_philo *p);
+void        action(long long timer);
+
+/*
+**  check_philo_status.c
+*/
+void        *check_(void *arg);
+int         philo_died(t_philo *p);
+int         death_signal(t_philo *p, long long int time_now);
+int         ate_all(t_philo *p);
 
 #endif

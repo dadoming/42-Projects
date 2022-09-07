@@ -1,5 +1,17 @@
 #include "../header/philo.h"
 
+int ft_strcmp(char *s1, char *s2)
+{
+	while (*s1++ == *s2++)
+	{
+		if (!*s1 && !*s2)
+		{
+			return (0);
+		}
+	}
+	return (*--s1 - *--s2);
+}
+
 int	ft_atoi(const char *str)
 {
 	int			i;
@@ -63,4 +75,21 @@ void err_msg(char *str)
 		i++;
 	}
 	write(STDERR_FILENO, "\n", 1);
+}
+
+void	*ft_memset(void *s, int c, size_t n)
+{
+	size_t	i;
+	char	cc;
+	char	*pointer_aux;
+
+	i = 0;
+	cc = (char)c;
+	pointer_aux = (char *)s;
+	while (i < n)
+	{
+		pointer_aux[i] = cc;
+		i++;
+	}
+	return ((void *)s);
 }

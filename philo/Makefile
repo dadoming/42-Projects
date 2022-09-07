@@ -10,6 +10,7 @@ SRCS = 		srcs/main.c \
 			srcs/close.c \
 			srcs/print.c \
 			srcs/actions.c \
+			srcs/check_philo_status.c \
 
 CC = gcc
 

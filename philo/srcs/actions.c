@@ -5,7 +5,7 @@ void action(long long timer)
     usleep(timer * 1000);
 }
 
-void pick(t_philo *p)
+void pick_forks(t_philo *p)
 {
     pthread_mutex_lock(&p->table->mutex.fork[p->hand[LEFT]]);
     print_status(p, FORK, WHITE);
@@ -15,14 +15,18 @@ void pick(t_philo *p)
 
 int eat(t_philo *p)
 {
-    pick(p);
-    print_status(p, EAT, GREEN);
+    pick_forks(p);
+    if (!print_status(p, EAT, GREEN))
+    {
+        return (0);
+    }
     action(p->table->rules.time_to_eat);
-    p->x_eaten++;
     pthread_mutex_unlock(&p->table->mutex.fork[p->hand[LEFT]]);
     pthread_mutex_unlock(&p->table->mutex.fork[p->hand[RIGHT]]);
-    if(p->x_eaten == p->table->rules.x_eats)
+    p->x_eaten++;
+    if(p->table->rules.x_eats > 0 && p->x_eaten >= p->table->rules.x_eats)
     {
+        p->table->how_many_ate++;
         print_status(p, "ate all his meals", GREEN);
         return 0;
     }
@@ -31,13 +35,15 @@ int eat(t_philo *p)
 
 int _sleep(t_philo *p)
 {
-    print_status(p, SLEEP, YELLOW);
+    if(!print_status(p, SLEEP, YELLOW))
+        return 0;
     action(p->table->rules.time_to_sleep);
     return (1);
 }
 
 int think(t_philo *p)
 {
-    print_status(p, THINK, BLUE);
+    if(!print_status(p, THINK, BLUE))
+        return 0;
     return (1);
 }
