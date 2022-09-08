@@ -6,6 +6,7 @@
 #include <stdlib.h>
 #include <pthread.h>
 #include <sys/time.h>
+#include <string.h>
 
 // https://gist.github.com/WestleyK/dc71766b3ce28bb31be54b9ab7709082
 # define RED        "\033[0;31;7m"

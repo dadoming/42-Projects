@@ -14,7 +14,7 @@ SRCS = 		srcs/main.c \
 
 CC = gcc
 
-FLAGS = -Wextra -Wall -Werror #-fsanitize=address
+FLAGS = -Wextra -Wall -Werror -fsanitize=thread
 
 RM = rm -f
 

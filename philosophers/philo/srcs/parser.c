@@ -23,7 +23,7 @@ void init_philos(t_philo *p, t_table *t)
     i = 1;
     while (i <= t->rules.nr_philo)
     {
-        //ft_memset(&p[i], 0, sizeof(t_philo));
+        memset(&p[i], 0, sizeof(t_philo));
         p[i].p_index = i;
         p[i].table = t;
         p[i].hand[LEFT] = i;
