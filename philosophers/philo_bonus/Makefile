@@ -1,16 +1,11 @@
-NAME = 		philo
+NAME = 		philo_bonus
 
-HEADER = 	includes/philo.h
+HEADER = 	includes/philo_bonus.h
 
 SRCS = 		srcs/main.c \
-	   		srcs/utils.c \
+			srcs/error.c \
+			srcs/utils.c \
 			srcs/parser.c \
-			srcs/time.c \
-			srcs/threads.c \
-			srcs/close.c \
-			srcs/print.c \
-			srcs/actions.c \
-			srcs/check_philo_status.c \
 
 CC = gcc
 
