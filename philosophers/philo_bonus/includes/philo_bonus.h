@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <sys/stat.h>
 #include <sys/time.h>
+#include <sys/types.h>
 #include <unistd.h>
 
 
@@ -28,7 +29,7 @@
 # define FORK       "has taken a fork"
 
 
-typedef struct s_rules
+typedef struct rules_s
 {
     int             nr_philo;
     int             time_to_die;
@@ -36,36 +37,63 @@ typedef struct s_rules
     int             time_to_sleep;
     int             x_eats;
 
-}   t_rules;
+}   rules_t;
 
-typedef struct s_table
+typedef struct semaph_s
 {
-    t_rules         rules;
-    long long int   time_start;
     sem_t           *forks;
+    sem_t           *died;
+    sem_t           *print;
 
-}   t_table;
 
-typedef struct s_philo
+}   semaph_t;
+
+typedef struct table_s
 {
+    rules_t         rules;
+    semaph_t        semaphore;
+               
+    long long int   time_start;
+
+}   table_t;
+
+typedef struct philo_s
+{
+    pid_t           pid;
     int             index;
     int             x_eaten;
-    t_table         *table;
+    int             t_left_after_eat;
+    table_t         *table;
 
-}   t_philo;
+}   philo_t;
 
 
 /*
 **  main.c
 */
-t_table     *table(void);
+table_t     *table(void);
 
 int         check_if_is_number(char **str);
 int	        ft_atoi(const char *str);
+void         print_status(philo_t *p, char *status, char *color);
 void        err_msg(char *err_str);
 int         parse_and_init(int argc, char** argv);
-t_philo     *init_philos(t_philo *p);
-
+philo_t     *init_philos(philo_t *p);
+int load_args(int argc, char **argv);
+long long get_delta_t(long long start_time);
+long long get_timestamp(void);
+void start_time();
+int close_program(philo_t *p);
+void start_meal(philo_t *p);
+void enter_process(philo_t *p);
+void think(philo_t *p);
+void _sleep(philo_t *p);
+void eat(philo_t *p);
+void drop_forks();
+void pick_forks(philo_t *p);
+void action(int time);
+int init_semaphores();
+sem_t *open_sem(char* name, int sem_value);
 
 
 #endif

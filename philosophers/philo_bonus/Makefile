@@ -5,7 +5,9 @@ HEADER = 	includes/philo_bonus.h
 SRCS = 		srcs/main.c \
 			srcs/error.c \
 			srcs/utils.c \
-			srcs/parser.c \
+			srcs/parse_and_init.c \
+			srcs/close.c \
+			srcs/time.c \
 
 CC = gcc
 

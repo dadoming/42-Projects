@@ -1,5 +1,17 @@
 #include "../includes/philo_bonus.h"
 
+void print_status(philo_t *p, char *status, char *color)
+{
+    long long int current_time;
+
+    current_time = get_delta_t(table()->time_start);
+    sem_wait(table()->semaphore.print);
+    printf("%s%lld", color, current_time);
+    printf("  %d  %s%s\n", p->index, status, RESET);
+    if(strcmp(status, DIED) != 0)
+        sem_post(table()->semaphore.print);
+}
+
 int check_if_is_number(char **str)
 {
     int i;

@@ -1,83 +1,100 @@
 #include "../includes/philo_bonus.h"
 
-t_table *table(void)
+table_t *table(void)
 {
-    static t_table table;
+    static table_t table;
     return (&table); 
 }
 
+void action(int time)
+{
+    usleep(time * 1000);
+}
 
-t_philo *init_philos(t_philo *p)
+void pick_forks(philo_t *p)
+{
+    sem_wait(table()->semaphore.forks);
+    print_status(p, FORK, WHITE);
+    sem_wait(table()->semaphore.forks);
+    print_status(p, FORK, WHITE);
+}
+
+void drop_forks()
+{
+    sem_post(table()->semaphore.forks);
+    sem_post(table()->semaphore.forks);
+}
+
+void eat(philo_t *p)
+{
+    pick_forks(p);
+    print_status(p, EAT, GREEN);
+    action(table()->rules.time_to_eat);
+    if(p->x_eaten > 0)
+        p->x_eaten++;
+    p->t_left_after_eat = get_delta_t(table()->time_start) + table()->rules.time_to_die;
+    drop_forks();
+}
+
+void _sleep(philo_t *p)
+{
+    print_status(p, SLEEP, YELLOW);
+    action(table()->rules.time_to_sleep);
+}
+
+void think(philo_t *p)
+{   
+    print_status(p, THINK, BLUE);
+}
+
+void enter_process(philo_t *p)
+{
+    //pthread_t check;
+
+    p->t_left_after_eat = get_timestamp() + table()->rules.time_to_die;
+    //pthread_create(check)
+    //pthread_detach(check)
+    while (1)
+    {
+        eat(p);
+        _sleep(p);
+        think(p);
+    }
+}
+
+void start_meal(philo_t *p)
 {
     int i;
-
-    p = malloc(sizeof(t_philo) * table()->rules.nr_philo);
-    i = 0;
+    
+    i = 0;    
+        
     while (i < table()->rules.nr_philo)
     {
-        memset(&p[i], 0, sizeof(t_philo));
-        p[i].index = i;
-        p[i].table = table();
+        p[i].pid = fork();
+        printf("%d && %d\n", getpid(), getppid());
+        if(p[i].pid == 0)
+        {
+            printf("HELLO WORLD\n");
+            enter_process(&p[i]);
+        }
         i++;
     }
-    return (p);
-}
-
-static int open_sem(char* name, int sem_value)
-{
-    sem_t *semaphore;
-
-    semaphore = sem_open(name, O_CREAT | O_EXCL, 0644, sem_value);
-    sem_unlink(semaphore);
-    return (semaphore);
-}
-
-int init_semaphores()
-{
-    table()->forks = open_sem("forks", table()->rules.nr_philo);
-    if(table()->forks == SEM_FAILED || 
-        ...)
-    {
-        err_msg("Failed opening semaphores");
-        return (-1)
-    }
-    return (0);
 }
 
 int main(int argc, char** argv)
 {
-    t_philo *p;
+    philo_t p[200];
 
-    p = NULL;
     if(parse_and_init(argc, argv) != 0)
-        return (1); // free_mem
+        return (close_program(p));
     init_philos(p);
+    printf("%d\n", p[0].index);
     if(init_semaphores() != 0)
-        return (2); //free_mem
-
-
-    if((table()->forks = sem_open("blaeh", O_CREAT | O_EXCL, 777, 
-        table()->rules.nr_philo)) == SEM_FAILED)
-    {
-        perror("sem_open()");
-        return (2);
-    }
-    if(sem_unlink("blaeh") == -1)
-    {
-        perror("sem_unlink()");
-        return (4);
-    }
-
-
-
-
-    if(sem_close(table()->forks) == -1)
-    {
-        perror("sem_close()");
-        return (3);
-    }
+        return (close_program(p));
+    start_time(p);
+    start_meal(p);
     
-    free(p);
-    
+
+    close_program(p);
     return (0);
 }
