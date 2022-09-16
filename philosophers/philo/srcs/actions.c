@@ -18,6 +18,8 @@ int eat(t_philo *p)
     pick_forks(p);
     if (!print_status(p, EAT, GREEN))
     {
+        pthread_mutex_unlock(&p->table->mutex.fork[p->hand[LEFT]]);
+        pthread_mutex_unlock(&p->table->mutex.fork[p->hand[RIGHT]]);
         return (0);
     }
     action(p->table->rules.time_to_eat);

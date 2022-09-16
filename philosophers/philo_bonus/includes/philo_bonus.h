@@ -44,25 +44,24 @@ typedef struct semaph_s
     sem_t           *forks;
     sem_t           *died;
     sem_t           *print;
-
+    sem_t           *stop;
 
 }   semaph_t;
 
 typedef struct table_s
 {
+    long long int   time_start;
     rules_t         rules;
     semaph_t        semaphore;
-               
-    long long int   time_start;
 
 }   table_t;
 
 typedef struct philo_s
 {
-    pid_t           pid;
     int             index;
     int             x_eaten;
     int             t_left_after_eat;
+    pid_t           pid;
     table_t         *table;
 
 }   philo_t;

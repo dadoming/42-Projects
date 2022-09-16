@@ -8,6 +8,7 @@ SRCS = 		srcs/main.c \
 			srcs/parse_and_init.c \
 			srcs/close.c \
 			srcs/time.c \
+			srcs/action.c \
 
 CC = gcc
 

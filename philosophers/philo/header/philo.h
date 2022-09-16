@@ -65,12 +65,14 @@ typedef struct      s_philo
 
 }                   t_philo;
 
+t_table *t(void);
+
 /*
 **  time.c    
 */
 long long   get_timestamp();
-long long   get_delta_t(long long start_time);
-void        start_timer(t_table *t);
+long long   get_delta_t();
+void        start_timer();
 
 /*
 **  utils.c
@@ -80,32 +82,31 @@ int         check_if_is_number(char **str);
 void        err_msg(char *str);
 int         ft_strcmp(char *s1, char *s2);
 
-void	*ft_memset(void *s, int c, size_t n);
-
 /*
 **  close_t.c
 */
-int         free_mem(t_table *t);
+int         free_mem();
+void        print_last();
 
 /*
 **  parser.c
 */
-int         check_and_load(t_table *t, int argc, char **argv);
-int         load_args(t_table *table, int argc, char **argv);
+int         check_and_load(int argc, char **argv);
+int         load_args(int argc, char **argv);
 
 /*
 **  main.c
 */
-void        init_mutexes(t_mutex *mutex, int nr_philo);
-void        init_philos(t_philo *p, t_table *t);
+void        init_mutexes();
+void        init_philos(t_philo *p);
 
 /*
 **  threads.c
 */
 void        *routine(void *philo_struct);
-int         start(t_philo *p, t_table *t);
-int         create_threads(pthread_t *th, t_philo *p, t_table *t);
-int         join_threads(pthread_t *th, t_table *t);
+int         start(t_philo *p);
+int         create_threads(pthread_t *th, t_philo *p);
+int         join_threads(pthread_t *th);
 
 /*
 **  print.c

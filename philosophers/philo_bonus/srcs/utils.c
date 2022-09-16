@@ -1,5 +1,10 @@
 #include "../includes/philo_bonus.h"
 
+void action(int time)
+{
+    usleep(time * 1000);
+}
+
 void print_status(philo_t *p, char *status, char *color)
 {
     long long int current_time;

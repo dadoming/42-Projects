@@ -15,13 +15,13 @@ int init_semaphores()
     table()->semaphore.forks = open_sem("forks", table()->rules.nr_philo);
     table()->semaphore.died = open_sem("died", 1);
     table()->semaphore.print = open_sem("print", 1);
-
+    table()->semaphore.stop = open_sem("stop", 1);
     if(table()->semaphore.forks == SEM_FAILED || \
         table()->semaphore.died == SEM_FAILED || \
-        table()->semaphore.print == SEM_FAILED 
-        )
+        table()->semaphore.print == SEM_FAILED || \
+        table()->semaphore.stop == SEM_FAILED)
     {
-        perror("SEM_OPEN ");
+        perror("SEM_OPEN");
         err_msg("Failed opening semaphores");
         return (-1);
     }
@@ -58,7 +58,6 @@ int load_args(int argc, char **argv)
             || table()->rules.time_to_die <= 0   || table()->rules.time_to_eat <= 0 
             || table()->rules.time_to_sleep <= 0 || table()->rules.x_eats < 0)
         return (1);
-    // ?
     if(argc == 5)
         table()->rules.x_eats = -1;
     return 0;
