@@ -12,7 +12,7 @@ void print_status(philo_t *p, char *status, char *color)
     current_time = get_delta_t(table()->time_start);
     sem_wait(table()->semaphore.print);
     printf("%s%lld", color, current_time);
-    printf("  %d  %s%s\n", p->index, status, RESET);
+    printf("  %d  %s%s\n", p->index + 1, status, RESET);
     if(strcmp(status, DIED) != 0)
         sem_post(table()->semaphore.print);
 }
@@ -65,4 +65,17 @@ int	ft_atoi(const char *str)
 			return (-1);
 	}
 	return ((int)res * neg);
+}
+
+void err_msg(char *err_str)
+{
+	int i;
+
+	i = 0;
+	while (err_str[i] != '\0')
+	{
+		write(STDERR_FILENO, &err_str[i], 1);
+		i++;
+	}
+	write(STDERR_FILENO, "\n", 1);
 }

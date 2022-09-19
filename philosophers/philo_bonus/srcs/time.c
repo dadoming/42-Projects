@@ -1,10 +1,5 @@
 #include "../includes/philo_bonus.h"
 
-void start_time()
-{
-    table()->time_start = get_timestamp();
-}
-
 long long get_delta_t(long long start_time)
 {
     return (get_timestamp() - start_time);

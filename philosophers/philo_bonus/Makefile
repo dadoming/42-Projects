@@ -3,12 +3,13 @@ NAME = 		philo_bonus
 HEADER = 	includes/philo_bonus.h
 
 SRCS = 		srcs/main.c \
-			srcs/error.c \
+			srcs/sems.c \
 			srcs/utils.c \
 			srcs/parse_and_init.c \
 			srcs/close.c \
 			srcs/time.c \
-			srcs/action.c \
+			srcs/actions.c \
+			#srcs/death.c 
 
 CC = gcc
 

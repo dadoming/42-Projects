@@ -6,53 +6,73 @@ table_t *table(void)
     return (&table); 
 }
 
-/*
-void *death_check(void *philo)
+void *routine(void *arg)
 {
-    philo_t *p; 
+    philo_t *p;
 
-    p = (philo_t*) philo;
+    p = (philo_t*)arg;
+    if (table()->rules.nr_philo == 1)
+    {
+        print_status(p, FORK, WHITE);
+        action(table()->rules.time_to_die);
+        return 0;
+    }
     while (1)
     {
-        sem_wait(p->table->semaphore.died);
-        if(p->t_left_after_eat < get_timestamp())
-        {
-            print_status(p, DIED, RED);
-            sem_post(table()->semaphore.stop);
-        }
-        sem_post(p->table->semaphore.died);
-        sem_wait(p->table->semaphore.died);
-        if((p->table->rules.x_eats >= 0) && (p->table->rules.x_eats <= p->x_eaten))
-        {
-            printf("\n%sAll philos ate %d times.\n%s", GREEN, table()->rules.x_eats, RESET);
-            sem_post(table()->semaphore.stop);
-        }
-        sem_post(p->table->semaphore.died);
+        if (eat(p) == 0)
+            break;
+        if (_sleep(p) == 0)
+            break;
+        if (think(p) == 0)
+            break;
     }
     return (0);
 }
-*/
 
 void enter_process(philo_t *p)
 {
-    pthread_t check;
-
-    p->t_left_after_eat = get_timestamp() + table()->rules.time_to_die;
-    //pthread_create(&check, NULL, death_check, p);
-    //pthread_detach(check);
-    while (1)
+    // pthread_t check;
+    
+    if(pthread_create(&p->th, NULL, &routine, p) != 0)
     {
-        eat(p);
-        _sleep(p);
-        think(p);
+        err_msg("Error creating thread");
+        return;
     }
+    // if(pthread_create(&check, NULL, &death_check, p) != 0)
+    // {
+        // err_msg("Error creating thread");
+        // return;
+    // }
+    pthread_join(p->th, NULL);
+    // pthread_join(check, NULL);
+    return;
+}
+
+void kill_process(philo_t *p)
+{
+    int status;
+    int i;
+
+    status = 0;
+    i = 0;
+    while (i++ < table()->rules.nr_philo && status == 0)
+	{
+	    waitpid(-1, &status, 0);
+        status = WEXITSTATUS(status);
+    }
+    if(status)
+    {
+        i = 0;
+        while (i < table()->rules.nr_philo)
+            kill(p[i].pid, SIGKILL);
+    }
+
 }
 
 void start_meal(philo_t *p)
 {
     int i;
 
-    sem_wait(table()->semaphore.stop);
     i = 0;    
     while (i < table()->rules.nr_philo)
     {
@@ -60,12 +80,14 @@ void start_meal(philo_t *p)
         if(p[i].pid == 0)
         {
             enter_process(&p[i]);
-            exit(0);
         }
-        i++;
         usleep(100);
+        i++;
     }
+    kill_process(p);
 }
+
+
 
 int main(int argc, char** argv)
 {
@@ -77,9 +99,10 @@ int main(int argc, char** argv)
     p = init_philos(p);
     if(init_semaphores() != 0)
         return (close_program(p));
-    start_time(p);
+    init_shared(p);
     start_meal(p);
-        sem_wait(table()->semaphore.stop);
+    if(table()->ate_all == 1 && table()->died == 0)
+        printf("\n%sAll philos ate %d times.\n%s", GREEN, table()->rules.x_eats, RESET);
     close_program(p);
     return (0);
 }
