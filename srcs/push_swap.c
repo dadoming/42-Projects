@@ -1,26 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   push_swap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/28 18:00:50 by dadoming          #+#    #+#             */
-/*   Updated: 2022/05/24 19:38:51 by dadoming         ###   ########.fr       */
+/*   Created: 2022/05/24 19:23:10 by dadoming          #+#    #+#             */
+/*   Updated: 2022/09/27 17:54:35 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../push_swap.h"
 
-int	ft_lstsize(t_list *lst)
+int	main(int argc, char **argv)
 {
-	int	i;
+	static t_list	*a;
+	static t_list	*b;
 
-	i = 0;
-	while (lst != NULL)
+	if (argc < 2)
 	{
-		lst = lst -> next;
-		i++;
+		print_msg("Wrong input.\nTry using: \
+			./push_swap \"1 ... n\" or ./push_swap 1 ... n ", 1);
+		return (1);
 	}
-	return (i);
+	a = init_stacks(argc, argv);
+	if (!a)
+		return (2);
+	if (lst_is_ordered(a) != 0)
+		sort(&a, &b);
+	free_list(&a);
+	return (0);
 }

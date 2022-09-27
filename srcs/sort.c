@@ -1,26 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_lstsize.c                                       :+:      :+:    :+:   */
+/*   sort.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2021/10/28 18:00:50 by dadoming          #+#    #+#             */
-/*   Updated: 2022/05/24 19:38:51 by dadoming         ###   ########.fr       */
+/*   Created: 2022/09/27 17:37:00 by dadoming          #+#    #+#             */
+/*   Updated: 2022/09/27 18:08:59 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft.h"
+#include "../push_swap.h"
 
-int	ft_lstsize(t_list *lst)
+void	sort(t_list **a, t_list **b)
 {
-	int	i;
+	int	list_size;
 
-	i = 0;
-	while (lst != NULL)
-	{
-		lst = lst -> next;
-		i++;
-	}
-	return (i);
+	list_size = ft_lstsize(*a);
+	if (list_size == 2)
+		sort_two(a);
+	else if (list_size == 3)
+		sort_three(a);
+	else if (list_size == 4)
+		sort_four(a, b);
+	else if (list_size == 5)
+		sort_five(a, b);
+	else
+		sort_big(a, b);
 }
