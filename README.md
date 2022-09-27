@@ -10,4 +10,4 @@
 
 > so_long: Finished with 124.
 
-> philosophers: Thinking.
+> philosophers: Needs evaluation.
