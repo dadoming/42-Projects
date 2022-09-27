@@ -49,6 +49,7 @@ SRCS =  ft_atoi.c \
 		ft_toupper.c \
 
 OBJS = ${SRCS:.c=.o}
+
 BONUS = ft_lstadd_back.c \
 		ft_lstadd_front.c \
 		ft_lstclear.c \
@@ -57,21 +58,16 @@ BONUS = ft_lstadd_back.c \
 		ft_lstnew.c \
 		ft_lstsize.c \
 
-#		ft_lstmap.c
-#		ft_lstdelone.c
-
 BONUS_OBJS = ${BONUS:.c=.o}
 CC = gcc
 FLAGS = -Wall -Wextra -Werror
 RM = rm -f
 
-#not working rn: 
-
 .c.o:
 	@${CC} ${FLAGS} -c $< -o ${<:.c=.o} -I.${HEADER}
 
 ${NAME}: ${OBJS}
-	@${LIB} ${NAME} ${OBJS}
+	${LIB} ${NAME} ${OBJS}
 
 all: ${NAME}
 

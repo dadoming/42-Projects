@@ -6,9 +6,17 @@
 #    By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/05/24 19:25:17 by dadoming          #+#    #+#              #
-#    Updated: 2022/06/02 15:57:36 by dadoming         ###   ########.fr        #
+#    Updated: 2022/09/27 17:38:22 by dadoming         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
+
+GREEN = \033[0;32m
+
+RED=\033[0;31m
+
+BLUE=\033[0;34m
+
+END=\033[0m
 
 NAME = push_swap
 
@@ -34,20 +42,23 @@ SRCS = srcs/push_swap.c \
 	srcs/utils.c \
 	srcs/sort.c
 
-all: ${LIBFT}
-	@echo Compiling...
+${NAME}: all
+
+lib: 
+	@cd libft/ && make -s bonus
+
+all: lib ${LIBFT} 
+	@echo "$(GREEN)Compiling...$(END)"
 	@${CC} ${FLAGS} ${NAME} ${SRCS} ${LIBFT} -I.${HEADER}
 
-${LIBFT}:
-	cd libft/ && make bonus
-
 clean:
-	@echo "Nothing to be cleaned."
+	@echo "$(RED)Removing push_swap executable$(END)"
+	@${RM} ${NAME}
 
 fclean: clean
-	@echo "Cleaning ./push_swap and libft.a..."
-	${RM} ${NAME}
-	${RM} libft/libft.a
+	@echo "$(RED)Removing library files$(END)"
+	@${RM} ${NAME}
+	@cd libft/ && make -s fclean
 
 re: fclean all
-	@echo "Done! 😃"
+	@echo "$(BLUE)Done! 😃$(END)"
