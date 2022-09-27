@@ -74,7 +74,6 @@ ${NAME}: ${OBJS}
 	@${LIB} ${NAME} ${OBJS}
 
 all: ${NAME}
-	@${RM} *.o
 
 bonus: ${OBJS} ${BONUS_OBJS}
 	@${LIB} ${NAME} ${OBJS} ${BONUS_OBJS}

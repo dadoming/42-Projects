@@ -17,11 +17,13 @@
 #include <stdlib.h>
 #include <unistd.h>
 #include "libft/libft.h"
+#include <limits.h>
 
 //PUSH_SWAP UTILS
 t_list  *init_stacks_string(char **splitted_argv);
 t_list  *init_stacks(int argc, char **argv);
 void    free_list(t_list **a);
+void    print_msg(char *str, int status);
 
 //MOVES
 void    sa(t_list **stack_a);
@@ -40,6 +42,7 @@ void    pa(t_list **stack_a, t_list **stack_b);
 void    pb(t_list **stack_a, t_list **stack_b);
 
 // ALGORITHM
+void    sort(t_list **a, t_list **b);
 int     lst_is_ordered(t_list *a);
 int     get_position(int a_num, int *radixs_array);
 void    sort_two(t_list **a);
@@ -56,6 +59,8 @@ void    ft_swap(int *a, int *b);
 int     check_input(char **argv, int argc);
 int     check_input_string(char *arg);
 int     check_errors(char **str);
+
+void    print(t_list *a, t_list *b);
 
 
 #endif

@@ -31,24 +31,23 @@ SRCS = srcs/push_swap.c \
 	srcs/sort_big.c \
 	srcs/check_errors.c \
 	srcs/sort_big_utils.c \
+	srcs/utils.c \
+	srcs/sort.c
 
 all: ${LIBFT}
 	@echo Compiling...
 	@${CC} ${FLAGS} ${NAME} ${SRCS} ${LIBFT} -I.${HEADER}
 
-${NAME}: ${LIBFT} ${SRCS}
-
 ${LIBFT}:
 	cd libft/ && make bonus
-	cd libft/ && make clean
 
 clean:
 	@echo "Nothing to be cleaned."
 
 fclean: clean
 	@echo "Cleaning ./push_swap and libft.a..."
-	@${RM} ${NAME}
-	@${RM} ${LIBFT}
+	${RM} ${NAME}
+	${RM} libft/libft.a
 
 re: fclean all
 	@echo "Done! 😃"

@@ -24,7 +24,7 @@ void pa(t_list **stack_a, t_list **stack_b)
         *stack_b = pop -> next;
         pop->next = NULL;
         ft_lstadd_front(stack_a, pop);
-        write(1, "pa\n", 3);
+        print_msg("pa", 0);
     }
 }
 
@@ -40,7 +40,7 @@ void pb(t_list **stack_a, t_list **stack_b)
         *stack_a = pop -> next;
         pop -> next = NULL;
         ft_lstadd_front(stack_b, pop);
-        write(1, "pb\n", 3);
+        print_msg("pb", 0);
     }
 }
 

@@ -38,7 +38,7 @@ t_list *init_stacks(int argc, char **argv)
         return (init_stacks_string(ft_split(argv[1], ' ')));
     i = 1;
     if(check_errors(argv) == -1)
-        return NULL;
+        return (NULL);
     head = ft_lstnew(ft_atoi(argv[i++]));
     tmp = head;
     while (i < argc)

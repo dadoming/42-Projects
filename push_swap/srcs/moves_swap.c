@@ -31,7 +31,7 @@ void sa(t_list **stack_a)
     if(ft_lstsize(*stack_a) > 1)
     {
         swap (stack_a);
-        write (1, "sa\n", 3);
+        print_msg("sa", 0);
     }
 }
 
@@ -40,7 +40,7 @@ void sb(t_list **stack_b)
     if(ft_lstsize(*stack_b) > 1)
     {
         swap (stack_b);
-        write (1, "sb\n", 3);
+        print_msg("sb", 0);
     }
 }
 
@@ -50,5 +50,5 @@ void ss(t_list **stack_a, t_list **stack_b)
         swap (stack_a);
     if(ft_lstsize(*stack_b) > 1)
         swap (stack_b);
-    write(1, "ss\n", 3);
+    print_msg("ss", 0);
 }

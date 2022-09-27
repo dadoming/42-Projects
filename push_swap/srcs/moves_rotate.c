@@ -34,7 +34,7 @@ void ra(t_list **stack_a)
     if(*stack_a)
     {
         rotate (stack_a);
-        write(1, "ra\n", 3);
+        print_msg("ra", 0);
     }
 }
 
@@ -43,7 +43,7 @@ void rb(t_list **stack_b)
     if(*stack_b)
     {
         rotate (stack_b);
-        write(1, "rb\n", 3);
+        print_msg("rb", 0);
     }
 }
 
@@ -51,5 +51,5 @@ void rr(t_list **stack_a, t_list **stack_b)
 {
     rotate (stack_a);
     rotate (stack_b);
-    write(1, "rr\n", 3);
+    print_msg("rr", 0);
 }

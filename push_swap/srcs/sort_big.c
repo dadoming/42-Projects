@@ -49,8 +49,6 @@ void radix(t_list **a, t_list **b, int *radixs_array, int size)
 
 void sort_big(t_list **a, t_list **b)
 {
-    // I believe it does not need a terminator 0 nor can it take it
-    // else it will just add the value of 0 to the array we are working with
     int *radixs_array;
     int size = ft_lstsize(*a);
 
