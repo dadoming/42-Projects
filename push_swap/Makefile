@@ -28,11 +28,11 @@ FLAGS = -Wall -Wextra -Werror
 SRCS_DIR = srcs/
 SRCS = $(wildcard $(SRCS_DIR)*.c)
 
-OBJS = $(SRCS:%.c=%.o) 
+OBJS = $(SRCS:%.c=%.o)
 
 ${LIBFT}: lib
 
-${NAME}: ${OBJS} lib ${LIBFT}
+${NAME}: lib ${LIBFT} ${OBJS}
 	@echo "$(GREEN)Compiling...$(END)"
 	@${CC} ${FLAGS} -o ${NAME} ${OBJS} ${LIBFT} -I.${HEADER}
 
