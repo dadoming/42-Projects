@@ -11,11 +11,8 @@
 # **************************************************************************** #
 
 GREEN = \033[0;32m
-
 RED=\033[0;31m
-
 BLUE=\033[0;34m
-
 END=\033[0m
 
 NAME = push_swap
@@ -26,39 +23,35 @@ HEADER = push_swap.h
 
 CC = gcc
 
-FLAGS = -Wall -Wextra -Werror -o
+FLAGS = -Wall -Wextra -Werror
 
-SRCS = srcs/push_swap.c \
-	srcs/init_stacks.c \
-	srcs/moves_push.c \
-	srcs/moves_revrotate.c \
-	srcs/moves_rotate.c \
-	srcs/moves_swap.c \
-	srcs/sort_little.c \
-	srcs/sort_mid.c \
-	srcs/sort_big.c \
-	srcs/check_errors.c \
-	srcs/sort_big_utils.c \
-	srcs/utils.c \
-	srcs/sort.c
+SRCS_DIR = srcs/
+SRCS = $(wildcard $(SRCS_DIR)*.c)
 
-${NAME}: all
+OBJS = $(SRCS:%.c=%.o) 
+
+${LIBFT}: lib
+
+${NAME}: ${OBJS} lib ${LIBFT}
+	@echo "$(GREEN)Compiling...$(END)"
+	@${CC} ${FLAGS} -o ${NAME} ${OBJS} ${LIBFT} -I.${HEADER}
 
 lib: 
 	@cd libft/ && make -s bonus
 
-all: lib ${LIBFT} 
-	@echo "$(GREEN)Compiling...$(END)"
-	@${CC} ${FLAGS} ${NAME} ${SRCS} ${LIBFT} -I.${HEADER}
+all: ${NAME}
 
 clean:
 	@echo "$(RED)Removing push_swap executable$(END)"
 	@${RM} ${NAME}
 
 fclean: clean
-	@echo "$(RED)Removing library files$(END)"
-	@${RM} ${NAME}
+	@echo "$(RED)Removing libft files$(END)"
+	@echo "$(RED)Removing object files$(END)"
 	@cd libft/ && make -s fclean
+	@${RM} ${OBJS}
 
 re: fclean all
 	@echo "$(BLUE)Done! 😃$(END)"
+
+.PHONY: all clean fclean re
