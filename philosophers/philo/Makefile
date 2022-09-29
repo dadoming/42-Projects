@@ -1,30 +1,29 @@
-NAME = 		philo
+NAME = philo
 
-HEADER = 	includes/philo.h
+INCLUDES_DIR = includes/
+INCLUDES = $(wildcard $(INCLUDES_DIR)*.h)
 
-SRCS = 		srcs/main.c \
-	   		srcs/utils.c \
-			srcs/parser.c \
-			srcs/time.c \
-			srcs/threads.c \
-			srcs/close.c \
-			srcs/print.c \
-			srcs/actions.c \
-			srcs/check_philo_status.c \
+SRCS_DIR = srcs/
+SRCS = $(wildcard $(SRCS_DIR)*.c)
 
-CC = gcc
+OBJS = $(SRCS:%.c=%.o)
 
-FLAGS = -Wextra -Wall -Werror #-fsanitize=thread
-
-RM = rm -f
-
-all:
+${NAME}: ${OBJS} 
 	@echo "Compiling..."
-	@${CC} ${FLAGS} -g -pthread ${SRCS} -o ${NAME} -I.${HEADER}
+	${CC} ${FLAGS} -g -o ${NAME} -pthread ${OBJS}
+
+all: ${NAME}
 
 clean: 
-	@echo "philo erased..."
-	@${RM} ${NAME}
+	${RM} ${NAME}
 
-re: 
-	make clean && make all
+fclean: clean 
+	${RM} ${OBJS}
+
+re: clean all
+
+FLAGS = -Wall -Werror -Wextra #-fsanitize=thread
+CC = gcc
+RM = rm -f
+
+.PHONY: all clean fclean re
