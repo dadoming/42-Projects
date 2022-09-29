@@ -30,8 +30,8 @@ int	ft_atoi(const char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		res = (res * 10) + (str[i++] - '0');
-		if ((res * neg) < -2147483648 || (res * neg) > 2147483647)
-			exit (1);
+		if ((res * neg) < INT_MIN || (res * neg) > INT_MAX)
+			return (-1);
 	}
 	return ((int)res * neg);
 }
