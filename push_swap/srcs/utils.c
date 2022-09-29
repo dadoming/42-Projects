@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 17:38:18 by dadoming          #+#    #+#             */
-/*   Updated: 2022/09/27 18:10:58 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/09/29 17:14:36 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,14 +18,14 @@ int	lst_is_ordered(t_list *a)
 	{
 		if (a->next == NULL)
 		{
-			return (0);
+			return (1);
 		}
 		if (a->content < a->next->content)
 			a = a -> next;
 		else
 			break ;
 	}
-	return (1);
+	return (0);
 }
 
 void	free_list(t_list **a)
@@ -34,7 +34,7 @@ void	free_list(t_list **a)
 
 	if (!a)
 		return ;
-	while (*a != NULL)
+	while (*a)
 	{
 		temp = (*a)-> next;
 		free(*a);

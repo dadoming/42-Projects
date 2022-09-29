@@ -26,7 +26,7 @@ int	main(int argc, char **argv)
 	a = init_stacks(argc, argv);
 	if (!a)
 		return (2);
-	if (lst_is_ordered(a) != 0)
+	if (!lst_is_ordered(a))
 		sort(&a, &b);
 	free_list(&a);
 	return (0);

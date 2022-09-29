@@ -5,12 +5,29 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/27 17:37:49 by dadoming          #+#    #+#             */
-/*   Updated: 2022/09/27 17:37:49 by dadoming         ###   ########.fr       */
+/*   Created: 2022/09/29 17:15:06 by dadoming          #+#    #+#             */
+/*   Updated: 2022/09/29 17:15:06 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../push_swap.h"
+
+static void	*free_empty(char **empty_string)
+{
+	if (empty_string)
+		free(empty_string);
+	return (NULL);
+}
+
+static void	free_splitted(char **s, int i)
+{
+	while (s[i])
+	{
+		free(s[i]);
+		i++;
+	}
+	free(s);
+}
 
 t_list	*init_stacks_string(char **splitted_argv)
 {
@@ -19,8 +36,13 @@ t_list	*init_stacks_string(char **splitted_argv)
 	int		i;
 
 	i = 0;
+	if (!splitted_argv[i])
+		return (free_empty(splitted_argv));
 	if (check_errors(splitted_argv) == -1)
+	{
+		free_splitted(splitted_argv, 0);
 		return (NULL);
+	}
 	head = ft_lstnew(ft_atoi(splitted_argv[i++]));
 	tmp = head;
 	while (splitted_argv[i] != 0)
@@ -30,13 +52,7 @@ t_list	*init_stacks_string(char **splitted_argv)
 		i++;
 	}
 	tmp -> next = NULL;
-	i = 0;
-	while (splitted_argv[i])
-	{
-		free(splitted_argv[i]);
-		i++;
-	}
-	free(splitted_argv[i]);
+	free_splitted(splitted_argv, 0);
 	return (head);
 }
 

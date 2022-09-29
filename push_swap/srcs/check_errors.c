@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/27 17:37:47 by dadoming          #+#    #+#             */
-/*   Updated: 2022/09/27 17:45:31 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/09/29 17:14:49 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ static int	check_size_of(char **str)
 	while (str[i])
 	{
 		checker = ft_atoi(str[i]);
-		if (!(checker > INT_MIN || checker < INT_MAX))
+		if (checker < INT_MIN || checker > INT_MAX)
 			return (-1);
 		i++;
 	}
