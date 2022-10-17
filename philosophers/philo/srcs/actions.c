@@ -15,6 +15,7 @@ void pick_forks(t_philo *p)
 
 int eat(t_philo *p)
 {
+    
     pick_forks(p);
     if (!print_status(p, EAT, GREEN))
     {

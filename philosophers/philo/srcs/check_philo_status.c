@@ -26,7 +26,7 @@ int philo_died(t_philo *p)
 {
     long long int time_now;
 
-    if(p->table->end != 0 || ate_all(p))
+    if(check_end(p) != 0 || ate_all(p))
         return 1;
     time_now = get_delta_t(p->table->rules.time_start);
     if((time_now - p->delta_death) > p->table->rules.time_to_die)

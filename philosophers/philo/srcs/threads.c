@@ -6,15 +6,15 @@ void *routine(void* philosopher)
     t_philo *p; 
     pthread_t check_death;
 
-    p = (t_philo*) philosopher;
     if(p->p_index % 2 == 0)
-        usleep(50000);
+        usleep(60000);
+    p = (t_philo*) philosopher;
     pthread_create(&check_death, NULL, check_, p);
-    pthread_detach(check_death);
     while (eat(p) && _sleep(p) && think(p))
     {
         continue;
     }
+    pthread_detach(check_death);
     return (0);
 }
 
@@ -31,10 +31,8 @@ int start(t_philo *p)
         usleep(1000 * t()->rules.time_to_die);
         return (0);
     }
-
     if(create_threads(ph_th, p) != 0)
         return (2);
-
     if(join_threads(ph_th) != 0)
         return (3);
     return (0);
@@ -45,7 +43,7 @@ int create_threads(pthread_t *th, t_philo *p)
     int i = 0;
     while (++i <= t()->rules.nr_philo)
     {
-        if(pthread_create(&th[i - 1], NULL, &routine, &p[i]) != 0)
+        if(pthread_create(&th[i - 1], NULL, routine, &p[i]) != 0)
         {
             printf("Error creating thread: %d\n", i);
             return (free_mem());

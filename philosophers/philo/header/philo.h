@@ -30,6 +30,7 @@ typedef struct      s_mutex
     pthread_mutex_t fork[202];
     pthread_mutex_t write;
     pthread_mutex_t dead;
+    pthread_mutex_t end;
 
 }                   t_mutex;
 
@@ -112,6 +113,7 @@ int         join_threads(pthread_t *th);
 **  print.c
 */
 int         print_status(t_philo *p, char *status, char *color);
+int         check_end(t_philo *p);
 
 /*
 **  actions.c

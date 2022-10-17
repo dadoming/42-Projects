@@ -13,6 +13,7 @@ void init_mutexes()
     }
     pthread_mutex_init(&(t()->mutex.write), NULL);
     pthread_mutex_init(&(t()->mutex.dead), NULL);
+    pthread_mutex_init(&(t()->mutex.end), NULL);
 }
 
 // Init each philosopher's values
