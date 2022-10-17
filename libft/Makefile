@@ -60,19 +60,16 @@ BONUS = ft_lstadd_back.c \
 
 BONUS_OBJS = ${BONUS:.c=.o}
 CC = gcc
-FLAGS = -Wall -Wextra -Werror
+CFLAGS = -Wall -Wextra -Werror
 RM = rm -f
-
-.c.o:
-	@${CC} ${FLAGS} -c $< -o ${<:.c=.o} -I.${HEADER}
-
-${NAME}: ${OBJS}
-	${LIB} ${NAME} ${OBJS}
 
 all: ${NAME}
 
-bonus: ${OBJS} ${BONUS_OBJS}
-	@${LIB} ${NAME} ${OBJS} ${BONUS_OBJS}
+.c.o:
+	${CC} ${CFLAGS} -c $< -o ${<:.c=.o} -I.${HEADER}
+
+${NAME}: ${OBJS} ${BONUS_OBJS}
+	${LIB} ${NAME} ${OBJS} ${BONUS_OBJS}
 
 clean:
 	@${RM} ${OBJS}
