@@ -42,19 +42,3 @@ void	free_list(t_list **a)
 	}
 	a = NULL;
 }
-
-// status = 1 for error / = 0 for just plain output
-void	print_msg(char *str, int status)
-{
-	if (status == 0)
-	{
-		write(STDOUT_FILENO, str, ft_strlen(str));
-		write(STDOUT_FILENO, "\n", 2);
-	}
-	if (status == 1)
-	{
-		write(STDOUT_FILENO, "\e[1;31m", 7);
-		write(STDOUT_FILENO, str, ft_strlen(str));
-		write(STDOUT_FILENO, "\e[0m\n", 6);
-	}
-}

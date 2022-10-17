@@ -12,10 +12,10 @@
 
 #include "libft.h"
 
-int	ft_atoi(const char *str)
+long int	ft_atoi(const char *str)
 {
 	int			i;
-	int			neg;
+	long int			neg;
 	long int	res;
 
 	res = 0;
@@ -31,7 +31,7 @@ int	ft_atoi(const char *str)
 	{
 		res = (res * 10) + (str[i++] - '0');
 		if ((res * neg) < INT_MIN || (res * neg) > INT_MAX)
-			return (-1);
+			return (res * neg);
 	}
-	return ((int)res * neg);
+	return (res * neg);
 }

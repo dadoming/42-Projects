@@ -22,16 +22,6 @@ static int	get_max_bits(int max_bits, int size)
 	return (max_bits);
 }
 
-// It first calculates how many digits the biggest number has;
-// i loops through the current bit;
-// j loops through the number list;
-// then checks if number is in correct slot, if yes ra, else pb;
-// next return all numbers to a;
-// For example: 13>>0 = 13
-//              13>>1 = 6
-//              13>>2 = 3
-//              13>>3 = 1
-//              13>>4 = 0
 void	radix(t_list **a, t_list **b, int *radixs_array, int size)
 {
 	int	num;

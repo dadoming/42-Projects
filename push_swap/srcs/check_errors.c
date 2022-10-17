@@ -20,17 +20,17 @@ int	check_errors(char **str)
 {
 	if (check_repeat(str) == -1)
 	{
-		print_msg("Your input has repetitions", 1);
+		ft_putstr_fd("Error\n", STDERR_FILENO);
 		return (-1);
 	}
 	if (check_if_is_number(str) == -1)
 	{
-		print_msg("Not a valid number", 1);
+		ft_putstr_fd("Error\n", STDERR_FILENO);
 		return (-1);
 	}
 	if (check_size_of(str) == -1)
 	{
-		print_msg("The size of your number exceeds limits", 1);
+		ft_putstr_fd("Error\n", STDERR_FILENO);
 		return (-1);
 	}
 	return (0);

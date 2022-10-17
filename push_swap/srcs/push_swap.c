@@ -19,8 +19,7 @@ int	main(int argc, char **argv)
 
 	if (argc < 2)
 	{
-		print_msg("Wrong input.\nTry using: \
-			./push_swap \"1 ... n\" or ./push_swap 1 ... n ", 1);
+		ft_putstr_fd("Error\n", STDERR_FILENO);
 		return (1);
 	}
 	a = init_stacks(argc, argv);
