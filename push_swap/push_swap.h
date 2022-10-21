@@ -20,10 +20,9 @@
 # include <limits.h>
 
 //PUSH_SWAP UTILS
-t_list	*init_stacks_string(char **splitted_argv);
+t_list	*init_stacks_string(char **splitted_argv, int start, int i);
 t_list	*init_stacks(int argc, char **argv);
 void	free_list(t_list **a);
-void	print_msg(char *str, int status);
 
 //MOVES
 void	sa(t_list **stack_a);
@@ -55,6 +54,6 @@ void	ft_swap(int *a, int *b);
 // INPUT
 int		check_input(char **argv, int argc);
 int		check_input_string(char *arg);
-int		check_errors(char **str);
+int		check_errors(char **str, int start);
 
 #endif

@@ -29,16 +29,25 @@ static void	free_splitted(char **s, int i)
 	free(s);
 }
 
-t_list	*init_stacks_string(char **splitted_argv)
+static int	bool_check(char *s)
+{
+	if ((s[0] == ('+' || '-')) && ft_isdigit(s[1]))
+		return (1);
+	return (0);
+}
+
+t_list	*init_stacks_string(char **splitted_argv, int start, int i)
 {
 	t_list	*head;
 	t_list	*tmp;
-	int		i;
 
-	i = 0;
-	if (!splitted_argv[i])
+	if (!splitted_argv[i] || \
+		(bool_check(splitted_argv[0]) && splitted_argv[1] == 0))
+	{
+		ft_putstr_fd("Error\n", STDERR_FILENO);
 		return (free_empty(splitted_argv));
-	if (check_errors(splitted_argv) == -1)
+	}
+	if (check_errors(splitted_argv, start) == -1)
 	{
 		free_splitted(splitted_argv, 0);
 		return (NULL);
@@ -47,9 +56,8 @@ t_list	*init_stacks_string(char **splitted_argv)
 	tmp = head;
 	while (splitted_argv[i] != 0)
 	{
-		tmp->next = ft_lstnew(ft_atoi(splitted_argv[i]));
+		tmp->next = ft_lstnew(ft_atoi(splitted_argv[i++]));
 		tmp = tmp->next;
-		i++;
 	}
 	tmp -> next = NULL;
 	free_splitted(splitted_argv, 0);
@@ -63,9 +71,9 @@ t_list	*init_stacks(int argc, char **argv)
 	int		i;
 
 	if (argc == 2)
-		return (init_stacks_string(ft_split(argv[1], ' ')));
+		return (init_stacks_string(ft_split(argv[1], ' '), 0, 0));
 	i = 1;
-	if (check_errors(argv) == -1)
+	if (check_errors(argv, 1) == -1)
 		return (NULL);
 	head = ft_lstnew(ft_atoi(argv[i++]));
 	tmp = head;

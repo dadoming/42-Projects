@@ -18,10 +18,7 @@ int	main(int argc, char **argv)
 	static t_list	*b;
 
 	if (argc < 2)
-	{
-		ft_putstr_fd("Error\n", STDERR_FILENO);
 		return (1);
-	}
 	a = init_stacks(argc, argv);
 	if (!a)
 		return (2);

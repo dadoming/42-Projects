@@ -14,16 +14,16 @@
 
 static int	check_size_of(char **str);
 static int	check_repeat(char **str);
-static int	check_if_is_number(char **str);
+static int	check_if_is_number(char **str, int i);
 
-int	check_errors(char **str)
+int	check_errors(char **str, int start)
 {
 	if (check_repeat(str) == -1)
 	{
 		ft_putstr_fd("Error\n", STDERR_FILENO);
 		return (-1);
 	}
-	if (check_if_is_number(str) == -1)
+	if (check_if_is_number(str, start) == -1)
 	{
 		ft_putstr_fd("Error\n", STDERR_FILENO);
 		return (-1);
@@ -59,12 +59,10 @@ static int	is_sign(int c)
 	return (0);
 }
 
-static int	check_if_is_number(char **str)
+static int	check_if_is_number(char **str, int i)
 {
-	int	i;
 	int	j;
 
-	i = 1;
 	j = 0;
 	while (str[i])
 	{

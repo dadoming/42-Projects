@@ -21,7 +21,7 @@ int	lst_is_ordered(t_list *a)
 			return (1);
 		}
 		if (a->content < a->next->content)
-			a = a -> next;
+			a = a->next;
 		else
 			break ;
 	}
