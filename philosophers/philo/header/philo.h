@@ -2,13 +2,13 @@
 #define PHILO_H
 
 #include <stdio.h>
+#include <limits.h>
 #include <unistd.h>
 #include <stdlib.h>
 #include <pthread.h>
 #include <sys/time.h>
 #include <string.h>
 
-// https://gist.github.com/WestleyK/dc71766b3ce28bb31be54b9ab7709082
 # define RED        "\033[0;31;7m"
 # define GREEN      "\033[0;32;7m"
 # define YELLOW     "\033[0;33;7m"
@@ -25,111 +25,80 @@
 # define LEFT       0
 # define RIGHT      1
 
-typedef struct      s_mutex
+# define TRUE       1
+# define FALSE      0
+
+typedef struct s_rules
 {
-    pthread_mutex_t fork[202];
+    int p_num;
+    int time_eat;
+    int time_die;
+    int time_sleep;
+    int max_eat; 
+} t_rules;
+
+typedef struct s_mutex
+{
+    pthread_mutex_t fork[200];
     pthread_mutex_t write;
     pthread_mutex_t dead;
-    pthread_mutex_t end;
+} t_mutex;
 
-}                   t_mutex;
-
-typedef struct      s_rules
+typedef struct s_table
 {
-    int             nr_philo;
-    int             time_to_die;
-    int             time_to_eat;
-    int             time_to_sleep;
-    int             x_eats;
-    long long int   time_start;
+    t_rules rules;
+    t_mutex mutex;
+    long long time_start;
+    long long time_end;
+    int index_death;
+} t_table;
 
-}                   t_rules;
-
-typedef struct      s_table
+typedef struct s_philo
 {
-    t_rules         rules;
-    t_mutex         mutex;
-    int             end;
-    int             index_death;
-    int             how_many_ate;
-    long long int   time_end;
+    //t_table table;
+    int index;
+    int hand[2];
+    int times_eaten;
+    long long delta_death;
+} t_philo;
 
-}                   t_table;
 
-typedef struct      s_philo
-{
-    int             p_index;
-    int             hand[2];
-    t_table         *table;
-    int             x_eaten;
-    long long       delta_death;
+/* Returns the address in memory in
+    which table is located*/
+t_table *table(void);
 
-}                   t_philo;
+/* Checks user input */
+int check_input(int argc, char **argv);
 
-t_table *t(void);
+/* Inits all memory */
+int init_program(int argc, char **argv, t_philo *philo);
 
-/*
-**  time.c    
-*/
-long long   get_timestamp();
-long long   get_delta_t();
+/* Gets present time */
+long long get_delta_t();
+
+/* Creates and joins threads */
+int start_program(t_philo *philo);
+
+/* Destroys mutexes */
+void destroy_program();
+
+/* Prints the last program message.
+    Either one died or all have full tummy.*/
+void print_end();
+
+/* If no philosopher died, prints passed status message. */
+int print_status(t_philo *p, char *status, char *color);
+
+int stop(t_philo *p);
+int eat(t_philo *p);
+int think(t_philo *p);
+int _sleep(t_philo *p);
+
+void        action(long long timer);
 void        start_timer();
-
-/*
-**  utils.c
-*/
-int         ft_atoi(const char *str);
-int         check_if_is_number(char **str);
+long long   get_timestamp(void);
+long	    ft_atoi(const char *str);
 void        err_msg(char *str);
 int         ft_strcmp(char *s1, char *s2);
-
-/*
-**  close_t.c
-*/
-int         free_mem();
-void        print_last();
-
-/*
-**  parser.c
-*/
-int         check_and_load(int argc, char **argv);
-int         load_args(int argc, char **argv);
-
-/*
-**  main.c
-*/
-void        init_mutexes();
-void        init_philos(t_philo *p);
-
-/*
-**  threads.c
-*/
-void        *routine(void *philo_struct);
-int         start(t_philo *p);
-int         create_threads(pthread_t *th, t_philo *p);
-int         join_threads(pthread_t *th);
-
-/*
-**  print.c
-*/
-int         print_status(t_philo *p, char *status, char *color);
-int         check_end(t_philo *p);
-
-/*
-**  actions.c
-*/
-int         eat(t_philo *p);
-int         _sleep(t_philo *p);
-int         think(t_philo *p);
-void        pick_forks(t_philo *p);
-void        action(long long timer);
-
-/*
-**  check_philo_status.c
-*/
-void        *check_(void *arg);
-int         philo_died(t_philo *p);
-int         death_signal(t_philo *p, long long int time_now);
-int         ate_all(t_philo *p);
 
 #endif

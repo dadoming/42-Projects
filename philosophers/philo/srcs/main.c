@@ -1,23 +1,30 @@
 #include "../header/philo.h"
 
-t_table *t(void)
+t_table *table(void)
 {
     static t_table table;
+
     return (&table);
 }
 
 int main(int argc, char **argv)
 {
-    t_philo p[200];
+    t_philo philo[200];
 
-    if(check_and_load(argc, argv) != 0)
+    if (check_input(argc, argv) == TRUE)
         return (1);
-    init_mutexes();
-    init_philos(p);
+    
+    if (init_program(argc, argv, philo) == TRUE)
+        return (2);
+
     start_timer();
-    if(start(p) != 0)
-        return(2);
-    print_last();
-    free_mem();
+
+    if(start_program(philo) == TRUE)
+        return (3);
+    
+    print_end();
+
+    destroy_program();
+
     return (0);
 }

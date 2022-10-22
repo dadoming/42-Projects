@@ -12,11 +12,11 @@ int ft_strcmp(char *s1, char *s2)
 	return (*--s1 - *--s2);
 }
 
-int	ft_atoi(const char *str)
+long	ft_atoi(const char *str)
 {
 	int			i;
-	int			neg;
-	long int	res;
+	long 	neg;
+	long	res;
 
 	res = 0;
 	neg = 1;
@@ -30,40 +30,12 @@ int	ft_atoi(const char *str)
 	while (str[i] >= '0' && str[i] <= '9')
 	{
 		res = (res * 10) + (str[i++] - '0');
-		if ((res * neg) < -2147483648)
-			return (-2);
-		if ((res * neg) > 2147483647)
+		if (((res * neg) < INT_MIN) || ((res * neg) > INT_MAX))
 			return (-1);
 	}
 	return ((int)res * neg);
 }
 
-// Checks input number 
-int check_if_is_number(char **str)
-{
-    int i;
-    int j;
-
-    i = 1;
-    j = 0;
-    while (str[i])
-    {
-        if(!((str[i][j] == '+' ) || (str[i][j] >= '0' && str[i][j] <= '9')))
-            return (-1);
-        j++;
-        while (str[i][j] != '\0')
-        {
-            if (!(str[i][j] >= '0' && str[i][j] <= '9'))
-                return (-1);
-            j++;
-        }
-        j = 0;
-        i++;
-    }
-    return (0);
-}
-
-// Prints message to stderr
 void err_msg(char *str)
 {
 	int i;
