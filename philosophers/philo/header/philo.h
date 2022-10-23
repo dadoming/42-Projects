@@ -55,7 +55,6 @@ typedef struct s_table
 
 typedef struct s_philo
 {
-    //t_table table;
     int index;
     int hand[2];
     int times_eaten;

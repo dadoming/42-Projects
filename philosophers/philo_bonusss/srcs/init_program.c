@@ -1,8 +1,9 @@
-#include "../header/philo.h"
+#include "../header/philo_bonus.h"
 
 static int  init_rules(int argc, char **argv);
-static void init_mutexes();
 static void init_philos(t_philo *philo);
+static int init_semaphores();
+static void open_sem(char* name, int sem_value, sem_t *s);
 
 int init_program(int argc, char **argv, t_philo *philo)
 {
@@ -11,23 +12,36 @@ int init_program(int argc, char **argv, t_philo *philo)
         err_msg("Something is wrong with the input values");
         return (TRUE);
     }
-    init_mutexes();
+    if (init_semaphores() == TRUE)
+    {
+        destroy_semaphores();
+        return (TRUE);
+    }
     init_philos(philo);
     return (FALSE);
 }
 
-static void init_mutexes()
+static void open_sem(char* name, int sem_value, sem_t *s)
 {
-    int i;
-    
-    i = 0;
-    while(i < table()->rules.p_num)
+    sem_unlink(name);
+    s = sem_open(name, O_CREAT | O_EXCL, 0644, sem_value);
+}
+
+static int init_semaphores()
+{
+    open_sem("forks", table()->rules.p_num, &table()->sem.forks);
+    open_sem("died", 1, &table()->sem.died);
+    open_sem("print", 1, &table()->sem.print);
+    open_sem("stop", 1, &table()->sem.stop);
+    if(&table()->sem.forks == SEM_FAILED || \
+        &table()->sem.died == SEM_FAILED || \
+        &table()->sem.print == SEM_FAILED || \
+        &table()->sem.stop == SEM_FAILED)
     {
-        pthread_mutex_init(&(table()->mutex.fork[i]), NULL);
-        i++;
+        err_msg("Failed opening semaphores");
+        return (TRUE);
     }
-    pthread_mutex_init(&(table()->mutex.write), NULL);
-    pthread_mutex_init(&(table()->mutex.dead), NULL);
+    return (FALSE);
 }
 
 static int init_rules(int argc, char **argv)
@@ -58,12 +72,8 @@ static void init_philos(t_philo *philo)
     {
         memset(&philo[i], 0, sizeof(t_philo));
         philo[i].index = i + 1;
-        philo[i].hand[LEFT] = i;
-        philo[i].hand[RIGHT] = i + 1;
         philo[i].delta_death = table()->rules.time_die;
         philo[i].times_eaten = 0;
-        if (i == table()->rules.p_num - 1)
-            philo[i].hand[RIGHT] = 0;
         i++;
     }
 }
