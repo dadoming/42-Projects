@@ -1,29 +1,30 @@
-NAME = 		philo_bonus
-
-HEADER = 	includes/philo_bonus.h
-
-SRCS = 		srcs/main.c \
-			srcs/sems.c \
-			srcs/utils.c \
-			srcs/parse_and_init.c \
-			srcs/close.c \
-			srcs/time.c \
-			srcs/actions.c \
-			#srcs/death.c 
-
+NAME = philo
+CFLAGS = -Wall -Werror -Wextra -fsanitize=thread
 CC = gcc
-
-FLAGS = -Wextra -Wall -Werror #-fsanitize=thread
-
 RM = rm -f
+HEADER = philo.h
+OBJS = $(SRCS:%.c=%.o)
+SRCS = srcs/main.c \
+	srcs/timer.c \
+	srcs/init_program.c \
+	srcs/start_program.c \
+	srcs/check_input.c \
+	srcs/utils.c \
+	srcs/destroy.c \
+	srcs/actions.c \
+	srcs/death.c
 
-all:
-	@echo "Compiling..."
-	@${CC} ${FLAGS} -g -pthread ${SRCS} -o ${NAME} -I.${HEADER}
+all: ${NAME}
+
+${NAME}: ${OBJS}
+	${CC} ${CFLAGS} -g -o ${NAME} -pthread ${OBJS}
 
 clean: 
-	@echo "philo erased..."
-	@${RM} ${NAME}
+	${RM} ${NAME}
 
-re: 
-	make clean && make all
+fclean: clean 
+	${RM} ${OBJS}
+
+re: fclean all
+
+.PHONY: all clean fclean re

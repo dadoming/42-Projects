@@ -32,6 +32,7 @@ static void init_mutexes()
 
 static int init_rules(int argc, char **argv)
 {
+    table()->rules.max_eat = 1;
     table()->rules.p_num        =   ft_atoi(argv[1]);
     table()->rules.time_die     =   ft_atoi(argv[2]);
     table()->rules.time_eat     =   ft_atoi(argv[3]);
@@ -42,7 +43,7 @@ static int init_rules(int argc, char **argv)
         || (table()->rules.time_die     <= 0) \
         || (table()->rules.time_eat     <= 0) \
         || (table()->rules.time_sleep   <= 0) \
-        || (table()->rules.max_eat      < 0))
+        || (table()->rules.max_eat      <= 0))
         return (TRUE);
     if (argc == 5)
         table()->rules.max_eat = -1;
