@@ -78,6 +78,7 @@ static void init_philos(t_philo *philo)
         philo[i].index = i + 1;
         philo[i].delta_death = table()->rules.time_die;
         philo[i].times_eaten = 0;
+        philo[i].is_dead = 0;
         i++;
     }
 }

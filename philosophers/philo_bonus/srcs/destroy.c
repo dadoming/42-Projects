@@ -7,7 +7,7 @@ void kill_all(t_philo *p)
     i = table()->rules.p_num;
     while (i)
     {
-        kill(p[i].pid, SIGINT);
+        kill(p[i - 1].pid, SIGINT);
         i--;
     }
 }

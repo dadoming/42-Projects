@@ -59,6 +59,7 @@ typedef struct s_table
 typedef struct s_philo
 {
     int index;
+    int is_dead;
     int times_eaten;
     long long delta_death;
     pid_t pid;
