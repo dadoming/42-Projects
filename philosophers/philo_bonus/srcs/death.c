@@ -13,7 +13,7 @@ void *check_death(void *arg)
     {
         if (dead(p) == TRUE)
         {
-            //sem_wait(table()->sem.print);
+            sem_wait(table()->sem.print);
             return (0);
         }
         if (p->times_eaten >= table()->rules.max_eat && \
@@ -30,7 +30,6 @@ static int dead(t_philo *p)
     time_now = get_delta_t(table()->time_start);
     if((time_now - p->delta_death) > table()->rules.time_die)
     {
-        //sem_wait(table()->sem.died);
         death_values(p, time_now);
         print_dead(p);
         p->is_dead = 1;

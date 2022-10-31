@@ -1,49 +1,30 @@
 #include "../header/philo_bonus.h"
 
-static void only_one_sitting();
+static int only_one_sitting();
 static void routine(t_philo *philo);
-static void print_all_eaten();
-
-int noonedied(t_philo *philo)
-{
-    int i = 0;
-    while (i < table()->rules.p_num)
-    {
-        printf("%d\n", philo[i].is_dead);
-        if(philo[i].is_dead == 1)
-            return (1);
-        i++;
-    }
-    return (0);
-}
 
 void start_program(t_philo *philo)
 {
     int i;
     int status;
 
-    if(table()->rules.p_num == 1)
-    {
-        only_one_sitting(philo);
+    if(only_one_sitting(philo) == TRUE)
         return;
-    }
     i = 0;
     while (i < table()->rules.p_num)
     {
         philo[i].pid = fork();
         if(philo[i].pid == 0)
             routine(&philo[i]);
-        //usleep(50);
+        usleep(50);
         i++;
     }
 
-    while (waitpid(-1, &status, WNOHANG <= 0))
+    while (WIFEXITED(status) != 1 || WEXITSTATUS(status) != EXIT_SUCCESS)
     {
-        if (WIFEXITED(status) == 1 && WEXITSTATUS(status) == EXIT_SUCCESS)
-            break;
+        waitpid(-1, &status, WNOHANG <= 0);
     }
-    if (noonedied(philo) == 0)
-        print_all_eaten();
+
     kill_all(philo);
 }
 
@@ -67,21 +48,21 @@ static void routine(t_philo *philo)
             break;
         print_status(philo, THINK, BLUE);
     }
+    kill(checker, SIGKILL);
     exit(EXIT_SUCCESS);
 }
 
-static void print_all_eaten()
+static int only_one_sitting()
 {
-    printf("\n%sAll philos ate %d times.\n%s", GREEN, \
-            table()->rules.max_eat, RESET);
-}
-
-static void only_one_sitting()
-{
-    printf("%s0   %d   %s%s\n", WHITE, 1, FORK, RESET);
-    usleep(1000 * table()->rules.time_die);
-    table()->time_end = get_delta_t();
-    table()->index_death = 1;
-    printf("\n%s%lld Philo %d died\n%s", RED, \
-            table()->time_end, table()->index_death, RESET);
+    if(table()->rules.p_num == 1)
+    {
+        printf("%s0   %d   %s%s\n", WHITE, 1, FORK, RESET);
+        usleep(1000 * table()->rules.time_die);
+        table()->time_end = get_delta_t();
+        table()->index_death = 1;
+        printf("\n%s%lld Philo %d died\n%s", RED, \
+                table()->time_end, table()->index_death, RESET);
+        return (TRUE);
+    }
+    return (FALSE);
 }
