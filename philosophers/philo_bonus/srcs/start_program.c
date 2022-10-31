@@ -3,10 +3,24 @@
 static int only_one_sitting();
 static void routine(t_philo *philo);
 
+void	*free_all(void *arg)
+{
+	int		i;
+	t_philo	*p;
+
+	p = (t_philo *)arg;
+	sem_wait(table()->sem.died);
+	i = -1;
+	while (++i < table()->rules.p_num)
+		kill(p[i].pid, 9);
+	destroy(p);
+	exit(0);
+}
+
 void start_program(t_philo *philo)
 {
     int i;
-    int status;
+    pthread_t free;
 
     if(only_one_sitting(philo) == TRUE)
         return;
@@ -16,52 +30,56 @@ void start_program(t_philo *philo)
         philo[i].pid = fork();
         if(philo[i].pid == 0)
             routine(&philo[i]);
-        usleep(50);
         i++;
     }
-
-    while (WIFEXITED(status) != 1 || WEXITSTATUS(status) != EXIT_SUCCESS)
+    pthread_create(&free, NULL, free_all, philo);
+    i = 0; 
+    while (i < table()->rules.p_num)
     {
-        waitpid(-1, &status, WNOHANG <= 0);
+        waitpid(philo[i].pid, NULL, 0);
+        i++;
     }
+}
 
-    kill_all(philo);
+void *enddd(void *arg)
+{
+    (void) arg;
+    sem_wait(table()->sem.end);
+    exit(0);
 }
 
 static void routine(t_philo *philo)
 {
-    pthread_t checker;
-
-    pthread_create(&checker, NULL, check_death, philo);
-    pthread_detach(checker);
-    while (1)
+    start_timer(philo);
+    pthread_create(&philo->checker, NULL, check_death, philo);
+    pthread_create(&philo->ender, NULL, enddd, 0);
+    int i = 0;
+    while ((i < table()->rules.max_eat) || table()->rules.max_eat == -1)
     {
-        if (eat(philo) != FALSE)
-            break;
-        if(philo->is_dead == 1)
-            break;
+        eat(philo);
+        i++;
+        if (i == table()->rules.max_eat)
+        {
+            pthread_detach(philo->checker);
+            pthread_detach(philo->ender);
+            exit(0);
+        }
         print_status(philo, SLEEP, YELLOW);
-        if(philo->is_dead == 1)
-            break;
         action(table()->rules.time_sleep);
-        if(philo->is_dead == 1)
-            break;
         print_status(philo, THINK, BLUE);
     }
-    kill(checker, SIGKILL);
-    exit(EXIT_SUCCESS);
 }
 
-static int only_one_sitting()
+static int only_one_sitting(t_philo *p)
 {
     if(table()->rules.p_num == 1)
     {
+        start_timer(p);
         printf("%s0   %d   %s%s\n", WHITE, 1, FORK, RESET);
         usleep(1000 * table()->rules.time_die);
-        table()->time_end = get_delta_t();
-        table()->index_death = 1;
-        printf("\n%s%lld Philo %d died\n%s", RED, \
-                table()->time_end, table()->index_death, RESET);
+        table()->time_end = get_delta_t(p);
+        printf("%s%lld Philo 1 died%s\n", RED, \
+                table()->time_end, RESET);
         return (TRUE);
     }
     return (FALSE);

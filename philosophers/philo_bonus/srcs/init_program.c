@@ -15,7 +15,7 @@ int init_program(int argc, char **argv, t_philo *philo)
     }
     if (init_semaphores() == TRUE)
     {
-        close_semaphores();
+        destroy(philo);
         return (TRUE);
     }
     init_philos(philo);
@@ -35,8 +35,9 @@ static sem_t *open_sem(char* name, int sem_value)
 static int init_semaphores()
 {
     table()->sem.forks = open_sem("forks", table()->rules.p_num);
-    table()->sem.died = open_sem("died", 1);
     table()->sem.print = open_sem("print", 1);
+    table()->sem.died = open_sem("died", 0);
+    table()->sem.end = open_sem("end", 0);
     if(table()->sem.forks == SEM_FAILED || \
         table()->sem.died == SEM_FAILED || \
         table()->sem.print == SEM_FAILED)

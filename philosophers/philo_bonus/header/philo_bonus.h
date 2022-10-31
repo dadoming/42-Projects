@@ -36,6 +36,7 @@ typedef struct s_semaph
     sem_t   *forks;
     sem_t   *died;
     sem_t   *print;
+    sem_t   *end;
 }   t_semaph;
 
 typedef struct s_rules
@@ -51,9 +52,7 @@ typedef struct s_table
 {
     t_rules rules;
     t_semaph sem;
-    long long   time_start;
     long long   time_end;
-    int         index_death;
 } t_table;
 
 typedef struct s_philo
@@ -61,8 +60,11 @@ typedef struct s_philo
     int index;
     int is_dead;
     int times_eaten;
-    long long delta_death;
+    long long   time_start;
+    long long   delta_death;
     pid_t pid;
+    pthread_t checker;
+    pthread_t ender;
 } t_philo;
 
 /* main.c */
@@ -79,7 +81,7 @@ void start_program(t_philo *philo);
 
 /* timer.c */
 void start_timer();
-long long get_delta_t();
+long long get_delta_t(t_philo *p);
 long long get_timestamp(void);
 void action(long long timer);
 
@@ -91,9 +93,11 @@ long	ft_atoi(const char *str);
 void err_msg(char *str);
 void print_status(t_philo *p, char *status, char *color);
 
+
 void *check_death(void *arg);
-int eat(t_philo *p);
+void eat(t_philo *p);
 void pick_forks(t_philo *p);
 void kill_all(t_philo *p);
-
+int destroy(t_philo *philo);
+void	*free_all(void *arg);
 #endif

@@ -2,12 +2,12 @@
 
 void print_status(t_philo *p, char *status, char *color)
 {
-    long long int current_time;
+    long long current_time;
 
-    current_time = get_delta_t(table()->time_start);
+    current_time = get_delta_t(p);
     sem_wait(table()->sem.print);
-    printf("%s%lld", color, current_time);
-    printf("  %d  %s%s\n", p->index, status, RESET);
+    printf("%s%lld  %d  %s%s\n", \
+		color, current_time, p->index, status, RESET);
     sem_post(table()->sem.print);
 }
 

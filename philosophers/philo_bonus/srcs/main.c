@@ -13,14 +13,9 @@ int main(int argc, char **argv)
 
     if (check_input(argc, argv) == TRUE)
         return (1);
-    
     if (init_program(argc, argv, philo) == TRUE)
         return (2);
-
-    start_timer();
-
     start_program(philo);
-
-    close_semaphores();
+    destroy(philo);
     return (0);
 }   

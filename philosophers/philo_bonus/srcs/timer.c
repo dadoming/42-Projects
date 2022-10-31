@@ -1,13 +1,13 @@
 #include "../header/philo_bonus.h"
 
-void start_timer()
+void start_timer(t_philo *p)
 {
-    table()->time_start = get_timestamp();
+    p->time_start = get_timestamp();
 }
 
-long long get_delta_t()
+long long get_delta_t(t_philo *p)
 {
-    return (get_timestamp() - table()->time_start);
+    return (get_timestamp() - p->time_start);
 }
 
 long long get_timestamp(void)
