@@ -1,13 +1,13 @@
 #include "../header/philo_bonus.h"
 
-void start_timer(t_philo *p)
+void start_timer(void)
 {
-    p->time_start = get_timestamp();
+    table()->time_start = get_timestamp();
 }
 
-long long get_delta_t(t_philo *p)
+long long get_delta_t(void)
 {
-    return (get_timestamp() - p->time_start);
+    return (get_timestamp() - table()->time_start);
 }
 
 long long get_timestamp(void)
@@ -19,5 +19,9 @@ long long get_timestamp(void)
 
 void action(long long timer)
 {
-    usleep(timer * 1000);
+    long long t;
+
+	t = get_delta_t();
+	while (get_delta_t() - t < timer)
+		usleep(100);
 }

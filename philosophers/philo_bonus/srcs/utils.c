@@ -4,7 +4,7 @@ void print_status(t_philo *p, char *status, char *color)
 {
     long long current_time;
 
-    current_time = get_delta_t(p);
+    current_time = get_delta_t();
     sem_wait(table()->sem.print);
     printf("%s%lld  %d  %s%s\n", \
 		color, current_time, p->index, status, RESET);

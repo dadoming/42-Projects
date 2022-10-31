@@ -23,7 +23,7 @@ void *check_death(void *arg)
     p = (t_philo *) arg;
     while (1)
     {
-        time_now = get_delta_t(p);
+        time_now = get_delta_t();
         if((time_now - p->delta_death) > table()->rules.time_die)
         {
             philo_death(p, time_now);

@@ -7,6 +7,8 @@ t_table *table(void)
     return (&table);
 }
 
+
+
 int main(int argc, char **argv)
 {
     t_philo philo[200];
@@ -15,6 +17,7 @@ int main(int argc, char **argv)
         return (1);
     if (init_program(argc, argv, philo) == TRUE)
         return (2);
+    start_timer();
     start_program(philo);
     destroy(philo);
     return (0);

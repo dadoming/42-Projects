@@ -50,7 +50,6 @@ void *enddd(void *arg)
 
 static void routine(t_philo *philo)
 {
-    start_timer(philo);
     pthread_create(&philo->checker, NULL, check_death, philo);
     pthread_create(&philo->ender, NULL, enddd, 0);
     int i = 0;
@@ -70,14 +69,14 @@ static void routine(t_philo *philo)
     }
 }
 
-static int only_one_sitting(t_philo *p)
+static int only_one_sitting()
 {
     if(table()->rules.p_num == 1)
     {
-        start_timer(p);
+        start_timer();
         printf("%s0   %d   %s%s\n", WHITE, 1, FORK, RESET);
         usleep(1000 * table()->rules.time_die);
-        table()->time_end = get_delta_t(p);
+        table()->time_end = get_delta_t();
         printf("%s%lld Philo 1 died%s\n", RED, \
                 table()->time_end, RESET);
         return (TRUE);
