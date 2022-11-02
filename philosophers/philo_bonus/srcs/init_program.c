@@ -5,7 +5,6 @@ static void init_philos(t_philo *philo);
 static int init_semaphores();
 static sem_t *open_sem(char* name, int sem_value);
 
-
 int init_program(int argc, char **argv, t_philo *philo)
 {
     if (init_rules(argc, argv) == TRUE)
@@ -37,10 +36,11 @@ static int init_semaphores()
     table()->sem.forks = open_sem("forks", table()->rules.p_num);
     table()->sem.print = open_sem("print", 1);
     table()->sem.died = open_sem("died", 0);
-    table()->sem.end = open_sem("end", 0);
+    table()->sem.check = open_sem("check", (table()->rules.p_num / 2) + 1);
     if(table()->sem.forks == SEM_FAILED || \
         table()->sem.died == SEM_FAILED || \
-        table()->sem.print == SEM_FAILED)
+        table()->sem.print == SEM_FAILED || \
+        table()->sem.check == SEM_FAILED)
     {
         err_msg("Failed opening semaphores");
         return (TRUE);
@@ -79,7 +79,6 @@ static void init_philos(t_philo *philo)
         philo[i].index = i + 1;
         philo[i].delta_death = table()->rules.time_die;
         philo[i].times_eaten = 0;
-        philo[i].is_dead = 0;
         i++;
     }
 }

@@ -12,7 +12,7 @@ void	*free_all(void *arg)
 	sem_wait(table()->sem.died);
 	i = -1;
 	while (++i < table()->rules.p_num)
-		kill(p[i].pid, 9);
+		kill(p[i].pid, SIGKILL);
 	destroy(p);
 	exit(0);
 }
@@ -39,30 +39,25 @@ void start_program(t_philo *philo)
         waitpid(philo[i].pid, NULL, 0);
         i++;
     }
-}
-
-void *enddd(void *arg)
-{
-    (void) arg;
-    sem_wait(table()->sem.end);
-    exit(0);
+    pthread_detach(free);
+    printf("%sAll philos ate %d times!%s\n", GREEN, table()->rules.max_eat, RESET);
 }
 
 static void routine(t_philo *philo)
 {
+    int i;
+
+    i = 0;
     if(philo->index % 2 == 0)
-        usleep(50);
+        ft_usleep(20);
     pthread_create(&philo->checker, NULL, check_death, philo);
-    pthread_create(&philo->ender, NULL, enddd, 0);
-    int i = 0;
+    pthread_detach(philo->checker);
     while ((i < table()->rules.max_eat) || table()->rules.max_eat == -1)
     {
         eat(philo);
         i++;
         if (i == table()->rules.max_eat)
         {
-            pthread_detach(philo->checker);
-            pthread_detach(philo->ender);
             exit(0);
         }
         print_status(philo, SLEEP, YELLOW);
@@ -79,8 +74,8 @@ static int only_one_sitting()
         printf("%s0   %d   %s%s\n", WHITE, 1, FORK, RESET);
         ft_usleep(table()->rules.time_die);
         table()->time_end = get_delta_t();
-        printf("%s%lld Philo 1 died%s\n", RED, \
-                table()->time_end, RESET);
+        printf("%s%lld Philo 1 %s%s\n", RED, \
+            table()->time_end, DIED, RESET);
         return (TRUE);
     }
     return (FALSE);

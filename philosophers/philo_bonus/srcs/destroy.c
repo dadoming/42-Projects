@@ -22,7 +22,7 @@ int destroy(t_philo *philo)
         return (TRUE);
     if(sem_close(table()->sem.print) == -1)
         return (TRUE);
-    if(sem_close(table()->sem.end) == -1)
+    if(sem_close(table()->sem.check) == -1)
         return (TRUE);
     return (FALSE);
 }

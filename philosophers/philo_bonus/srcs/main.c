@@ -7,8 +7,6 @@ t_table *table(void)
     return (&table);
 }
 
-
-
 int main(int argc, char **argv)
 {
     t_philo philo[200];

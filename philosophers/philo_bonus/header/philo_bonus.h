@@ -33,71 +33,71 @@
 
 typedef struct s_semaph
 {
-    sem_t   *forks;
-    sem_t   *died;
-    sem_t   *print;
-    sem_t   *end;
-}   t_semaph;
+    sem_t       *forks;
+    sem_t       *died;
+    sem_t       *print;
+    sem_t       *check;
+}       t_semaph;
 
 typedef struct s_rules
 {
-    int p_num;
-    int time_eat;
-    int time_die;
-    int time_sleep;
-    int max_eat;
-}   t_rules;
+    int         p_num;
+    int         time_eat;
+    int         time_die;
+    int         time_sleep;
+    int         max_eat;
+}       t_rules;
 
 typedef struct s_table
 {
-    t_rules rules;
-    t_semaph sem;
+    t_rules     rules;
+    t_semaph    sem;
     long long   time_end;
     long long   time_start;
-} t_table;
+}       t_table;
 
 typedef struct s_philo
 {
-    int index;
-    int is_dead;
-    int times_eaten;
-    pid_t pid;
-    pthread_t checker;
-    pthread_t ender;
+    int         index;
+    int         times_eaten;
+    pid_t       pid;
+    pthread_t   checker;
+    pthread_t   ender;
     long long   delta_death;
-} t_philo;
+}       t_philo;
 
 /* main.c */
-t_table *table(void);
+t_table         *table(void);
 
 /* check_input.c*/
-int check_input(int argc, char **argv);
+int             check_input(int argc, char **argv);
 
 /* init_program.c */
-int init_program(int argc, char **argv, t_philo *philo);
+int             init_program(int argc, char **argv, t_philo *philo);
 
 /* start_program.c */
-void start_program(t_philo *philo);
+void            start_program(t_philo *philo);
 
 /* timer.c */
-void start_timer();
-long long get_delta_t(void);
-long long get_timestamp(void);
-void ft_usleep(int time);
+void            start_timer();
+long long       get_delta_t(void);
+long long       get_timestamp(void);
+void            ft_usleep(int time);
 
 /* destroy.c */
-int close_semaphores();
+int             close_semaphores();
 
 /* utils.c */
-long	ft_atoi(const char *str);
-void err_msg(char *str);
-void print_status(t_philo *p, char *status, char *color);
+long	        ft_atoi(const char *str);
+void            err_msg(char *str);
+void            print_status(t_philo *p, char *status, char *color);
 
 
-void *check_death(void *arg);
-void eat(t_philo *p);
-void pick_forks(t_philo *p);
-void kill_all(t_philo *p);
-int destroy(t_philo *philo);
-void	*free_all(void *arg);
+void            *check_death(void *arg);
+void            eat(t_philo *p);
+void            pick_forks(t_philo *p);
+void            kill_all(t_philo *p);
+int             destroy(t_philo *philo);
+void	        *free_all(void *arg);
+
 #endif
