@@ -50,6 +50,8 @@ void *enddd(void *arg)
 
 static void routine(t_philo *philo)
 {
+    if(philo->index % 2 == 0)
+        usleep(50);
     pthread_create(&philo->checker, NULL, check_death, philo);
     pthread_create(&philo->ender, NULL, enddd, 0);
     int i = 0;
@@ -64,7 +66,7 @@ static void routine(t_philo *philo)
             exit(0);
         }
         print_status(philo, SLEEP, YELLOW);
-        action(table()->rules.time_sleep);
+        ft_usleep(table()->rules.time_sleep);
         print_status(philo, THINK, BLUE);
     }
 }
@@ -75,7 +77,7 @@ static int only_one_sitting()
     {
         start_timer();
         printf("%s0   %d   %s%s\n", WHITE, 1, FORK, RESET);
-        usleep(1000 * table()->rules.time_die);
+        ft_usleep(table()->rules.time_die);
         table()->time_end = get_delta_t();
         printf("%s%lld Philo 1 died%s\n", RED, \
                 table()->time_end, RESET);

@@ -24,7 +24,7 @@ void eat(t_philo *p)
 {
     pick_forks(p);
     print_status(p, EAT, GREEN);
-    action(table()->rules.time_eat);
+    ft_usleep(table()->rules.time_eat);
     p->delta_death = get_delta_t();
     if (table()->rules.max_eat > 0)
         p->times_eaten++;

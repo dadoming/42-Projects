@@ -83,7 +83,7 @@ void start_program(t_philo *philo);
 void start_timer();
 long long get_delta_t(void);
 long long get_timestamp(void);
-void action(long long timer);
+void ft_usleep(int time);
 
 /* destroy.c */
 int close_semaphores();

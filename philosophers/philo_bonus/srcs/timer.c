@@ -10,6 +10,15 @@ long long get_delta_t(void)
     return (get_timestamp() - table()->time_start);
 }
 
+void	ft_usleep(int time)
+{
+	long long start;
+
+	start = get_timestamp();
+	while (get_timestamp() < start + time)
+		usleep(10);
+}
+
 long long get_timestamp(void)
 {
     struct timeval t;
@@ -17,11 +26,3 @@ long long get_timestamp(void)
     return (t.tv_sec * 1000 + t.tv_usec / 1000); 
 }
 
-void action(long long timer)
-{
-    long long t;
-
-	t = get_delta_t();
-	while (get_delta_t() - t < timer)
-		usleep(100);
-}
