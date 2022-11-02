@@ -15,11 +15,12 @@
 #include <unistd.h>
 #include <limits.h>
 
-# define RED        "\033[0;31;7m"
-# define GREEN      "\033[0;32;7m"
-# define YELLOW     "\033[0;33;7m"
-# define BLUE       "\033[0;34;7m"
-# define WHITE      "\033[0;37;7m"
+# define BOLDRED        "\033[1m\033[31m"
+# define GREEN      "\033[32m"
+# define BOLDGREEN  "\033[1m\033[32m"
+# define YELLOW     "\033[33m"
+# define BLUE       "\033[35m"
+# define WHITE      "\033[37m"
 # define RESET		"\033[0m"
 
 # define EAT        "is eating"
@@ -36,7 +37,6 @@ typedef struct s_semaph
     sem_t       *forks;
     sem_t       *died;
     sem_t       *print;
-    sem_t       *check;
 }       t_semaph;
 
 typedef struct s_rules
@@ -62,7 +62,6 @@ typedef struct s_philo
     int         times_eaten;
     pid_t       pid;
     pthread_t   checker;
-    pthread_t   ender;
     long long   delta_death;
 }       t_philo;
 
@@ -95,8 +94,6 @@ void            print_status(t_philo *p, char *status, char *color);
 
 void            *check_death(void *arg);
 void            eat(t_philo *p);
-void            pick_forks(t_philo *p);
-void            kill_all(t_philo *p);
 int             destroy(t_philo *philo);
 void	        *free_all(void *arg);
 

@@ -6,7 +6,7 @@ void print_status(t_philo *p, char *status, char *color)
 
     current_time = get_delta_t();
     sem_wait(table()->sem.print);
-    printf("%s%lld  %d  %s%s\n", \
+    printf("%s%lld\t%d\t%s%s\n", \
 		color, current_time, p->index, status, RESET);
     sem_post(table()->sem.print);
 }

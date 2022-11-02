@@ -21,33 +21,6 @@ int init_program(int argc, char **argv, t_philo *philo)
     return (FALSE);
 }
 
-// https://stackoverflow.com/questions/72847701/what-is-the-pshared-value-of-a-semaphore-if-i-used-sem-open-instead-of-sem-ini/73672598#73672598
-static sem_t *open_sem(char* name, int sem_value)
-{
-    sem_t *s;
-
-    sem_unlink(name);
-    s = sem_open(name, O_CREAT | O_EXCL, 0644, sem_value);
-    return (s);
-}
-
-static int init_semaphores()
-{
-    table()->sem.forks = open_sem("forks", table()->rules.p_num);
-    table()->sem.print = open_sem("print", 1);
-    table()->sem.died = open_sem("died", 0);
-    table()->sem.check = open_sem("check", (table()->rules.p_num / 2) + 1);
-    if(table()->sem.forks == SEM_FAILED || \
-        table()->sem.died == SEM_FAILED || \
-        table()->sem.print == SEM_FAILED || \
-        table()->sem.check == SEM_FAILED)
-    {
-        err_msg("Failed opening semaphores");
-        return (TRUE);
-    }
-    return (FALSE);
-}
-
 static int init_rules(int argc, char **argv)
 {
     table()->rules.max_eat = 1;
@@ -65,6 +38,31 @@ static int init_rules(int argc, char **argv)
         return (TRUE);
     if (argc == 5)
         table()->rules.max_eat = -1;
+    return (FALSE);
+}
+
+// https://stackoverflow.com/questions/72847701/what-is-the-pshared-value-of-a-semaphore-if-i-used-sem-open-instead-of-sem-ini/73672598#73672598
+static sem_t *open_sem(char* name, int sem_value)
+{
+    sem_t *s;
+
+    sem_unlink(name);
+    s = sem_open(name, O_CREAT | O_EXCL, 0644, sem_value);
+    return (s);
+}
+
+static int init_semaphores()
+{
+    table()->sem.forks = open_sem("forks", table()->rules.p_num);
+    table()->sem.print = open_sem("print", 1);
+    table()->sem.died = open_sem("died", 0);
+    if(table()->sem.forks == SEM_FAILED || \
+        table()->sem.died == SEM_FAILED || \
+        table()->sem.print == SEM_FAILED)
+    {
+        err_msg("Failed opening semaphores");
+        return (TRUE);
+    }
     return (FALSE);
 }
 
