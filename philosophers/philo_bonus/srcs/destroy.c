@@ -4,13 +4,13 @@ static void kill_all(t_philo *p);
 
 int destroy(t_philo *philo)
 {
-    if(philo[0].pid)
+    if (philo[0].pid)
         kill_all(philo);
-    if(sem_close(table()->sem.forks) == -1)
+    if (sem_close(table()->sem.forks) == -1)
         return (TRUE);
-    if(sem_close(table()->sem.died) == -1)
+    if (sem_close(table()->sem.died) == -1)
         return (TRUE);
-    if(sem_close(table()->sem.print) == -1)
+    if (sem_close(table()->sem.print) == -1)
         return (TRUE);
     return (FALSE);
 }

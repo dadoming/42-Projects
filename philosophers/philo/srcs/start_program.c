@@ -1,10 +1,9 @@
 #include "../header/philo.h"
 
-static int only_one_sitting();
-static int create_threads(pthread_t *th, t_philo *p);
-static int join_threads(pthread_t *th);
-static void* routine(void* philo);
-
+static int      only_one_sitting();
+static int      create_threads(pthread_t *th, t_philo *p);
+static int      join_threads(pthread_t *th);
+static void*    routine(void* philo);
 
 int start_program(t_philo *philo)
 {
@@ -25,7 +24,9 @@ static void* routine(void* philo)
 
     p = (t_philo*) philo;
     if (p->index % 2 == 0)
-        usleep(60 * 1000);
+        ft_usleep(100);
+    pthread_create(&p->checker, NULL, stop, p);
+    pthread_detach(p->checker);
     while (1)
     {
         if (eat(p) != FALSE || _sleep(p) != FALSE || think(p) != FALSE)
@@ -74,8 +75,8 @@ static int only_one_sitting()
 {
     if(table()->rules.p_num == 1)
     {
-        printf("%s0   %d   %s%s\n", WHITE, 1, FORK, RESET);
-        usleep(1000 * table()->rules.time_die);
+        printf("%s%lld\t%d\t%s%s\n", WHITE, get_delta_t(), 1, FORK, RESET);
+        ft_usleep(table()->rules.time_die);
         table()->time_end = get_delta_t();
         table()->index_death = 1;
         return (TRUE);

@@ -11,12 +11,13 @@ void *check_death(void *arg)
     while (1)
     {
         time_now = get_delta_t();
-        if((time_now - p->delta_death) > table()->rules.time_die)
+        if ((time_now - p->delta_death) > table()->rules.time_die)
         {
             sem_wait(table()->sem.print);
             print_dead(p, time_now);
             sem_post(table()->sem.died);
         }
+        ft_usleep(5);
     }
     return (NULL);
 }

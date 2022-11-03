@@ -9,11 +9,12 @@
 #include <sys/time.h>
 #include <string.h>
 
-# define RED        "\033[0;31;7m"
-# define GREEN      "\033[0;32;7m"
-# define YELLOW     "\033[0;33;7m"
-# define BLUE       "\033[0;34;7m"
-# define WHITE      "\033[0;37;7m"
+# define BOLDRED        "\033[1m\033[31m"
+# define GREEN      "\033[32m"
+# define BOLDGREEN  "\033[1m\033[32m"
+# define YELLOW     "\033[33m"
+# define MAGENTA       "\033[35m"
+# define WHITE      "\033[37m"
 # define RESET		"\033[0m"
 
 # define EAT        "is eating"
@@ -59,6 +60,7 @@ typedef struct s_philo
     int hand[2];
     int times_eaten;
     long long delta_death;
+    pthread_t checker;
 } t_philo;
 
 
@@ -86,18 +88,27 @@ void destroy_program();
 void print_end();
 
 /* If no philosopher died, prints passed status message. */
-int print_status(t_philo *p, char *status, char *color);
+void print_status(t_philo *p, char *status, char *color);
 
-int stop(t_philo *p);
-int eat(t_philo *p);
-int think(t_philo *p);
-int _sleep(t_philo *p);
+/* Monitoring thread to check for the death of a philosopher by comparing
+    if has passed more time than time_to_die, if yes set the philo_index
+    to the number of the philo that died, which stops all running threads
+    using check_end(). */
+void*       stop(void *arg);
+int         check_end();
 
-void        action(long long timer);
+/* Simulation functions */
+int         eat(t_philo *p);
+int         think(t_philo *p);
+int         _sleep(t_philo *p);
+
+/* Time functions */
+void	    ft_usleep(int time);
 void        start_timer();
 long long   get_timestamp(void);
+
+/* utils */
 long	    ft_atoi(const char *str);
 void        err_msg(char *str);
-int         ft_strcmp(char *s1, char *s2);
 
 #endif

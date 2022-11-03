@@ -15,11 +15,11 @@
 #include <unistd.h>
 #include <limits.h>
 
-# define BOLDRED        "\033[1m\033[31m"
+# define BOLDRED    "\033[1m\033[31m"
 # define GREEN      "\033[32m"
 # define BOLDGREEN  "\033[1m\033[32m"
 # define YELLOW     "\033[33m"
-# define BLUE       "\033[35m"
+# define MAGENTA    "\033[35m"
 # define WHITE      "\033[37m"
 # define RESET		"\033[0m"
 

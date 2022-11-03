@@ -26,7 +26,7 @@ static int check_if_number(char **str)
     j = 0;
     while (str[i])
     {
-        if(!((str[i][j] == '+' ) || (str[i][j] >= '0' \
+        if (!((str[i][j] == '+' ) || (str[i][j] >= '0' \
             && str[i][j] <= '9')))
             return (TRUE);
         j++;

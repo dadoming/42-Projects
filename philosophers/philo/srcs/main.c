@@ -13,18 +13,12 @@ int main(int argc, char **argv)
 
     if (check_input(argc, argv) == TRUE)
         return (1);
-    
     if (init_program(argc, argv, philo) == TRUE)
         return (2);
-
     start_timer();
-
-    if(start_program(philo) == TRUE)
+    if (start_program(philo) == TRUE)
         return (3);
-    
     print_end();
-
     destroy_program();
-
     return (0);
 }

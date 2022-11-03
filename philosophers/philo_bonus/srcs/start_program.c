@@ -61,13 +61,13 @@ static void routine(t_philo *philo)
         }
         print_status(philo, SLEEP, YELLOW);
         ft_usleep(table()->rules.time_sleep);
-        print_status(philo, THINK, BLUE);
+        print_status(philo, THINK, MAGENTA);
     }
 }
 
 static int only_one_sitting()
 {
-    if(table()->rules.p_num == 1)
+    if (table()->rules.p_num == 1)
     {
         start_timer();
         printf("%s%lld\t%d\t%s%s\n", WHITE, \
