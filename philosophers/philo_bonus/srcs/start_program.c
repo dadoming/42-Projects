@@ -48,6 +48,9 @@ static void routine(t_philo *philo)
 
     if(philo->index % 2 == 0)
         ft_usleep(20);
+
+    // inserir uma mutex em cada philosopher para checkar a p->delta_death
+    
     pthread_create(&philo->checker, NULL, check_death, philo);
     pthread_detach(philo->checker);
     i = 0;
