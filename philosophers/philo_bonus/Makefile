@@ -16,6 +16,7 @@ SRCS = srcs/main.c \
 	srcs/start_program.c \
 	srcs/check_input.c \
 	srcs/utils.c \
+	srcs/utils2.c \
 	srcs/destroy.c \
 	srcs/actions.c \
 	srcs/death.c

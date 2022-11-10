@@ -62,6 +62,7 @@ typedef struct s_philo
     int         times_eaten;
     pid_t       pid;
     pthread_t   checker;
+    sem_t       *mutex;
     long long   delta_death;
 }       t_philo;
 
@@ -84,13 +85,15 @@ long long       get_timestamp(void);
 void            ft_usleep(int time);
 
 /* destroy.c */
-int             close_semaphores();
+int             destroy(t_philo *philo);
 
 /* utils.c */
 long	        ft_atoi(const char *str);
 void            err_msg(char *str);
 void            print_status(t_philo *p, char *status, char *color);
-
+char	        *_itoa(int n);
+int ft_strlen(const char *str);
+char	*_append(char const *s1, char const *s2);
 
 void            *check_death(void *arg);
 void            eat(t_philo *p);

@@ -1,9 +1,9 @@
 #include "../header/philo_bonus.h"
 
-static int  init_rules(int argc, char **argv);
-static void init_philos(t_philo *philo);
-static int init_semaphores();
-static sem_t *open_sem(char* name, int sem_value);
+static int      init_rules(int argc, char **argv);
+static int      init_philos(t_philo *philo);
+static int      init_semaphores();
+static sem_t    *open_sem(char* name, int sem_value);
 
 int init_program(int argc, char **argv, t_philo *philo)
 {
@@ -17,7 +17,10 @@ int init_program(int argc, char **argv, t_philo *philo)
         destroy(philo);
         return (TRUE);
     }
-    init_philos(philo);
+    if (init_philos(philo) == TRUE)
+    {
+
+    }
     return (FALSE);
 }
 
@@ -66,7 +69,24 @@ static int init_semaphores()
     return (FALSE);
 }
 
-static void init_philos(t_philo *philo)
+static int init_mutex(t_philo *p, int i)
+{
+    char *str;
+    char *num;
+
+    str = "mutex";
+    num = NULL;
+    num = _itoa(i);
+    str = _append(str, num);
+    p->mutex = open_sem(str, 1);
+    if(p->mutex == SEM_FAILED)
+        return (TRUE);
+    free(str);
+    free(num);
+    return (FALSE);
+}
+
+static int init_philos(t_philo *philo)
 {
     int i;
     
@@ -77,6 +97,9 @@ static void init_philos(t_philo *philo)
         philo[i].index = i + 1;
         philo[i].delta_death = table()->rules.time_die;
         philo[i].times_eaten = 0;
+        if(init_mutex(&philo[i], i) == TRUE)
+            return (TRUE);
         i++;
     }
+    return (FALSE);
 }
