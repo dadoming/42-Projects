@@ -1,6 +1,18 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/11/14 15:56:02 by dadoming          #+#    #+#              #
+#    Updated: 2022/11/14 15:56:39 by dadoming         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = philo_bonus
 
-CFLAGS = -Wall -Werror -Wextra #-fsanitize=thread
+CFLAGS = -Wall -Werror -Wextra -fsanitize=thread
 
 CC = gcc
 

@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   utils2.c                                           :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/11/14 15:56:35 by dadoming          #+#    #+#             */
+/*   Updated: 2022/11/14 16:35:06 by dadoming         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "../header/philo_bonus.h"
 
 static int	ft_length(int n)
@@ -50,4 +62,13 @@ char	*_itoa(int n)
 		return (NULL);
 	str[len] = '\0';
 	return (ft_filler(aux, len, str));
+}
+
+sem_t	*open_sem(char *name, int sem_value)
+{
+	sem_t	*s;
+
+	sem_unlink(name);
+	s = sem_open(name, O_CREAT | O_EXCL, 0644, sem_value);
+	return (s);
 }

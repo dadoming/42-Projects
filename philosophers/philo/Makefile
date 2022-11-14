@@ -1,5 +1,17 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2022/11/14 17:24:53 by dadoming          #+#    #+#              #
+#    Updated: 2022/11/14 19:29:42 by dadoming         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = philo
-CFLAGS = -Wall -Werror -Wextra #-fsanitize=thread
+CFLAGS = -Wall -Werror -Wextra -fsanitize=thread
 CC = gcc
 RM = rm -f
 HEADER = philo.h
