@@ -12,18 +12,6 @@
 
 #include "../header/philo.h"
 
-int actions(t_philo *p)
-{
-	if (eat(p) != FALSE)
-		return (TRUE); 
-	if (table()->rules.max_eat != p->times_eaten)
-	{
-		if((_sleep(p) != FALSE) || (think(p) != FALSE))
-			return(TRUE);
-	}
-	return (FALSE);
-}
-
 static int	pick_forks(t_philo *p)
 {
 	pthread_mutex_lock(&table()->mutex.fork[p->hand[LEFT]]);
@@ -55,10 +43,10 @@ int	eat(t_philo *p)
 	ft_usleep(table()->rules.time_eat);
 	pthread_mutex_unlock(&table()->mutex.fork[p->hand[LEFT]]);
 	pthread_mutex_unlock(&table()->mutex.fork[p->hand[RIGHT]]);
-	pthread_mutex_lock(&(table()->mutex.check[p->index-1]));
+	pthread_mutex_lock(&(table()->mutex.check));
 	p->delta_death = get_delta_t();
 	p->times_eaten++;
-	pthread_mutex_unlock(&(table()->mutex.check[p->index-1]));
+	pthread_mutex_unlock(&(table()->mutex.check));
 	return (FALSE);
 }
 

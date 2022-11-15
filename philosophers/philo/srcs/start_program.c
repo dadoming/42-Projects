@@ -38,10 +38,18 @@ static void	*routine(void *philo)
 	p = (t_philo *)philo;
 	if (p->index % 2 == 0)
 		ft_usleep(5);
-	pthread_create(&monitor, NULL, check, p);
-	pthread_detach(monitor);
+	if(pthread_create(&monitor, NULL, check, p) != 0)
+	{
+		err_msg("Error creating monitoring thread");
+		return(NULL);
+	}
 	while (eat(p) == FALSE && _sleep(p) == FALSE && think(p) == FALSE)
 		continue;
+	if(pthread_join(monitor, NULL) != 0)
+	{
+		err_msg("Error joining monitoring thread");
+		return(NULL);
+	}
 	return (0);
 }
 

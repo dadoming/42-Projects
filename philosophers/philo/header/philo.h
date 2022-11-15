@@ -53,8 +53,9 @@ typedef struct s_rules
 typedef struct s_mutex
 {
 	pthread_mutex_t	fork[200];
-	pthread_mutex_t check[200];
 	pthread_mutex_t	write;
+	pthread_mutex_t death;
+	pthread_mutex_t check;
 }					t_mutex;
 
 typedef struct s_table

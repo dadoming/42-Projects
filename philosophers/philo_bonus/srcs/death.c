@@ -34,7 +34,7 @@ void	*check_death(void *arg)
 		if (p->times_eaten == table()->rules.max_eat)
 			break ;
 		sem_post(p->mutex);
-		ft_usleep(10);
+		ft_usleep(2);
 	}
 	return (NULL);
 }

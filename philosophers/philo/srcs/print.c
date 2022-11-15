@@ -26,13 +26,16 @@ int	print_status(t_philo *p, char *status, char *color)
 	long long	current_time;
 
 	current_time = get_delta_t();
+	pthread_mutex_lock(&table()->mutex.death);
 	pthread_mutex_lock(&table()->mutex.write);
 	if (table()->is_dead == TRUE || p->times_eaten == table()->rules.max_eat)
 	{
 		pthread_mutex_unlock(&table()->mutex.write);
+		pthread_mutex_unlock(&table()->mutex.death);
 		return (TRUE);
 	}
 	printf("%s%lld\t%d\t%s%s\n", color, current_time, p->index, status, RESET);
 	pthread_mutex_unlock(&table()->mutex.write);
+	pthread_mutex_unlock(&table()->mutex.death);
 	return(FALSE);
 }
