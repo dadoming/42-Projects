@@ -30,6 +30,7 @@ int	main(int argc, char **argv)
 	start_timer();
 	if (start_program(philo) == TRUE)
 		return (3);
+	ft_usleep(400);
 	print_end();
 	destroy_program();
 	return (0);

@@ -33,15 +33,15 @@ int	start_program(t_philo *philo)
 static void	*routine(void *philo)
 {
 	t_philo	*p;
+	pthread_t monitor;
 	
 	p = (t_philo *)philo;
 	if (p->index % 2 == 0)
 		ft_usleep(5);
-	while (1)
-	{
-		if (eat(p) != FALSE || _sleep(p) != FALSE || think(p) != FALSE)
-			break ;
-	}
+	pthread_create(&monitor, NULL, check, p);
+	pthread_detach(monitor);
+	while (eat(p) == FALSE && _sleep(p) == FALSE && think(p) == FALSE)
+		continue;
 	return (0);
 }
 
@@ -85,8 +85,8 @@ static int	only_one_sitting(void)
 	{
 		printf("%s%lld\t%d\t%s%s\n", WHITE, get_delta_t(), 1, FORK, RESET);
 		ft_usleep(table()->rules.time_die);
-		table()->time_end = get_delta_t();
-		table()->index_death = 1;
+		printf("%s%lld\t%d\t%s%s\n", BOLDRED, get_delta_t(), 1, DIED, RESET);
+		table()->is_dead = 1;
 		return (TRUE);
 	}
 	return (FALSE);

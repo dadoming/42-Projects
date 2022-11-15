@@ -24,7 +24,7 @@ SRCS = srcs/main.c \
 	srcs/start_program.c \
 	srcs/print.c \
 	srcs/destroy.c \
-	srcs/simulation.c \
+	srcs/actions.c \
 	srcs/check_death.c
 
 all: ${NAME}

@@ -12,58 +12,92 @@
 
 #include "../header/philo.h"
 
-static void	death_values(t_philo *p, long long int time_now);
-static int	ate_all(t_philo *p);
-
-int	stop(t_philo *p)
+void	*check(void *args)
 {
-	long long	time_now;
+    t_philo *p;
+	long long time_now;
 
-	pthread_mutex_lock(&table()->mutex.check);
-	if (check_end() == TRUE || ate_all(p) || table()->is_ddead == 1)
+    p = (t_philo *)args;
+	while (1)
 	{
-		pthread_mutex_unlock(&table()->mutex.check);
-		return(TRUE);
+		time_now = get_delta_t();
+		pthread_mutex_lock(&(table()->mutex.check[p->index-1]));
+		if((time_now - p->delta_death) > table()->rules.time_die)
+		{
+			pthread_mutex_unlock(&(table()->mutex.check[p->index-1]));
+			print_status(p, DIED, BOLDRED);
+        	table()->is_dead = TRUE;
+			break ;
+		}
+		pthread_mutex_unlock(&(table()->mutex.check[p->index-1]));
+		pthread_mutex_lock(&(table()->mutex.check[p->index-1]));
+		if(p->times_eaten == table()->rules.max_eat)
+		{
+			pthread_mutex_unlock(&(table()->mutex.check[p->index-1]));
+			break ;
+		}
+		pthread_mutex_unlock(&(table()->mutex.check[p->index-1]));
+		ft_usleep(1);
 	}
-	time_now = get_delta_t();
-	if (((time_now - p->delta_death) > table()->rules.time_die) && \
-		(table()->index_death == 0))
-	{
-		death_values(p, time_now);
-		pthread_mutex_unlock(&table()->mutex.check);
-		return(TRUE);
-	}
-	pthread_mutex_unlock(&table()->mutex.check);
-	return 0;
+	return (NULL);
 }
 
-int	check_end(void)
+
+
+
+
+
+
+
+/*
+
+void	*check(void *args)
 {
-	if (table()->index_death > 0)
+	int		i;
+    t_philo *p;
+
+    p = (t_philo *)args;
+	i = 0;
+	if (table()->rules.max_eat > 0)
 	{
+		while (table()->rules.max_eat > p[i].times_eaten \
+			&& table()->is_dead == FALSE)
+		{
+            if (death(&p[i]) == TRUE)
+				break ;
+            i++;
+            if (i == table()->rules.p_num)
+		        i = 0;
+		}
+	}
+	else
+	{
+		while (table()->is_dead == FALSE)
+		{
+			if (death(&p[i]) == TRUE)
+				break ;
+            i++;
+            if (i == table()->rules.p_num)
+		        i = 0;
+        }
+	}
+	return (NULL);
+}
+
+int	death(t_philo *p)
+{
+	int	time;
+
+	time = get_delta_t();
+	pthread_mutex_lock(&(p->check));
+    if ((time - p->delta_death) > table()->rules.time_die)
+	{
+		pthread_mutex_unlock(&(p->check));
+		print_status(p, DIED, BOLDRED);
+        table()->is_dead = TRUE;
 		return (TRUE);
 	}
+	pthread_mutex_unlock(&(p->check));
 	return (FALSE);
 }
-
-static void	death_values(t_philo *p, long long int time_now)
-{
-	pthread_mutex_lock(&table()->mutex.dead);
-	table()->is_ddead = 1;
-	table()->time_end = time_now;
-	table()->index_death = p->index;
-	printf("\n%s%lld\t%d\tdied\n%s", BOLDRED, table()->time_end, \
-		table()->index_death, RESET);
-	pthread_mutex_unlock(&table()->mutex.dead);
-}
-
-static int	ate_all(t_philo *p)
-{
-	if ((table()->rules.max_eat > 0) && \
-		(p->times_eaten >= table()->rules.max_eat))
-		{
-			p->ate_all_meals = 1;
-			return (TRUE);	
-		}
-	return (FALSE);
-}
+*/

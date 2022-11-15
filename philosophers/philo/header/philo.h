@@ -53,24 +53,22 @@ typedef struct s_rules
 typedef struct s_mutex
 {
 	pthread_mutex_t	fork[200];
+	pthread_mutex_t check[200];
 	pthread_mutex_t	write;
-	pthread_mutex_t	dead;
-	pthread_mutex_t	check;
 }					t_mutex;
 
 typedef struct s_table
 {
 	t_rules			rules;
 	t_mutex			mutex;
+	pthread_t		monitor;
 	long long		time_start;
 	long long		time_end;
-	int				index_death;
-	int				is_ddead;
+	int				is_dead;
 }					t_table;
 
 typedef struct s_philo
 {
-	int 			ate_all_meals;
 	int				index;
 	int				hand[2];
 	int				times_eaten;
@@ -101,16 +99,10 @@ void				destroy_program(void);
 void				print_end(void);
 
 /* If no philosopher died, prints passed status message. */
-void				print_status(t_philo *p, char *status, char *color);
-
-/* Monitoring thread to check for the death of a philosopher by comparing
-    if has passed more time than time_to_die, if yes set the philo_index
-    to the number of the philo that died, which stops all running threads
-    using check_end(). */
-int	stop(t_philo *p);
-int					check_end(void);
+int					print_status(t_philo *p, char *status, char *color);
 
 /* Simulation functions */
+int					actions(t_philo *p);
 int					eat(t_philo *p);
 int					think(t_philo *p);
 int					_sleep(t_philo *p);
@@ -123,5 +115,9 @@ long long			get_timestamp(void);
 /* utils */
 long				ft_atoi(const char *str);
 void				err_msg(char *str);
+
+/* Monitor */
+void				*check(void *args);
+int					death(t_philo *p);
 
 #endif

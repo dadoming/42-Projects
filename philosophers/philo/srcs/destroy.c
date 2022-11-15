@@ -22,9 +22,9 @@ void	destroy_program(void)
 		while (i < table()->rules.p_num)
 		{
 			pthread_mutex_destroy(&(table()->mutex.fork[i]));
+			pthread_mutex_destroy(&(table()->mutex.check[i]));
 			i++;
 		}
 	}
 	pthread_mutex_destroy(&(table()->mutex.write));
-	pthread_mutex_destroy(&(table()->mutex.dead));
 }

@@ -36,11 +36,10 @@ static void	init_mutexes(void)
 	while (i < table()->rules.p_num)
 	{
 		pthread_mutex_init(&(table()->mutex.fork[i]), NULL);
+		pthread_mutex_init(&(table()->mutex.check[i]), NULL);
 		i++;
 	}
 	pthread_mutex_init(&(table()->mutex.write), NULL);
-	pthread_mutex_init(&(table()->mutex.dead), NULL);
-	pthread_mutex_init(&(table()->mutex.check), NULL);
 }
 
 static int	init_rules(int argc, char **argv)

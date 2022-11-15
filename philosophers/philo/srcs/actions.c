@@ -12,56 +12,67 @@
 
 #include "../header/philo.h"
 
-static void	drop_forks(t_philo *p)
+int actions(t_philo *p)
 {
-	pthread_mutex_unlock(&table()->mutex.fork[p->hand[LEFT]]);
-	pthread_mutex_unlock(&table()->mutex.fork[p->hand[RIGHT]]);
+	if (eat(p) != FALSE)
+		return (TRUE); 
+	if (table()->rules.max_eat != p->times_eaten)
+	{
+		if((_sleep(p) != FALSE) || (think(p) != FALSE))
+			return(TRUE);
+	}
+	return (FALSE);
 }
 
-static void	pick_forks(t_philo *p)
+static int	pick_forks(t_philo *p)
 {
 	pthread_mutex_lock(&table()->mutex.fork[p->hand[LEFT]]);
-	print_status(p, FORK, WHITE);
+	if (print_status(p, FORK, WHITE) == TRUE)
+	{
+		pthread_mutex_unlock(&table()->mutex.fork[p->hand[LEFT]]);
+		return (TRUE);
+	}
 	pthread_mutex_lock(&table()->mutex.fork[p->hand[RIGHT]]);
-	print_status(p, FORK, WHITE);
+	if (print_status(p, FORK, WHITE) == TRUE)
+	{
+		pthread_mutex_unlock(&table()->mutex.fork[p->hand[LEFT]]);
+		pthread_mutex_unlock(&table()->mutex.fork[p->hand[RIGHT]]);
+		return (TRUE);
+	}
+	return (FALSE);
 }
 
 int	eat(t_philo *p)
 {
-	if (stop(p) == TRUE)
+	if(pick_forks(p) == TRUE)
 		return (TRUE);
-	pick_forks(p);
-	if (stop(p) == TRUE)
+	if(print_status(p, EAT, GREEN) == TRUE)
+	{
+		pthread_mutex_unlock(&table()->mutex.fork[p->hand[LEFT]]);
+		pthread_mutex_unlock(&table()->mutex.fork[p->hand[RIGHT]]);
 		return (TRUE);
-	print_status(p, EAT, GREEN);
+	}
 	ft_usleep(table()->rules.time_eat);
-	// if (stop(p) == TRUE)
-	// 	return (TRUE);
+	pthread_mutex_unlock(&table()->mutex.fork[p->hand[LEFT]]);
+	pthread_mutex_unlock(&table()->mutex.fork[p->hand[RIGHT]]);
+	pthread_mutex_lock(&(table()->mutex.check[p->index-1]));
 	p->delta_death = get_delta_t();
-	if (stop(p) == TRUE)
-		return (TRUE);
 	p->times_eaten++;
-	if (stop(p) == TRUE)
-		return (TRUE);
-	drop_forks(p);
+	pthread_mutex_unlock(&(table()->mutex.check[p->index-1]));
 	return (FALSE);
 }
 
 int	think(t_philo *p)
 {
-	if (stop(p) == TRUE)
+	if (print_status(p, THINK, MAGENTA) == TRUE)
 		return (TRUE);
-	print_status(p, THINK, MAGENTA);
 	return (FALSE);
 }
 
 int	_sleep(t_philo *p)
 {
-	if (stop(p) == TRUE)
+	if (print_status(p, SLEEP, YELLOW) == TRUE)
 		return (TRUE);
-	print_status(p, SLEEP, YELLOW);
 	ft_usleep(table()->rules.time_sleep);
-	if (stop(p) == TRUE)
-		return (TRUE);
 	return (FALSE);
 }
