@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   simulation.c                                       :+:      :+:    :+:   */
+/*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:25:05 by dadoming          #+#    #+#             */
-/*   Updated: 2022/11/14 19:40:08 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/11/16 13:35:58 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,35 +14,46 @@
 
 static int	pick_forks(t_philo *p)
 {
-	pthread_mutex_lock(&table()->mutex.fork[p->hand[LEFT]]);
-	if (print_status(p, FORK, WHITE) == TRUE)
+	if (((p->index - 1) % 2) != 0)
 	{
-		pthread_mutex_unlock(&table()->mutex.fork[p->hand[LEFT]]);
-		return (TRUE);
+		pthread_mutex_lock(&table()->mutex.fork[p->hand[RIGHT]]);
+		print_status(p, FORK, WHITE);
+		pthread_mutex_lock(&table()->mutex.fork[p->hand[LEFT]]);
+		if (print_status(p, FORK, WHITE) == TRUE)
+		{
+			pthread_mutex_unlock(&table()->mutex.fork[p->hand[LEFT]]);
+			pthread_mutex_unlock(&table()->mutex.fork[p->hand[RIGHT]]);
+			return (TRUE);
+		}
 	}
-	pthread_mutex_lock(&table()->mutex.fork[p->hand[RIGHT]]);
-	if (print_status(p, FORK, WHITE) == TRUE)
+	else
 	{
-		pthread_mutex_unlock(&table()->mutex.fork[p->hand[LEFT]]);
-		pthread_mutex_unlock(&table()->mutex.fork[p->hand[RIGHT]]);
-		return (TRUE);
+		pthread_mutex_lock(&table()->mutex.fork[p->hand[LEFT]]);
+		print_status(p, FORK, WHITE);
+		pthread_mutex_lock(&table()->mutex.fork[p->hand[RIGHT]]);
+		if (print_status(p, FORK, WHITE) == TRUE)
+		{
+			pthread_mutex_unlock(&table()->mutex.fork[p->hand[RIGHT]]);
+			pthread_mutex_unlock(&table()->mutex.fork[p->hand[LEFT]]);
+			return (TRUE);
+		}
 	}
 	return (FALSE);
 }
 
 int	eat(t_philo *p)
 {
-	if(pick_forks(p) == TRUE)
+	if (pick_forks(p) == TRUE)
 		return (TRUE);
-	if(print_status(p, EAT, GREEN) == TRUE)
+	if (print_status(p, EAT, GREEN) == TRUE)
 	{
-		pthread_mutex_unlock(&table()->mutex.fork[p->hand[LEFT]]);
 		pthread_mutex_unlock(&table()->mutex.fork[p->hand[RIGHT]]);
+		pthread_mutex_unlock(&table()->mutex.fork[p->hand[LEFT]]);
 		return (TRUE);
 	}
 	ft_usleep(table()->rules.time_eat);
-	pthread_mutex_unlock(&table()->mutex.fork[p->hand[LEFT]]);
 	pthread_mutex_unlock(&table()->mutex.fork[p->hand[RIGHT]]);
+	pthread_mutex_unlock(&table()->mutex.fork[p->hand[LEFT]]);
 	pthread_mutex_lock(&(table()->mutex.check));
 	p->delta_death = get_delta_t();
 	p->times_eaten++;

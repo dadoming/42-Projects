@@ -6,16 +6,22 @@
 #    By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/11/14 17:24:53 by dadoming          #+#    #+#              #
-#    Updated: 2022/11/14 19:29:42 by dadoming         ###   ########.fr        #
+#    Updated: 2022/11/16 14:17:04 by dadoming         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = philo
-CFLAGS = -Wall -Werror -Wextra
+
+CFLAGS = -Wall -Werror -Wextra -fsanitize=thread -g
+
 CC = gcc
+
 RM = rm -f
+
 HEADER = philo.h
+
 OBJS = $(SRCS:%.c=%.o)
+
 SRCS = srcs/main.c \
 	srcs/utils.c \
 	srcs/check_input.c \
@@ -30,7 +36,7 @@ SRCS = srcs/main.c \
 all: ${NAME}
 
 ${NAME}: ${OBJS}
-	${CC} ${CFLAGS} -g -o ${NAME} -pthread ${OBJS}
+	${CC} ${CFLAGS} -o ${NAME} -pthread ${OBJS}
 
 clean: 
 	${RM} ${NAME}

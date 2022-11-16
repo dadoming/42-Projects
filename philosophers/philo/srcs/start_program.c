@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:25:03 by dadoming          #+#    #+#             */
-/*   Updated: 2022/11/14 19:42:37 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/11/16 13:24:33 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,23 +32,23 @@ int	start_program(t_philo *philo)
 
 static void	*routine(void *philo)
 {
-	t_philo	*p;
-	pthread_t monitor;
-	
+	t_philo		*p;
+	pthread_t	monitor;
+
 	p = (t_philo *)philo;
-	if (p->index % 2 == 0)
-		ft_usleep(5);
-	if(pthread_create(&monitor, NULL, check, p) != 0)
+	if ((p->index - 1) % 2 == 0)
+		usleep(60000);
+	if (pthread_create(&monitor, NULL, check, p) != 0)
 	{
 		err_msg("Error creating monitoring thread");
-		return(NULL);
+		return (NULL);
 	}
 	while (eat(p) == FALSE && _sleep(p) == FALSE && think(p) == FALSE)
-		continue;
-	if(pthread_join(monitor, NULL) != 0)
+		continue ;
+	if (pthread_join(monitor, NULL) != 0)
 	{
 		err_msg("Error joining monitoring thread");
-		return(NULL);
+		return (NULL);
 	}
 	return (0);
 }

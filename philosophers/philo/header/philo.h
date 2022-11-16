@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/11/14 17:38:23 by dadoming          #+#    #+#             */
-/*   Updated: 2022/11/14 19:42:17 by dadoming         ###   ########.fr       */
+/*   Updated: 2022/11/16 12:24:17 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,8 +54,8 @@ typedef struct s_mutex
 {
 	pthread_mutex_t	fork[200];
 	pthread_mutex_t	write;
-	pthread_mutex_t death;
-	pthread_mutex_t check;
+	pthread_mutex_t	death;
+	pthread_mutex_t	check;
 }					t_mutex;
 
 typedef struct s_table
