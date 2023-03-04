@@ -51,9 +51,3 @@ static int	set_death(t_philo *p, int time_now)
 	}
 	return (FALSE);
 }
-
-pthread_mutex_lock
-if()
-	unlock
-	return 
-unlock 
