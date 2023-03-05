@@ -9,6 +9,7 @@ void expandContactByIndex(Contact *contact, int array_size);
 void printContactInTable(std::string str);
 void displaySearchMenu(Contact *contact, int array_size);
 std::string remove_extra_whitespaces(std::string str);
+int check_integer(std::string input);
 
 class PhoneBook
 {

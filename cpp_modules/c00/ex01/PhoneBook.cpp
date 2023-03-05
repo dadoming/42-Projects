@@ -77,20 +77,8 @@ void expandContactByIndex(Contact *contact, int array_size)
         std::cout << "> ";
         std::getline(std::cin, index);
         index = remove_extra_whitespaces(index);
+        input_value = check_integer(index);
         
-        try
-        {
-            input_value = std::stoi(index);
-        }
-        catch(const std::invalid_argument& e)
-        {
-            input_value = -1;
-        }
-        catch(const std::out_of_range& e)
-        {
-            input_value = -1;
-        }
-
         if (index.empty() || input_value > array_size - 1 || input_value < 0)
         {
             std::cout << "Please enter a number from 0 to " << array_size - 1 << "." << std::endl;
@@ -106,4 +94,14 @@ void expandContactByIndex(Contact *contact, int array_size)
     std::cout << "Phone Number:\t" << contact[input_value].phone_number << std::endl;
     std::cout << "Darkest Secret:\t" << contact[input_value].darkest_secret << std::endl;
     std::cout << std::endl;
+}
+
+int check_integer(std::string input)
+{
+    if (input.length() == 1)
+    {
+        if (input[0] >= '0' && input[0] <= '7')
+            return (input[0] - 48);
+    }
+    return (-1);
 }
