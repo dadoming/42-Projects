@@ -44,6 +44,11 @@ void Harl::complain( string level )
         i++;
     }
 
+    if (i == 4)
+    {
+        std::cout << "[ Probably complaining about insignificant problems ]" << std::endl;
+    }
+
     switch (i)
     {
         case 0:
