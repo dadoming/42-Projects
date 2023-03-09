@@ -1,14 +1,14 @@
-NAME = brainzzz
+NAME = replace
 
 CC = c++
 
 CFLAGS = -Wall -Wextra -Werror -g -std=c++98 
 
-INC = Zombie.hpp
+INC = 
 
 OBJS = $(SRCS:%.cpp=%.o)
 
-SRCS = main.cpp 
+SRCS = main.cpp
 
 all: $(NAME)
 

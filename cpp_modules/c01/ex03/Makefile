@@ -1,14 +1,14 @@
-NAME = brainzzz
+NAME = unnecesary_violence
 
 CC = c++
 
 CFLAGS = -Wall -Wextra -Werror -g -std=c++98 
 
-INC = Zombie.hpp
+INC = HumanA.hpp HumanB.hpp Weapon.hpp
 
 OBJS = $(SRCS:%.cpp=%.o)
 
-SRCS = main.cpp 
+SRCS = main.cpp HumanA.cpp HumanB.cpp Weapon.cpp
 
 all: $(NAME)
 
