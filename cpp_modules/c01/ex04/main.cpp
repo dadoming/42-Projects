@@ -12,7 +12,7 @@ int main(int argc, char **argv)
 {
     if (argc != 4)
     {
-        std::cerr << "Usage: " << argv[1] << " <filename> <str1> <str2>" << endl;
+        std::cerr << "Usage: " << argv[0] << " <filename> <str1> <str2>" << endl;
         return (1);    
     }
     my_replace(argv[1], argv[2], argv[3]);
