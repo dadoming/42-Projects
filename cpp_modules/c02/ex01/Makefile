@@ -8,7 +8,7 @@ INC = Fixed.hpp
 
 OBJS = $(SRCS:%.cpp=%.o)
 
-SRCS = main.cpp Fixed.cpp changeType.cpp
+SRCS = main.cpp Fixed.cpp
 
 
 all: $(NAME)

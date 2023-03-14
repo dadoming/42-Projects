@@ -9,7 +9,7 @@ Fixed::Fixed()
 Fixed::Fixed(const int value)
 {
     std::cout << "Int constructor called" << std::endl;
-    this->_fixedPointValue = (value << _fractionalBits);
+    this->_fixedPointValue = value << _fractionalBits;
 }
 
 Fixed::Fixed(const float value)
@@ -34,4 +34,24 @@ Fixed & Fixed::operator=(const Fixed &copy)
 Fixed::~Fixed()
 {
     std::cout << "Destructor called" << std::endl;
+}
+
+int Fixed::getRawBits(void) const
+{
+    return (this->_fixedPointValue);
+}
+
+void Fixed::setRawBits(int const raw)
+{
+    this->_fixedPointValue = raw;
+}
+
+float Fixed::toFloat( void ) const 
+{
+    return ((float) this->_fixedPointValue / (1 << _fractionalBits));
+}
+
+int Fixed::toInt( void ) const 
+{
+    return (this->_fixedPointValue >> _fractionalBits);
 }
