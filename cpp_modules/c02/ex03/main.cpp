@@ -1,6 +1,16 @@
 #include "Point.hpp"
 #include "Fixed.hpp"
 
+/*
+
+    Algorithm:
+
+    https://www.youtube.com/watch?v=HYAgJN3x4GA&list=LL&index=3
+
+*/
+
+
+
 void paint(Point const a, Point const b, Point const c)
 {
     std::cout << "A(" << a.getX() << ", " << a.getY() << ")" << std::endl;
@@ -51,7 +61,7 @@ int main(void)
     std::cout << "Point 2: " << (bsp(a, b, c, Point(3, 2)) ? "YES!" : "NO!") << std::endl;
     std::cout << "Point 3: " << (bsp(a, b, c, Point(2, 1)) ? "YES!" : "NO!") << std::endl;
     std::cout << "Point 4: " << (bsp(a, b, c, Point(3.75f, 3.25f)) ? "YES!" : "NO!") << std::endl;
-    
-
+    std::cout << "Point 5: " << (bsp(a, b, c, Point(4, 4)) ? "YES!" : "NO!") << std::endl;
+    std::cout << "Point 6: " << (bsp(a, b, c, Point(4, 2)) ? "YES!" : "NO!") << std::endl;
     return 0;
 }
