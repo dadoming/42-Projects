@@ -1,4 +1,4 @@
-NAME = Interface
+NAME = Wizards
 
 CC = c++
 

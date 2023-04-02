@@ -34,7 +34,7 @@ int main( void )
         IMateriaSource* src = new MateriaSource();
         src->learnMateria(new Ice());
         src->learnMateria(new Cure());
-
+        
         
         ICharacter *player = new Character("player");
         std::cout << "Created player" << std::endl;
@@ -47,7 +47,9 @@ int main( void )
         std::cout << "Player created and equiped Ice" << std::endl;
         player->equip(src->createMateria("cure"));
         std::cout << "Player created and equiped Cure" << std::endl;
-
+        
+        // Should output error
+        //AMateria *tmp = AMateria("lightning");
 
         player->unequip(0);
         std::cout << "Player unequiped Ice and left it on the floor" << std::endl;
@@ -64,6 +66,7 @@ int main( void )
         std::cout << "Player tries to use Cure" << std::endl;
         player->use(3, *enemy);
 
+        
         clearDroppedMateria();
         delete enemy;
         delete player;
