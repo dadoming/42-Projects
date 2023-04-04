@@ -1,0 +1,274 @@
+ ________________________________
+/                                \
+|     IPv4 Addresses: Format     |
+\________________________________/
+
+An IPv4 address has 32 bits, which is 4 bytes.
+
+32 bits equals to 2³², which is 4,294,967,296 unique addresses.
+
+Example: 01100010 10111100 00010011 01000111 -> This is an ip address in Binary
+         \  98  / \ 188 / \  19  / \  71  / -> This is an ip address in Decimal
+    
+98.188.19.71 -> This is an ip address in Dot-Decimal
+
+ ________________________________________
+/                                        \
+|     Network portion & Host portion     |
+\________________________________________/
+
+The first part in an IP address is always the network portion, and the second part is always the host portion.
+
+    81 . 2 . 0 . 9
+  network  | host
+   portion |  portion
+
+The octet can be split in many ways. The case above is a 10/22 split. The first octet is split in 10 bits for the network portion,
+    and 22 bits for the host portion. This is only for /8, /16, /24 networks.
+
+
+
+> But why whould we want to split an IP address into two parts?
+
+10.0.0.0
+    |______ 10.0.3.1          ______
+    |ROUTER| --------------- |SWITCH| --------------- |PCS| size: 4 IP's example: (10.0.3.10 | 10.0.3.11 | 10.0.3.12 | 10.0.3.13)
+    |______|                 |______|
+10.0.1.1|   \_10.0.2.1
+        |     \_
+        |       \_
+        |         \_
+        |           \_
+        |             \_
+        |               \_
+        |                 \_
+        |                   \_   ______
+        |                     \_|SWITCH|
+     ___|__                     |______| ----------- |PCS| size: 8 IP's example: (10.0.2.10 | 10.0.2.11 | 10.0.2.12 | 10.0.2.13 |
+    |SWITCH|                                                                      10.0.2.14 | 10.0.2.15 | 10.0.2.16 | 10.0.2.17)
+    |______|
+        |
+        |          ___________
+        +-------- |SERVER FARM| size: 6 IP's Example: (10.0.1.10 | 10.0.1.11 | 10.0.1.12 | 10.0.1.13 | 10.0.1.14 | 10.0.1.15)
+                  |___________|
+
+The server farm / small data center is a small network where we have six devices that require
+    each one IP address at minimum.
+Each of these 3 networks is connected to an interface on the router. This interface is going to
+    be the default gateway for all of the devices that are inside the network.
+The point of the network portion is to differentiate different networks. So, for the server farm, they associated ip's will
+    have the similar values of "10.0.1." which is the network portion. The host part changes for each device.
+
+The rule for the other routers is just the same, the network part will reside in the the first 3 numbers and the host part
+    will be the last number.
+
+ __________________________________________________
+/                                                  \
+|     Network address and the Broadcast address    |
+\__________________________________________________/
+
+The Network address is the very first IP address in a subnet. 
+One of the gateways in the example above was assigned a value of 10.0.3.1. But this is not the first value in the network.
+    The first value is 10.0.3.0.
+Example: 81.2.255.255 -> the host portion is filled with 0's
+
+The Broadcast address is the very last IP address in a subnet.
+Example: 81.2.255.255 -> the host portion is filled with 1's
+
+
+
+                            10.0.0.0
+ ______ (i2)  9.0.0.0       (i3)|______ 10.0.3.1  (i6)    ______
+|ROUTER|------------------------|ROUTER| --------------- |SWITCH| --------------- |PCS| size: 4 IP's example: (10.0.3.10 | 10.0.3.11 | 10.0.3.12 | 10.0.3.13)
+|__R1__|9.0.0.1          9.0.0.2|__R2__|                 |______|
+(i1)|8.0.0.1                10.0.1.1|   \_10.0.2.1
+    |                           (i4)|     \_(i5)
+    |                               |       \_
+    |                               |         \_
+    |                               |           \_
+    |8.0.0.0                        |             \_
+    |                               |               \_
+    |                               |                 \_
+    |                               |                   \_   ______
+    |                               |                     \_|SWITCH|
+ ___|__                           __|___                    |______| ----------- |PCS| size: 8 IP's example: (10.0.2.10 | 10.0.2.11 | 10.0.2.12 | 10.0.2.13 |
+|SWITCH|                         |SWITCH|                                                                      10.0.2.14 | 10.0.2.15 | 10.0.2.16 | 10.0.2.17)
+|______|                         |______|
+    |                               |
+ ___|__                             |          ___________
+| PCS  |                            +-------- |SERVER FARM| size: 6 IP's Example: (10.0.1.10 | 10.0.1.11 | 10.0.1.12 | 10.0.1.13 | 10.0.1.14 | 10.0.1.15)
+|______|                                      |___________|
+size:2 IP's Example: (8.0.0.10 | 8.0.0.11)
+
+The Network ID is the IP address that has the value for the network. For example, 9.0.0.0 is a network ID.
+
+ROUTING TABLE: A routing table lists the different networks that this router can reach.
+The routing table for R1 will be:
+-8.0.0.0  -> i1
+-9.0.0.0  -> i2
+-10.0.1.0 -> i2 |
+-10.0.2.0 -> i2 |-or->  10.0.0.0 -> i2
+-10.0.3.0 -> i2 |
+
+The routing table for R2 will be:
+-8.0.0.0  -> i3
+-9.0.0.0  -> i3
+-10.0.1.0 -> i4
+-10.0.2.0 -> i5
+-10.0.3.0 -> i6
+
+
+ _______________________________________________
+/                                               \
+|     How to determine a Network ID address     |
+\_______________________________________________/
+
+- Host address:         153.0.99.207
+- Host address(binary): 10011001.00000000.01100011.11001111
+- Network address:      10011001.00000000.00000000.00000000
+- Broadcast address:    10011001.00000000.11111111.11111111
+
+
+
+ _________________________________
+/                                 \
+|     IPv4 Addresses: Classes     |
+\_________________________________/
+
+- Large networks  - Class A, N.H.H.H -> values range between: 1.0.0.0     - 126.255.255.255
+
+- Medium networks - Class B, N.N.H.H -> values range between: 128.0.0.0   - 191.255.255.255
+
+- Small networks  - Class C, N.N.N.H -> values range between: 192.0.0.0   - 223.255.255.255
+
+N = Network ID
+H = Host ID
+
+Above 224:
+- Class D -> Reserved for multicast
+- Class E -> Experimental, used for research
+
+
+
+________________________________________________________________
+
+Class A - large networks
+
+- Example: 71. 3. 99. 2
+            |  |   |  |
+    |Network|  +---+--+---> Host
+
+Network address:    71.0.0.0
+Broadcast address:  71.255.255.255
+
+Because the value is between 1-126, it is a Class A address.
+________________________________________________________________
+
+Class B - medium networks
+
+- Example: 155.8.101.33
+            |  |  |  |
+Network <---+--+  +--+--> Host
+
+Network address:    155.8.0.0
+Broadcast address:  155.8.255.255
+
+Because the value is between 128-191, it is a Class B address.
+
+________________________________________________________________
+
+Class C - small networks
+
+- Example: 201.65.4.137
+            |  |  |  |
+Network <---+--+--+  +--> Host
+
+Network address:    201.65.4.0
+Broadcast address:  201.65.4.255
+
+Because the value is between 192-223, it is a Class C address.
+
+________________________________________________________________
+
+Examples: 
+
+(1) IP = 200.200.200.200 => Class C
+(2) IP = 1.1.1.1         => Class A
+(3) IP = 192.168.1.1     => Class C
+(4) IP = 44.13.0.0       => Class A
+(5) IP = 100.0.0.255     => Class A
+(6) IP = 155.255.255.7   => Class B
+
+
+
+
+ ______________________________
+/                              \
+|     IPv4 Addresses: CIDR     |
+\______________________________/
+
+Class B Address:                                |   Classless Address:
+                                                |   
+Example: 155.8.101.33 /16                       |   Example: 155.8.101.33 /21
+means half of the bits are used for the         |   Binary format: 10011011.00010000.01100|101.00100001
+network ID and half for the host ID.            |       first 21 bits - network portion   |  last 11 bits - host portion
+                                                |   
+- Network address:      155.8.0.0               |   - Network address:      155.8.96.0    (10011011.00010000.01100|000.00000000)
+- Broadcast address:    155.8.255.255           |   - Broadcast address:    155.8.103.255 (10011011.00010000.01100|111.11111111)
+
+
+Subnet Mask - 2nd Format
+
+/21 = 11111111.11111111.11111000.00000000
+        255      255      248       0
+
+IP address: 155.8.101.33 255.255.248.0     
+
+
+ _______________________________________________
+/                                               \
+|     IPv4 Addresses: Reserved IP Addresses     |
+\_______________________________________________/
+
+- Not all IP addresses can be used freely.
+
+- Some IP addresses are reserved for special use:
+    -> 0.0.0.0          (default route)
+    -> 255.255.255.255  (default broadcast)
+    -> 127.0.0.0/8      (localhost)
+    -> 169.254.0.0/16   (APIPA)
+
+
+RFC 1918 defines three provate network ranges:
+https://www.rfc-editor.org/rfc/rfc1918
+
+- 10.0.0.0/8
+- 172.16.0.0/12   ( 10101100.00010000.00000000.00000000 )
+- 192.168.0.0/16  
+
+There should be no devices on the Internet with these IP addresses.
+
+________________________________________________________________
+
+NAT - Network Address Translation
+
+(192.168.1.3)--\                         192.168.1.1
+                \                            |
+(192.168.1.4)------------|SWITCH|------------|ROUTER|----------|INTERNET|---------|HTTP SERVER|(85.202.9.3)
+                /                                   |
+(192.168.1.5)--/                                76.0.13.6
+
+1
+Packet sent by 192.168.1.5 with destination 85.202.9.3
+When the packet reaches the switch, the values remain the same.
+When the packet reaches the LAN interface on the router, they still remain the same.
+The values only change when the packet reaches the WAN (outside facing) interface on the router so,
+    the source IP address is changed from the private IP address to the public IP address. 
+    This is: 76.0.13.6
+Then the packet is routed through the internet and when it finally reaches the http server, it only sees the public IP address.
+
+2
+Packet sent from http server 85.202.9.3 with destination 76.0.13.6
+It basically makes the reverse way from the server to the router.
+Only when it exits the router it changes the IP destination IP address to the computer that
+    sent the packet to the server in first place, which is 192.168.1.5.

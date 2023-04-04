@@ -1,0 +1,99 @@
+Udemy course on IP Addressing and Subnetting - Zero to Hero
+
+     ______________________________
+    /                              \
+    |         TCP/IP MODEL         |
+    \______________________________/
+    
+    +------------------------------+
+    |         APPLICATION          |
+    +------------------------------+
+    |          TRANSPORT           |   --->   Port Numbers: 
+    +------------------------------+
+    |          NETWORK             |   --->   IP Address: 
+    +------------------------------+
+    |          PHYSICAL            |   --->   MAC Address: 
+    +------------------------------+
+
+
+> TCP/IP Model (Transmission Control Protocol/Internet Protocol) 
+
+    It's a bunch of standardized rules that allow computers to communicate with each other over a network, such as the Internet.
+    If they don't use this model, they might not send/receive data correctly and that can lead to disaster.
+    So basically it's a set of rules that keeps the Internet usable in a data communication sense.
+    <IP>  is the part that obtains the address to which data is sent.
+    <TCP> is responsible for data delivery once the IP address has been found.
+    "Think of it this way: The IP Address is like the phone number assigned to your smartphone. 
+    The TCP is all the technology that makes the phone ring, and that enables you to talk to another phone."
+
+    How TCP/IP sends data:
+    If you were to send all the information at once and an error occurred, the whole message would be lost and would have to be resent.
+    So instead, TCP/IP breaks the data into smaller pieces called packets.
+    The packets are reassembled at the destination.
+    The packets are also checked for errors and retransmitted if necessary.
+    Packets can also take different routes to the destination, if the first round is unavailable or congestioned, which is called "routing".
+
+    TCP/IP divides the different communication tasks into layers, each layer is responsible for a specific task.
+    The data goes through the four layers before it is received on the other end and it then goes in reverse order to reassemble the data and 
+        to present the recipient.
+    The purpose of the layers is to make the communication process easier to understand and to keep things standardized. Just like so, 
+        the software vendors can create products that will interact with other products without a problem. Just like car manufacturers,
+        they all have the pedals in the same place.
+    It also makes it easier to update each individual layer without having to update the whole system.
+ ______________________
+/                      \
+|      APPLICATION     |
+\______________________/
+
+    This layer is the group of applications that require network communication. This is what the user typically interacts with, such as
+        emails and messaging. Because the lower layers handle the details of communication, the applications don't have to worry about them. 
+ ______________________
+/                      \
+|       TRANSPORT      |
+\______________________/
+
+    The transport layer is what provides a reliable data connection between two devices. It divides the data into packets, acknowledges
+        the packets that is has received from the other device and makes sure the other device acknowledges the packets it receives. 
+ ______________________
+/                      \
+|       NETWORK        |
+\______________________/
+
+    The network layer (also called Internet layer) is responsible for the control of the packet movement around the network.
+ ______________________
+/                      \
+|       PHYSICAL       |
+\______________________/
+
+    The physical layer (also called Link layer, Network Interface layer or Datalink layer) is what handles the physical parts of sending and
+        receiving data using the Ethernet cable, wireless network, network interface, device driver in the computer, etc.
+
+
+> Are data packets private?
+
+    No. When the packets are being transmitted between computers, they are vulnerable to being seen by others. That's why you should avoid
+        public Wi-Fi networks when sending data that must stay private, and to use encryption.
+    To encrypt the data in those packets the use of a VPN (Virtual Private Network) is recommended.
+
+
+> Types of IP addresses
+
+    The differences between types of IP addresses are transparent to the casual user and are only important to network administrators.
+    The different types of IP addresses are:
+        -> Static IP address: It's a permanent IP address. It never changes. They are like fixed addresses on an house. Once a device has
+            been assigned a static IP address, that number typically stays the same until the device has been decomissioned or the network
+            archictecture changes. These addresses are generally used by servers and other important equipment. These can be either ipv4 
+            or ipv6. Usually they are ipv4 tho.
+        -> Dynamic IP address: These addresses change, or at least they are designed to change. They are assigned by DHCP (Dynamic Host
+            Configuration Protocol) servers. These addresses are generally used by computers and other devices that are not always on the
+            network. Whithin the home or business network, the Dynamic IP address is assigned by the router.
+
+        -> Private IP address: An home router has a public IP address but also assigns a private IP address aka local IP address. 
+
+
+IPv6: was developed as a solution to the IP Address shortage. Provides 3.4x10³⁸ addresses, which is approx. 340 trillion trillion trillion.
+Example: 2001:0db8:3c4d:0012:0000:0000:1234:56ab
+Another one: ::/0 -> Only has 0's in it. It is used for default routes.
+
+IPv4: provides approx. 4.3 billion addresses.
+Example: 192.168.1.12
