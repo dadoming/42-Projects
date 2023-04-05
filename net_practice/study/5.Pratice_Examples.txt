@@ -1,0 +1,56 @@
+ ________________________________
+/                                \
+|           Exercise 1           |
+\________________________________/
+
+Requirement: divide a class A network 50.0.0.0 into two equal networks
+
+00110010.00000000.00000000.00000000 This is the binary representation of the network address
+         |
+         |_______ To split the network into equal networks we have this bit be 0 in the first network 
+    This bit is called the subnet bit                                      and 1 in the second network
+
+ _______________________________________________________________________________________________________________
+|Network #1               |Binary                                                  |Decimal                     |
+|_________________________|________________________________________________________|____________________________|
+|Network address          |00110010.00000000.00000000.00000000                     |50.0.0.0                    |
+|First usable address     |00110010.00000000.00000000.00000001                     |50.0.0.1                    |
+|Last usable address      |00110010.01111111.11111111.11111110                     |50.127.255.254              |
+|Broadcast address        |00110010.01111111.11111111.11111111                     |50.127.255.255              |
+|_________________________|________________________________________________________|____________________________|
+|Network #2:              |Binary                                                  |Decimal                     |
+|_________________________|________________________________________________________|____________________________|
+|Network address          |00110010.10000000.00000000.00000000                     |50.128.0.0                  |
+|First usable address     |00110010.10000000.00000000.00000001                     |50.128.0.1                  |
+|Last usable address      |00110010.11111111.11111111.11111110                     |50.255.255.254              | 
+|Broadcast address        |00110010.11111111.11111111.11111111                     |50.255.255.255              |
+|_________________________|________________________________________________________|____________________________|
+
+
+
+ ________________________________
+/                                \
+|           Exercise 2           |
+\________________________________/
+
+Requirement: You need to subnet a class A network, 21.0.0.0. How many class C networks can you create?
+
+21.0.0.0 -> is a class A network
+--
+
+21.0.0.0 -> is a class C network
+------
+
+Since we can only manage the 2 middle 8 bits, we can create 2^16 = 65536 - 2 = 65534 class C networks
+
+
+
+ ________________________________
+/                                \
+|           Exercise 3           |
+\________________________________/
+
+Requirement: You need to subnet a class B network, 155.3.0.0. How many class C networks can you create?
+
+Since we can only manage the right 8 middle bits, we can create 2^8 = 256 - 2 = 254 class C networks
+
