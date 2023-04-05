@@ -3,3 +3,181 @@
 |           Subnetting           |
 \________________________________/
 
+Fixed-Length Subnet Mask (FLSM) means that every subnet in the network has the same subnet mask. 
+
+This means that in this network:
+
+|15 PCS|---|SWITCH 1|       
+                     \
+                      \
+|15 PCS|---|SWITCH 2|-------|ROUTER|-----|INTERNET|
+                      /
+                     /
+|15 PCS|---|SWITCH 3|
+
+For example, if the subnet mask is /27, then all pcs will have the same subnet mask:
+
+-> All pcs from switch 1 subnet will have the 10.0.0.0 with the subnet mask /27.
+-> All pcs from switch 2 subnet will have the 10.0.0.32 with the subnet mask /27.
+-> All pcs from switch 3 subnet will have the 10.0.0.64 with the subnet mask /27.
+
+Taking a look at the first subnet, we have 15 computers in this subnet. This means that we need 
+    15 different IP addresses to be assigned to our computers. We need 1 more address to be assigned to the router
+    interface. Two more IP addresses are needed for the network ID and the broadcast address. This means that we
+    need 18 IP addresses in total.
+
+So each subnet will have 18 IP addresses. This means that we need 18 x 3 = 54 IP addresses in total.
+If we use /27, we will have 32 IP addresses in total. 
+32 - 27 = 5
+2^5 = 32.       So we have 32 different combinations to be used as the host part of the IP address.
+
+____________________________________________________________
+
+Example:
+   
+                                   8+1+2=11
+|8 PCS| --------------- |SWITCH| --------------- |ROUTER| --------------- |INTERNET|
+                                   2+1+2=5           |
+|2 PCS|-----------------|SWITCH|---------------------|
+                                   2+1+2=5           |
+|2 PCS|-----------------|SWITCH|---------------------|
+                                   2+1+2=5           |
+|2 PCS|-----------------|SWITCH|---------------------|
+
+
+Request: Create 4 subnets, where 3 subnets should have 5 IP addresses each, and 1 subnet needs 11 IP addresses.
+
+Solution: 
+_________________________________________________________________________________________
+|SUBNET    |NUMBER OF HOSTS    |MASK    |NETWORK ID    |RANGE OF "USEFULL" ADDRESSES    |
+|__________|___________________|________|______________|________________________________|
+|#1        |11                 |/28     |192.168.1.0   |192.168.1.1  - 192.168.1.14     |
+|#2        |5                  |/28     |192.168.1.16  |192.168.1.17 - 192.168.1.30     |
+|#3        |5                  |/28     |192.168.1.32  |192.168.1.33 - 192.168.1.46     |
+|#4        |5                  |/28     |192.168.1.48  |192.168.1.49 - 192.168.1.62     |
+|__________|___________________|________|______________|________________________________|
+
+All of the subnets are going to have the same Mask, so we need to first calculate the mask of the largest network, 
+    because we need to make sure that it has enough different IP addresses for all of it's hosts.
+The biggest subnet is #1, so we need to calculate the mask of #1.
+
+ ____
+|#1  |
+|____|
+
+Mask:
+
+For 11 addresses we need 4 bits, because 2^4 = 16. 2^3=8, so we need 4 bits to be able to have 11 addresses.
+    If we were to use 5 bits, it would be too much. That would be wasting IP addresses.
+
+11111111 11111111 11111111 11110000 = 255.255.255.240, so the mask is 32 - 4 = /28 !!
+
+
+Network ID: 
+
+The network ID is the first address of the subnet. It is used to identify the network.
+    So, the network ID of #1 is 192.168.1.0
+
+
+Range of "usefull" addresses:
+
+The range of usefull adresses will be between the first and the last address of the subnet.
+The last address of the subnet is the broadcast address. The 16'th address is 192.168.1.15
+    So the range of usefull addresses is from 192.168.1.1 - 192.168.1.14
+
+ ____
+|#2  |
+|____|
+
+Mask:
+
+Why is it /28? Why can't it be /29? We only need 5 addresses, why wouldn't 3 bits work?
+The answer is that we need to make sure that all of the subnets have the same mask because
+    we are using Fixed-Length subnetting method.
+
+Network ID:
+
+The broadcast address of the 1st subnet is 192.168.1.15, so the network ID of the 2nd subnet is 192.168.1.16
+
+Range of "usefull" addresses:
+
+The broadcast address will be 192.168.1.31 
+So the range of usefull addresses is from 192.168.1.17 - 192.168.1.30.
+
+ ____
+|#3  |
+|____|
+
+Mask:
+
+/28
+
+Network ID:
+
+The broadcast address of the 2nd subnet is 192.168.1.31, so the network ID of the 3rd subnet is 192.168.1.32
+
+Range of "usefull" addresses:
+
+The broadcast address will be 192.168.1.47
+So the range of usefull addresses is from 192.168.1.32 - 192.168.1.46
+
+ ____
+|#4  |
+|____|
+
+Mask:
+
+/28
+
+Network ID:
+
+The broadcast address of the 3rd subnet is 192.168.1.47, so the network ID of the 4th subnet is 192.168.1.48
+
+Range of "usefull" addresses:
+
+The broadcast address will be 192.168.1.63
+So the range of usefull addresses is from 192.168.1.49 - 192.168.1.62
+
+_________________________________________________________________________________________
+
+
+
+
+Variable-Length Subnet Mask (VLSM)
+
+VLSM means that every subnet in the network has a different subnet mask.
+Unlike Fixed-Length subnetting, Variable-Length subnetting creates a hierarchical IP address space, 
+    making it possible to create subnets without wasting large numbers of addresses.
+
+
+
+Example:
+
+                                   8+1+2=11
+|8 PCS| --------------- |SWITCH| --------------- |ROUTER| --------------- |INTERNET|
+                                   2+1+2=5           |
+|2 PCS|-----------------|SWITCH|---------------------|
+                                   2+1+2=5           |
+|2 PCS|-----------------|SWITCH|---------------------|
+                                   2+1+2=5           |
+|2 PCS|-----------------|SWITCH|---------------------|
+
+Request: Create 4 subnets, where 3 subnets should have 5 IP addresses each, and 1 subnet needs 11 IP addresses.
+
+Solution: 
+_________________________________________________________________________________________
+|SUBNET    |NUMBER OF HOSTS    |MASK    |NETWORK ID    |RANGE OF "USEFULL" ADDRESSES    |
+|__________|___________________|________|______________|________________________________|
+|#1        |11                 |/28     |192.168.1.0   |192.168.1.1  - 192.168.1.14     |
+|#2        |5                  |/29     |192.168.1.16  |192.168.1.17 - 192.168.1.22     |
+|#3        |5                  |/29     |192.168.1.24  |192.168.1.25 - 192.168.1.30     |
+|#4        |5                  |/29     |192.168.1.32  |192.168.1.33 - 192.168.1.38     |
+|__________|___________________|________|______________|________________________________|
+
+So by using the VLSM technique we were able to save 24 addresses.
+
+_________________________________________________________________________________________
+
+
+Summarization
+
