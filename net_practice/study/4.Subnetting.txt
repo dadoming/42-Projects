@@ -181,3 +181,15 @@ ________________________________________________________________________________
 
 Summarization
 
+                                  192.168.1.0/28          192.168.1.40/30             7.7.7.0/30
+|8 PCS| --------------- |SWITCH| --------------- |ROUTER| --------------- |ROUTER| --------------- |INTERNET|
+                                  192.168.1.16/29    |
+|2 PCS|-----------------|SWITCH|---------------------|
+                                  192.168.1.24/29    |
+|2 PCS|-----------------|SWITCH|---------------------|
+                                  192.168.1.32/29    |
+|2 PCS|-----------------|SWITCH|---------------------|
+
+From one router to another it is only needed a mask of /30, because we only need 2 addresses.
+    The Network ID starts on 40 because the broadcast address of the last network is 39.
+    
