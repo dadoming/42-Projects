@@ -3,6 +3,8 @@
 |           Exercise 1           |
 \________________________________/
 
+(FLSM)
+
 Requirement: divide a class A network 50.0.0.0 into two equal networks
 
 00110010.00000000.00000000.00000000 This is the binary representation of the network address
@@ -33,6 +35,8 @@ Requirement: divide a class A network 50.0.0.0 into two equal networks
 |           Exercise 2           |
 \________________________________/
 
+(FLSM)
+
 Requirement: You need to subnet a class A network, 21.0.0.0. How many class C networks can you create?
 
 21.0.0.0 -> is a class A network
@@ -50,7 +54,44 @@ Since we can only manage the 2 middle 8 bits, we can create 2^16 = 65536 - 2 = 6
 |           Exercise 3           |
 \________________________________/
 
+(FLSM)
+
 Requirement: You need to subnet a class B network, 155.3.0.0. How many class C networks can you create?
 
 Since we can only manage the right 8 middle bits, we can create 2^8 = 256 - 2 = 254 class C networks
 
+
+
+ ________________________________
+/                                \
+|           Exercise 4           |
+\________________________________/
+
+(FLSM)
+
+Requirement: You've been allocated a class B network address of 189.2.0.0.
+            You need to create at least: 9 subnets with 64 addresses for each subnet, 
+                                         5 subnets with 100 addresses for each subnet,
+                                         13 subnets with 70 addresses for each subnet.
+
+1. Find the common subnet mask for all the subnets
+2. Count the number of subnets needed
+
+
+1. 100 addresses -> fits 7 bits (2^7 = 128)
+
+10111101.00000010.00000000.00000000
+                  |subnets ||hosts|
+
+2. 9 + 5 + 13 = 27 subnets -> fits 2^9 = 512 subnets
+
+Answer: 189.2.0.0/25
+
+
+Extra question: Name the first, the 11th and the last subnet.
+
+1st:  189.2.0.0
+
+11th: 189.2.0.0
+
+Last: 10111101.00000010.00000000.00000000
