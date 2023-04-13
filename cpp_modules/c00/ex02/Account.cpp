@@ -10,6 +10,9 @@ int Account::_totalAmount = 0;
 int Account::_totalNbDeposits = 0;
 int Account::_totalNbWithdrawals = 0;
 
+// Order: Init accounts -> displayAccountsInfos -> displayStatus for each -> makeDeposit for each -> 
+//				-> displayAccountsInfos -> displayStatus for each -> makeWithdrawal-> displayAccountsInfos -> displayStatus for each
+
 Account::Account(int initial_deposit)
 {
 	_displayTimestamp();

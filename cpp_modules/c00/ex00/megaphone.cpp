@@ -1,6 +1,6 @@
 # include <iostream>
-# include <cctype>  // For islower() and toupper() implementation.
-# include <cstring> // For strlen implementation.
+# include <cctype>
+# include <cstring>
 
 int main(int argc, char **argv)
 {
@@ -8,7 +8,6 @@ int main(int argc, char **argv)
     {
         for (int i = 1; i < argc; i++)
         {
-            //int len = std::char_traits<char>::length(argv[i]);
             int len = strlen(argv[i]);
             for (int j = 0; j < len; j++)
             {

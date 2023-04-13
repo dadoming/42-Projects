@@ -2,42 +2,23 @@
 #include <iostream>
 #include <iomanip>
 
-void PhoneBook::addContact(Contact *contact)
-{
-    std::cout << "Fill in the following fields:" << std::endl;
-    std::cout << "(Can't be left in blank.)" << std::endl << std::endl;
-
-    (*contact).first_name      =  (*contact).grabInputFromUser("First Name:");
-    (*contact).last_name       =  (*contact).grabInputFromUser("Last Name:");
-    (*contact).nickname        =  (*contact).grabInputFromUser("Nickname:");
-    (*contact).phone_number    =  (*contact).grabInputFromUser("Phone Number:");
-    (*contact).darkest_secret  =  (*contact).grabInputFromUser("Darkest Secret:");
-
-    std::cout << "Contact added!" << std::endl << std::endl;
-}
-
-void PhoneBook::searchContact(Contact *contact)
+void PhoneBook::searchContact()
 {
     int array_size = 0;
-    while (contact[array_size].first_name != "")
-    {
-        if (array_size > MAX_CONTACTS - 1)
-            break;
+    while ((array_size <= MAX_CONTACTS - 1) && this->contact[array_size].getFirstName() != "")
         array_size++;
-    }
 
     if (array_size > 0)
     {
         std::cout << "Available contacts:" << std::endl;
-        displaySearchMenu(contact, array_size);
-        
-        expandContactByIndex(contact, array_size);
+        this->displaySearchMenu(array_size);
+        this->expandContactByIndex(array_size);
     }
     else
         std::cout << "No contacts available." << std::endl;
 }
 
-void displaySearchMenu(Contact *contact, int array_size)
+void PhoneBook::displaySearchMenu(int array_size)
 {
     std::cout << std::setw(10) << std::right << "Index" << "|";
     std::cout << std::setw(10) << std::right << "First Name" << "|";
@@ -47,9 +28,9 @@ void displaySearchMenu(Contact *contact, int array_size)
     for (int i = 0; i < array_size; i++)
     {
         std::cout << std::setw(10) << std::right << i << "|";
-        printContactInTable(contact[i].first_name);
-        printContactInTable(contact[i].last_name);
-        printContactInTable(contact[i].nickname);
+        printContactInTable(this->contact[i].getFirstName());
+        printContactInTable(this->contact[i].getLastName());
+        printContactInTable(this->contact[i].getNickname());
         std::cout << std::endl;
     }
 }
@@ -67,7 +48,7 @@ void printContactInTable(std::string str)
     }
 }
 
-void expandContactByIndex(Contact *contact, int array_size)
+void PhoneBook::expandContactByIndex(int array_size)
 {
     std::cout << "Enter the index of the contact you want to see." << std::endl;
     std::string index;
@@ -88,11 +69,11 @@ void expandContactByIndex(Contact *contact, int array_size)
     }
 
     std::cout << std::endl;
-    std::cout << "First Name:\t" << contact[input_value].first_name << std::endl;
-    std::cout << "Last Name:\t" << contact[input_value].last_name << std::endl;
-    std::cout << "Nickname:\t" << contact[input_value].nickname << std::endl;
-    std::cout << "Phone Number:\t" << contact[input_value].phone_number << std::endl;
-    std::cout << "Darkest Secret:\t" << contact[input_value].darkest_secret << std::endl;
+    std::cout << "First Name:\t" << this->contact[input_value].getFirstName() << std::endl;
+    std::cout << "Last Name:\t" << this->contact[input_value].getLastName() << std::endl;
+    std::cout << "Nickname:\t" << this->contact[input_value].getNickname() << std::endl;
+    std::cout << "Phone Number:\t" << this->contact[input_value].getPhoneNumber() << std::endl;
+    std::cout << "Darkest Secret:\t" << this->contact[input_value].getDarkestSecret() << std::endl;
     std::cout << std::endl;
 }
 
