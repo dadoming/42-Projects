@@ -6,14 +6,14 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/06 16:19:41 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/21 19:05:38 by dadoming         ###   ########.fr       */
+/*   Updated: 2023/04/14 17:08:18 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef SO_LONG_H
 # define SO_LONG_H
 
-# include "mlx.h"
+# include "../minilibx-linux/mlx.h"
 
 # include "../libft/libft.h"
 # include "../gnl/get_next_line.h"
@@ -24,11 +24,11 @@
 # include <math.h>
 # include <time.h>
 
-# define W 13
-# define A 0
-# define S 1
-# define D 2
-# define ESC 53
+# define W 119
+# define A 97
+# define S 115
+# define D 100
+# define ESC 65307
 
 typedef struct s_window{
 	void	*mlx;

@@ -6,11 +6,11 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 15:43:58 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/21 18:38:39 by dadoming         ###   ########.fr       */
+/*   Updated: 2023/04/14 17:03:53 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 
 void	print_background(t_win *w, int x, int y)
 {

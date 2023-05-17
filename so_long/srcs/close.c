@@ -6,11 +6,11 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 03:30:34 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/21 20:09:53 by dadoming         ###   ########.fr       */
+/*   Updated: 2023/04/14 17:04:02 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 
 void	free_sprites(t_win *w)
 {

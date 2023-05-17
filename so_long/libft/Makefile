@@ -6,7 +6,7 @@
 #    By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2021/10/26 19:25:19 by dadoming          #+#    #+#              #
-#    Updated: 2022/06/01 18:19:33 by dadoming         ###   ########.fr        #
+#    Updated: 2023/04/14 17:04:45 by dadoming         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OBJS = ${SRCS:.c=.o}
 BONUS = ft_lstadd_back.c ft_lstadd_front.c ft_lstclear.c ft_lstdelone.c ft_lstiter.c ft_lstlast.c ft_lstmap.c ft_lstnew.c ft_lstsize.c  
 BONUS_OBJS = ${BONUS:.c=.o}
 CC = gcc
-FLAGS = -Wall -Wextra -Werror
+FLAGS = -Wall -Wextra #-Werror
 RM = rm -f
 
 .c.o: 

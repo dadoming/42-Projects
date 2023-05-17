@@ -6,11 +6,11 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 22:17:59 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/21 18:34:26 by dadoming         ###   ########.fr       */
+/*   Updated: 2023/04/14 17:09:41 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 
 void	victory(t_win *w)
 {
@@ -42,7 +42,7 @@ int	loop_engine(t_win *w)
 {
 	static int	delay;
 
-	if (++delay < 3000)
+	if (++delay < 10000)
 		return (0);
 	if (w -> winn)
 		victory(w);

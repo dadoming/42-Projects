@@ -6,11 +6,11 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/15 20:57:01 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/21 19:01:34 by dadoming         ###   ########.fr       */
+/*   Updated: 2023/04/14 17:11:30 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 
 int	key_press(t_win *w, int key)
 {
@@ -35,6 +35,7 @@ int	key_press(t_win *w, int key)
 
 int	key_event(int key, t_win *w)
 {
+	printf("key: %d\n", key);
 	if (valid_key(key, w))
 	{
 		if (key_press(w, key))

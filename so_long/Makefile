@@ -6,7 +6,7 @@
 #    By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/06/05 18:06:31 by dadoming          #+#    #+#              #
-#    Updated: 2022/06/21 18:55:53 by dadoming         ###   ########.fr        #
+#    Updated: 2023/05/17 18:08:22 by dadoming         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,11 +14,9 @@ NAME = so_long
 
 LIBFT = libft/libft.a
 
-GNL = gnl/get_next_line.c gnl/get_next_line_utils.c
+INCLUDES = /includes /gnl/get_next_line.h
 
-INCLUDES = /includes
-
-CC = clang
+CC = gcc
 
 FLAGS = -Wextra -Wall -Werror -fsanitize=address
 
@@ -32,12 +30,17 @@ SRCS = srcs/so_long.c \
 		srcs/animations.c \
 		srcs/close.c \
 		srcs/img_control.c \
+		gnl/get_next_line.c \
+		gnl/get_next_line_utils.c
+		
+
+OBJS = $(SRCS:.c=.o)
 
 RM = rm -f
 
+MLX_LIB	= minilibx-linux/libmlx.a
 
-all: ${LIBFT}
-	@${CC} ${FLAGS} -o ${NAME} -I /usr/local/include ${SRCS} ${GNL} ${LIBFT} -L /usr/local/lib/ -lmlx -framework OpenGL -framework Appkit -I.${INCLUDES} 
+all: $(MLX_LIB) $(LIBFT) $(NAME)
 	
 	@printf "                                    \r"
 	@printf "\033[2;32m               DONE!            \r"
@@ -45,7 +48,11 @@ all: ${LIBFT}
 	@printf "\033[1;;32m               DONE! \n"
 	@sleep 0.3
 
-${NAME}: ${LIBFT} ${SRCS}
+${NAME}:  $(OBJS)
+	$(CC) $(CFLAGS) -o $(NAME) $(OBJS) -L. $(MLX_LIB) $(LIBFT) -lXext -lX11 -lm -lz
+
+$(MLX_LIB):
+	cd minilibx-linux && ./configure
 
 ${LIBFT}:
 	@cd libft/ && make bonus
@@ -66,8 +73,7 @@ clean:
 
 fclean: clean
 	@${RM} ${NAME}
-	@${RM} ${LIBFT}
-	@printf "\033[1;91m       CLEANING\r"
+	@printf "       CLEANING\r"
 		@sleep 0.2
 		@printf "       CLEANING .\r"
 		@sleep 0.2

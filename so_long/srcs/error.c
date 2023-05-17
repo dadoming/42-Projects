@@ -6,11 +6,11 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/07 19:54:36 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/21 18:02:25 by dadoming         ###   ########.fr       */
+/*   Updated: 2023/04/14 17:04:00 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 
 void	error_msg(char *str)
 {

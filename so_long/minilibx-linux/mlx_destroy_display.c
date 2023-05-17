@@ -1,27 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   window.c                                           :+:      :+:    :+:   */
+/*   mlx_destroy_display.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
+/*   By: mg <mg@student.42.fr>                      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/06/07 19:17:53 by dadoming          #+#    #+#             */
-/*   Updated: 2023/04/14 17:03:51 by dadoming         ###   ########.fr       */
+/*   Created: 2020/10/03 18:56:35 by mg                #+#    #+#             */
+/*   Updated: 2020/10/04 01:55:35 by mg               ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/so_long.h"
+#include "mlx_int.h"
 
-// Close window + needs to free(all)
-int	x_close_window(t_win *ptr)
+int	mlx_destroy_display(t_xvar *xvar)
 {
-	msg("Exited game");
-	ft_exit_game(ptr);
-	return (0);
-}
-
-void	key_close_window(t_win *ptr)
-{
-	msg("Exited game");
-	ft_exit_game(ptr);
+	XCloseDisplay(xvar->display);
 }

@@ -6,11 +6,11 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/06/21 04:16:19 by dadoming          #+#    #+#             */
-/*   Updated: 2022/06/21 19:05:43 by dadoming         ###   ########.fr       */
+/*   Updated: 2023/04/14 17:03:59 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "so_long.h"
+#include "../includes/so_long.h"
 
 void	put_back(t_win *w, int key, int x, int y)
 {
