@@ -6,7 +6,7 @@
 /*   By: dadoming <dadoming@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/06 13:04:32 by dadoming          #+#    #+#             */
-/*   Updated: 2022/05/24 17:51:15 by dadoming         ###   ########.fr       */
+/*   Updated: 2023/01/19 14:07:08 by dadoming         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,7 @@ char	*get_command(char *command, char **path_to_cmd)
 	{
 		tmp = ft_strjoin(*path_to_cmd, "/");
 		cmd = ft_strjoin(tmp, command);
+		printf("%s\n", tmp);
 		free(tmp);
 		if (access(cmd, F_OK) == 0)
 			return (cmd);
