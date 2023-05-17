@@ -11,12 +11,12 @@ int main( void )
     // Zombie1
     Zombie *zombie1 = newZombie( "Zito" );
     zombie1->announce();
-    delete (zombie1);
 
     std::cout << std::endl;
 
     // Zombie2
     randomChump( "Tó Mané" );
     
+    delete (zombie1);
     return (0);
 }

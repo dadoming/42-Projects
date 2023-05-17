@@ -16,7 +16,7 @@ public:
 
 private:
     
-    std::string type;
+    std::string _type;
 
 };
 

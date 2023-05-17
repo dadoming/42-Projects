@@ -1,6 +1,6 @@
 # include "Zombie.hpp"
 
-# define HORDE_SIZE 1
+# define HORDE_SIZE 2
 
 int main( void )
 {
