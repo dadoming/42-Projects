@@ -27,7 +27,8 @@ int main(int argc, char **argv)
             command = remove_extra_whitespaces(command);
 			if (command.compare("ADD") == 0 || command.compare("add") == 0)
 			{
-                book.addContact(&book.contact[oldest_added_index]);
+				std::cout << oldest_added_index << std::endl;
+                book.contact[oldest_added_index].setContact();
 				oldest_added_index++;
 				if (oldest_added_index == 8)
 					oldest_added_index = 0;
@@ -36,7 +37,7 @@ int main(int argc, char **argv)
 
 			else if (command.compare("SEARCH") == 0 || command.compare("search") == 0)
 			{
-				book.searchContact(book.contact);
+				book.searchContact();
 				wrong_input = 0;
 			}
 

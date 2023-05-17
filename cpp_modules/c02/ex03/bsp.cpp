@@ -15,7 +15,7 @@ static Fixed area(Point const a, Point const b, Point const c)
 // Split the triangle in 3 and if point is inside, the area has to be equal to the sum of the 3 areas
 bool bsp(Point const a, Point const b, Point const c, Point const point)
 {
-    /*
+    
     if ((  a.getX() == point.getX() && a.getY() == point.getY()) \
         || b.getX() == point.getX() && b.getY() == point.getY() \
         || c.getX() == point.getX() && c.getY() == point.getY())
@@ -27,12 +27,12 @@ bool bsp(Point const a, Point const b, Point const c, Point const point)
     Fixed sum = area1 + area2 + area3;
 
     return (sum.operator==(triangleArea));
-    */
+    
 
-    Fixed w1 = (a.getX() * (c.getY() - a.getY()) + (point.getY() - a.getY()) * (c.getX() - a.getX()) - point.getX() * (c.getY() - a.getY())) /\
-                ((b.getY() - a.getY()) * (c.getX() - a.getX()) - (b.getX() - a.getX()) * (c.getY() - a.getY()));
-
-    Fixed w2 = (point.getY() - a.getY() - w1 * (b.getY() - a.getY())) / (c.getY() - a.getY());
-
-    return (w1 > 0 && w2 > 0 && (w1 + w2) < 1);
+    //Fixed w1 = (a.getX() * (c.getY() - a.getY()) + (point.getY() - a.getY()) * (c.getX() - a.getX()) - point.getX() * (c.getY() - a.getY())) /\
+    //            ((b.getY() - a.getY()) * (c.getX() - a.getX()) - (b.getX() - a.getX()) * (c.getY() - a.getY()));
+//
+    //Fixed w2 = (point.getY() - a.getY() - w1 * (b.getY() - a.getY())) / (c.getY() - a.getY());
+//
+    //return (w1 > 0 && w2 > 0 && (w1 + w2) < 1);
 }
