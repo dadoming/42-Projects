@@ -16,28 +16,20 @@ int main(int argc, char **argv)
         return (1);    
     }
     my_replace(argv[1], argv[2], argv[3]);
-    std::cout << "Replacement done" << endl;
     return (0);
 }
 
 void my_replace(std::string filename, std::string s1, std::string s2)
 {
     std::ifstream infile(filename);
-    if (!infile)
-    {
-        std::cerr << "Error opening input file" << endl;
-        return ;
-    }
+    if (!infile) { std::cerr << "Error opening input file" << endl; return ; }
 
     std::ofstream outfile(filename + ".replace");
-    if (!outfile)
-    {
-        std::cerr << "Error opening output file" << endl;
-        return ;
-    }
+    if (!outfile) { std::cerr << "Error opening output file" << endl; infile.close(); return ; }
 
     if (infile.is_open())
     {
+        // copy file to string
         char            buffer;
         std::string     str;
         while (infile.get(buffer))
@@ -45,13 +37,14 @@ void my_replace(std::string filename, std::string s1, std::string s2)
             str += buffer;
         }
 
-        int iter = str.find(s1);
-        while (iter != std::string::npos)
+        // replace
+        for(int i = str.find(s1); i != std::string::npos; i = str.find(s1))
         {
-            str.erase(iter, s1.length());
-            str.insert(iter, s2);
-            iter = str.find(s1);
+            str.erase(i, s1.length());
+            str.insert(i, s2);
         }
+
+        // write to file
         outfile << str;
     }
 
