@@ -38,13 +38,11 @@ void my_replace(std::string filename, std::string s1, std::string s2)
         }
 
         // replace
-        for(int i = str.find(s1); i != std::string::npos; i = str.find(s1))
+        for (int i = str.find(s1); i != std::string::npos; i = str.find(s1))
         {
             str.erase(i, s1.length());
             str.insert(i, s2);
         }
-
-        // write to file
         outfile << str;
     }
 
