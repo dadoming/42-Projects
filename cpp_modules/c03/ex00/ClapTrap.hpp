@@ -10,9 +10,9 @@ class Claptrap
 private:
 
 	std::string		_name;
-	int				        _hitPoints;
-	int				        _energyPoints;
-	unsigned int		    _attackDamage;
+	int				_hitPoints;
+	int				_energyPoints;
+	unsigned int 	_attackDamage;
 
 public:
 
