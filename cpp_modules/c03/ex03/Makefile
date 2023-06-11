@@ -2,7 +2,7 @@ NAME = diamond_clap
 
 CC = c++
 
-CFLAGS = -Wall -Wextra -Werror -Wno-shadow -g -std=c++98 
+CFLAGS = -Wall -Wextra -Werror -Wshadow -g -std=c++98 -fsanitize=address 
 
 INC = Claptrap.hpp Scavtrap.hpp	Fragtrap.hpp DiamondTrap.hpp
 

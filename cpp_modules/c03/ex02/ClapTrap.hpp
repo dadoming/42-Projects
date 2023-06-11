@@ -36,4 +36,6 @@ public:
 
 };
 
+void unableToPerform(int dead, std::string name);
+
 # endif

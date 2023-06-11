@@ -14,12 +14,14 @@ private:
 	int				        _energyPoints;
 	unsigned int		    _attackDamage;
 
+	std::string		        _trapType;
+
 public:
 
 	Claptrap();
 	Claptrap( std::string name );
 	Claptrap( const Claptrap& other );
-    Claptrap( std::string name, int hp, int ad, int ep);
+    Claptrap( std::string name, int hp, int ad, int ep, std::string type );
     Claptrap& operator=( const Claptrap& other );
 	~Claptrap();
 
@@ -33,7 +35,11 @@ public:
     void            useEnergyPoint();
     bool            actionPossible();
     bool            isDead();
-
+	int				getEnergyPoints();
+	
+	std::string     getTrapType();
 };
+
+void unableToPerform(int dead, std::string name, std::string type);
 
 # endif

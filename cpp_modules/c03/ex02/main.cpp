@@ -34,7 +34,6 @@ int main(void)
     f.printStats();
 
     f.highFivesGuys();
-
-
-
+    //for(int i = 0; i < 100; i++)
+    //    f.highFivesGuys();
 }

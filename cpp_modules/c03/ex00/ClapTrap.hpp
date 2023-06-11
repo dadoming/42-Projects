@@ -29,6 +29,9 @@ public:
 
     std::string getName();
     unsigned int getAttackDamage();
+	bool isDead();
 };
+
+void unableToPerform(int dead, std::string name);
 
 # endif

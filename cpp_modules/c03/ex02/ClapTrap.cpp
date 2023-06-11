@@ -1,9 +1,6 @@
 #include "ClapTrap.hpp"
 
-Claptrap::Claptrap()
-{
-    std::cout << "Claptrap constructor called" << std::endl;
-}
+Claptrap::Claptrap() { std::cout << "Claptrap constructor called" << std::endl; }
 
 Claptrap::Claptrap( std::string name )
 {
@@ -14,11 +11,7 @@ Claptrap::Claptrap( std::string name )
     _attackDamage = 0;
 }
 
-Claptrap::Claptrap( const Claptrap& other )
-{
-    std::cout << "Claptrap constructor called" << std::endl;
-    *this = other;
-}
+Claptrap::Claptrap( const Claptrap& other ) { std::cout << "Claptrap constructor called" << std::endl; *this = other; }
 
 Claptrap::Claptrap( std::string name, int hp, int ad, int ep)
 {
@@ -39,10 +32,7 @@ Claptrap& Claptrap::operator=( const Claptrap& other )
     return *this;
 }
 
-Claptrap::~Claptrap()
-{
-    std::cout << "Claptrap destructor called" << std::endl;
-}
+Claptrap::~Claptrap() { std::cout << "Claptrap destructor called" << std::endl; }
 
 void Claptrap::attack( const std::string& target )
 {
@@ -53,13 +43,8 @@ void Claptrap::attack( const std::string& target )
         std::cout << " points of damage!" << std::endl;
         useEnergyPoint();
     }
-    else 
-    {
-        if (isDead())
-            std::cout << "\U0001f480" << "  " << getName() << " has no HP left!" << std::endl;
-        else
-            std::cout << "\U0001f62b" << "  " << getName() << " has no energy left!" << std::endl;
-    }
+    else
+        unableToPerform(isDead(), getName());
 }
 
 void Claptrap::takeDamage( unsigned int amount )
@@ -84,12 +69,7 @@ void Claptrap::beRepaired( unsigned int amount )
         useEnergyPoint();
     }
     else 
-    {
-        if (isDead())
-            std::cout << "\U0001f480" << " " << getName() << " has no HP left!" << std::endl;
-        else
-            std::cout << "\U0001f62b" << "  " << getName() << " has no energy left!" << std::endl;
-    }
+        unableToPerform(isDead(), getName());
 }
 
 void Claptrap::printStats()
@@ -98,6 +78,14 @@ void Claptrap::printStats()
     std::cout << "AD: " << _attackDamage << std::endl;
     std::cout << "HP: " << _hitPoints << std::endl;
     std::cout << "Energy: " << _energyPoints << std::endl;
+}
+
+void unableToPerform(int dead, std::string name)
+{
+    if (dead)
+        std::cout << "\U0001f480" << " " << name << " has no HP left!" << std::endl;
+    else
+        std::cout << "\U0001f62b" << "  " << name << " has no energy left!" << std::endl;
 }
 
 bool Claptrap::actionPossible() { return (_hitPoints > 0 && _energyPoints > 0); }

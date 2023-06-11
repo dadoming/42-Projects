@@ -8,7 +8,6 @@ class Diamondtrap : public Scavtrap, public Fragtrap
 {
 
 private:
-    
     std::string _name;
 
 public:
@@ -21,7 +20,6 @@ public:
 
     void whoAmI();
     void attack( const std::string& target );
-
 
 };
 
