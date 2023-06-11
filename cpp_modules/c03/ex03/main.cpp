@@ -65,8 +65,7 @@ int main(void)
     }
     
     std::cout << std::endl;
-    
-    
+
 
     /* This should force the Wshadow flag to throw a warning, but doesn't (?)
     int x = 42;
