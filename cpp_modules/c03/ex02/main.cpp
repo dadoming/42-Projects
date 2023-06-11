@@ -6,7 +6,7 @@ int main(void)
 {
     Claptrap c("Clapy");
     Scavtrap s("Scavy");
-    Fragtrap f("Fragy");
+    Fragtrap f("Fraggy");
 
     std::cout << std::endl;
     c.printStats();

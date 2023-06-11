@@ -48,5 +48,16 @@ void Scavtrap::attack( const std::string& target )
 
 void Scavtrap::guardGate()
 {
-    std::cout << "\U0001f6e1\uFE0F" << "  " << getName() << " has entered Gate keeper mode" << std::endl;
+    if (actionPossible())
+    {
+        std::cout << "\U0001f6e1\uFE0F" << "  " << getName() << " has entered Gate keeper mode" << std::endl;
+        useEnergyPoint();
+    }
+    else
+    {
+        if (isDead())
+            std::cout << "\U0001f480" << " " << getName() << " has no HP left!" << std::endl;
+        else
+            std::cout << "\U0001f62b" << "  " << getName() << " has no energy left!" << std::endl;
+    }
 }

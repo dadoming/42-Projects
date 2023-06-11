@@ -21,11 +21,11 @@ int main(void)
 
     scav.printStats();
     std::cout << std::endl;
+    scav.guardGate();
 
     scav.takeDamage(120);
     scav.attack("LOL");
 
-    scav.guardGate();
 
 
 
