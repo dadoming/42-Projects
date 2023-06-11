@@ -24,10 +24,7 @@ int main(void)
     scav.guardGate();
 
     scav.takeDamage(120);
-    scav.attack("LOL");
-
-
-
+    scav.attack("bla");
 
     return (0);
 }

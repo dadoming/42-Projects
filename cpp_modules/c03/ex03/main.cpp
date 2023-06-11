@@ -3,6 +3,38 @@
 # include "ScavTrap.hpp"
 # include "FragTrap.hpp"
 
+/*
+        Virtual inheritance                             Non-virtual inheritance
+                                     
+            |---------|                          |---------|                |---------|
+            | Claptrap|                          | Claptrap|                | Claptrap|
+            |---------|                          |---------|                |---------|
+            | attack()|                          | attack()|                | attack()|
+            |takeDmg()|                          |takeDmg()|                |takeDmg()|
+            |  beRep()|                          |  beRep()|                |  beRep()|
+            |   ...   |                          |   ...   |                |   ...   |
+            |---------|                          |---------|                |---------|
+            ^         ^                               ^                          ^
+            |         |                               |                          |
+           /           \                              |                          |
+          /             \                             |                          |
+    |---------|     |---------|                  |---------|                |---------|
+    | ScavTrap|     | FragTrap|                  | ScavTrap|                | FragTrap|
+    |---------|     |---------|                  |---------|                |---------|
+    | guard() |     | high5() |                  | guard() |                | high5() |
+    |---------|     |---------|                  |---------|                |---------|
+             ^       ^                                     ^                ^
+              \     /                                       \              /
+               \   /                                         \            /
+                \ /                                           \          /
+            |---------|                                       |---------|  
+            | Diamond |                                       | Diamond |
+            |---------|                                       |---------|
+            | whoAmI()|                                       | whoAmI()|
+            |---------|                                       |---------|
+
+*/
+
 int main(void)
 {
     Diamondtrap d("Chad");
