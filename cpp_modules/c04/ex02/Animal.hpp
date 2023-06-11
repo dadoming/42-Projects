@@ -8,12 +8,11 @@ class Animal
 {
 
 public:
-    static Animal* create();
 
     virtual ~Animal();
 
-    virtual void  makeSound() const;
-    virtual void  spitIdea(int i) const;
+    virtual void  makeSound() const = 0;
+    virtual void  spitIdea(int i) const = 0;
     std::string   getType() const;
 
 protected:

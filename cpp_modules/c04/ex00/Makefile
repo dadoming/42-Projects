@@ -1,8 +1,8 @@
 NAME = CatsAndDogs
 
-CC = c++
+CXX = c++
 
-CFLAGS = -Wall -Wextra -Werror -g -std=c++98 
+CXXFLAGS = -Wall -Wextra -Werror -g -std=c++98 
 
 INC = Animal.hpp Cat.hpp Dog.hpp
 
@@ -14,7 +14,7 @@ SRCS = main.cpp Animal.cpp Cat.cpp Dog.cpp WrongAnimal.cpp WrongCat.cpp
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
 
 clean:
 	rm -f $(OBJS)

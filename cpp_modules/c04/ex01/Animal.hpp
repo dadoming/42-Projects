@@ -14,7 +14,6 @@ public:
     virtual ~Animal();
 
     virtual void  makeSound() const;
-    virtual void  spitIdea(int i) const;
     std::string   getType() const;
 
 protected:

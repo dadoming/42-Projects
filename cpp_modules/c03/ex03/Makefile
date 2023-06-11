@@ -1,8 +1,8 @@
 NAME = diamond_clap
 
-CC = c++
+CXX = c++
 
-CFLAGS = -Wall -Wextra -Werror -Wshadow -g -std=c++98 -fsanitize=address 
+CXXFLAGS = -Wall -Wextra -Werror -Wshadow -g -std=c++98 -fsanitize=address 
 
 INC = Claptrap.hpp Scavtrap.hpp	Fragtrap.hpp DiamondTrap.hpp
 
@@ -14,7 +14,7 @@ SRCS = main.cpp ClapTrap.cpp ScavTrap.cpp FragTrap.cpp DiamondTrap.cpp
 all: $(NAME)
 
 $(NAME): $(OBJS)
-	$(CC) $(CFLAGS) -o $(NAME) $(OBJS)
+	$(CXX) $(CXXFLAGS) -o $(NAME) $(OBJS)
 
 clean:
 	rm -f $(OBJS)
