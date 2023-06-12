@@ -2,23 +2,23 @@
 # include "Cat.hpp"
 # include "Dog.hpp"
 
-int main()
+# define MAX_ANIMALS 4
+
+int main( void )
 {
-    const Animal* animals[10];
+    const Animal* animals[MAX_ANIMALS];
     
-    for (int i = 0; i < 10; i++)
+    for (int i = 0; i < MAX_ANIMALS; i++)
     {
         if (i % 2 == 0)
             animals[i] = new Cat();
         else
             animals[i] = new Dog();
+        animals[i]->makeSound();
+        animals[i]->spitIdea(4);
     }
-
-    animals[3]->makeSound();
-    animals[4]->spitIdea(4);
-
-    for (int i = 0; i < 10; i++)
-        delete animals[i];
     
+    for (int i = 0; i < MAX_ANIMALS; i++)
+        delete animals[i];
     return (0);
 }

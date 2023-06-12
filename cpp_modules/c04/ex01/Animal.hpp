@@ -15,6 +15,7 @@ public:
 
     virtual void  makeSound() const;
     std::string   getType() const;
+    virtual void  spitIdea( int idea ) const;
 
 protected:
     std::string _type;

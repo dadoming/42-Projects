@@ -14,7 +14,7 @@ public:
     Cat();
     Cat( const Cat& other );
     Cat &operator=( const Cat& other );
-    ~Cat();
+    virtual ~Cat();
 
     void makeSound() const;
     void spitIdea(int i) const;

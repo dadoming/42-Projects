@@ -13,8 +13,8 @@ Animal &Animal::operator=( const Animal& other ) { std::cout << "Animal copy ass
 
 Animal::~Animal() { std::cout << "Animal destructor called" << std::endl; }
 
-void Animal::makeSound() const { std::cout << "This is an unknown animal! O.o" << std::endl; }
-
 std::string Animal::getType() const { return (_type); }
 
-void Animal::spitIdea(int i) const { std::cout << "This animal has no brain!" << std::endl; }
+void Animal::makeSound() const { std::cout << "This is an unknown animal! O.o" << std::endl; }
+
+void Animal::spitIdea(int i) const { (void) i; std::cout << "This animal has no brain!" << std::endl; }

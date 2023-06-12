@@ -16,3 +16,5 @@ Animal::~Animal() { std::cout << "Animal destructor called" << std::endl; }
 void Animal::makeSound() const { std::cout << "This is an unknown animal! O.o" << std::endl; }
 
 std::string Animal::getType() const { return (_type); }
+
+void Animal::spitIdea( int idea ) const { (void)idea; std::cout << "I ain't got no typeee" << std::endl; }

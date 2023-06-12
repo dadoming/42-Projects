@@ -7,6 +7,7 @@
 int main()
 {
     {   // Test 1
+        std::cout << std::endl << "--- TEST 1 ---" << std::endl;
         const Animal* meta = new Animal();
         const Animal* j = new Dog();
         const Animal* i = new Cat();
@@ -23,14 +24,13 @@ int main()
         j->makeSound();
         std::cout << "Animal: ";
         meta->makeSound();
-        std::cout << std::endl;
 
         delete meta;
         delete j;
         delete i;
     }
     {   // Test 2
-        std::cout << std::endl;
+        std::cout << std::endl << "--- TEST 2 ---" << std::endl;
         const WrongAnimal* meta = new WrongAnimal();
         const WrongAnimal* i = new WrongCat();
 

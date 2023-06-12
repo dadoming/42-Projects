@@ -17,6 +17,12 @@ Dog &Dog::operator=( const Dog& other ) { std::cout << "Dog copy assignment oper
 
 Dog::~Dog() { delete _brain; std::cout << "Dog destructor called" << std::endl; }
 
-void Dog::makeSound() const { std::cout << "Woof Woof!" << std::endl; }
+void Dog::makeSound() const 
+{ 
+    std::cout << "Woof Woof!" << std::endl; 
+}
 
-void Dog::spitIdea(int i) const { std::cout << _brain->getIdea(i) << std::endl; }
+void Dog::spitIdea(int i) const 
+{ 
+    std::cout << _brain->getIdea(i) << std::endl; 
+}
