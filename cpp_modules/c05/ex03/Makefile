@@ -4,11 +4,11 @@ CXX = c++
 
 CXXFLAGS = -Wall -Wextra -Werror -g -std=c++98 
 
-INC = Bureaucrat.hpp
+INC = Bureaucrat.hpp AForm.hpp ShrubberyCreationForm.hpp RobotomyRequestForm.hpp PresidentialPardonForm.hpp Intern.hpp
 
 OBJS = $(SRCS:%.cpp=%.o)
 
-SRCS = main.cpp Bureaucrat.cpp
+SRCS = main.cpp Bureaucrat.cpp AForm.cpp ShrubberyCreationForm.cpp RobotomyRequestForm.cpp PresidentialPardonForm.cpp Intern.cpp
 
 
 all: $(NAME)
@@ -18,6 +18,7 @@ $(NAME): $(OBJS)
 
 clean:
 	rm -f $(OBJS)
+	rm -f *_shrubbery
 
 fclean: clean
 	rm -f $(NAME)
