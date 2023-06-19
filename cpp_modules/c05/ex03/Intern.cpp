@@ -20,26 +20,35 @@ const char* Intern::InvalidFormNameException::what() const throw()
     return ("Invalid form name");
 }
 
+const std::string formList[3] = { 
+    "robotomy request", 
+    "presidential pardon", 
+    "shrubbery creation"
+};
+
 AForm* Intern::makeForm(std::string formName, std::string target)
 {
-    AForm *form = NULL;
-    try
+    int i = 0;
+    while(i < 3)
     {
-        if (formName == "robotomy request")
-            form = new RobotomyRequestForm(target);
-        else if (formName == "presidential pardon")
-            form = new PresidentialPardonForm(target);
-        else if (formName == "shrubbery creation")
-            form = new ShrubberyCreationForm(target);
-        else
-            throw InvalidFormNameException(); // exits the function with exception
-        std::cout << "Intern creates " << formName << std::endl;
-        return (form);
+        if (formName == formList[i])
+            break ;
+        i++;
     }
-    catch(const std::exception& e)
+
+    switch (i)
     {
-        std::cerr << e.what() << std::endl;
+        case 0:
+            std::cout << "Intern creates " << formName << std::endl;
+            return (new RobotomyRequestForm(target));
+        case 1:
+            std::cout << "Intern creates " << formName << std::endl;
+            return (new PresidentialPardonForm(target));
+        case 2:
+            std::cout << "Intern creates " << formName << std::endl;
+            return (new ShrubberyCreationForm(target));
+        default:
+            throw InvalidFormNameException();
     }
-    return (form);
 }
 
