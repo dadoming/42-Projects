@@ -1,10 +1,10 @@
-NAME = 
+NAME = MutantStack
 
 CXX = c++
 
 CXXFLAGS = -Wall -Wextra -Werror -g -std=c++98 
 
-INC = 
+INC = MutantStack.hpp
 
 OBJS = $(SRCS:%.cpp=%.o)
 
