@@ -1,14 +1,14 @@
-NAME = 
+NAME = PMergeMe
 
 CXX = c++
 
 CXXFLAGS = -Wall -Wextra -Werror -g -std=c++98 
 
-INC = 
+INC = PMergeMe.hpp
 
 OBJS = $(SRCS:%.cpp=%.o)
 
-SRCS = main.cpp 
+SRCS = main.cpp PMergeMe.cpp
 
 
 all: $(NAME)
