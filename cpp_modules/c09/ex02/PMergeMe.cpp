@@ -17,62 +17,73 @@ PMergeMe &PMergeMe::operator=(const PMergeMe &other)
 {
     if (this != &other)
     {
-        
+        _vec = other._vec;
+        _deque = other._deque;
+        _timeStartVec = other._timeStartVec;
+        _timeStartDeque = other._timeStartDeque;
+        _timeEndVec = other._timeEndVec;
+        _timeEndDeque = other._timeEndDeque;
     }
     return *this;
 }
 
-template <typename T> static void insertionSort(T& A, int start, int middle) 
+template <typename T> static void insertionSort(T& container, int start, int middle) 
 {
     for (int i = start; i <= middle; i++) 
     {
-        int tempVal = A[i];
+        int temp = container[i];
         int j = i;
-        while (j > start && A[j - 1] > tempVal) {
-            A[j] = A[j - 1];
+        while (j > start && container[j - 1] > temp) {
+            container[j] = container[j - 1];
             j--;
         }
-        A[j] = tempVal;
+        container[j] = temp;
     }
 }
 
-template <typename T> static void merge(T& A, int start, int middle, int end) {
+template <typename T> static void merge(T& container, int start, int middle, int end) {
     int n1 = middle - start + 1;
     int n2 = end - middle;
-    T LA(A.begin() + start, A.begin() + middle + 1);
-    T RA(A.begin() + middle + 1, A.begin() + end + 1);
-    int RIDX = 0;
-    int LIDX = 0;
-    for (int i = start; i <= end; i++) {
-        if (RIDX == n2) {
-            A[i] = LA[LIDX];
-            LIDX++;
-        } else if (LIDX == n1) {
-            A[i] = RA[RIDX];
-            RIDX++;
-        } else if (RA[RIDX] > LA[LIDX]) {
-            A[i] = LA[LIDX];
-            LIDX++;
-        } else {
-            A[i] = RA[RIDX];
-            RIDX++;
+    T leftIter(container.begin() + start, container.begin() + middle + 1);
+    T rightIter(container.begin() + middle + 1, container.begin() + end + 1);
+    int rightIndex = 0;
+    int leftIndex = 0;
+    for (int i = start; i <= end; i++) 
+    {
+        if (rightIndex == n2) 
+        {
+            container[i] = leftIter[leftIndex];
+            leftIndex++;
+        } 
+        else if (leftIndex == n1) 
+        {
+            container[i] = rightIter[rightIndex];
+            rightIndex++;
+        } 
+        else if (rightIter[rightIndex] > leftIter[leftIndex]) 
+        {
+            container[i] = leftIter[leftIndex];
+            leftIndex++;
+        } 
+        else 
+        {
+            container[i] = rightIter[rightIndex];
+            rightIndex++;
         }
     }
 }
 
-template <typename T> void mergeInsertionSort(T& A, int start, int end) 
+template <typename T> void mergeInsertionSort(T& container, int start, int end) 
 {
     if (end - start > THRESHOLD) 
     {
         int middle = (start + end) / 2;
-        mergeInsertionSort(A, start, middle);
-        mergeInsertionSort(A, middle + 1, end);
-        merge(A, start, middle, end);
+        mergeInsertionSort(container, start, middle);
+        mergeInsertionSort(container, middle + 1, end);
+        merge(container, start, middle, end);
     } 
-    else 
-    {
-        insertionSort(A, start, end);
-    }
+    else
+        insertionSort(container, start, end);
 }
 
 void PMergeMe::sortContainers()
@@ -88,10 +99,7 @@ void PMergeMe::sortContainers()
 template <typename T> void printContainer(T &container, std::string cont_name)
 {
     typename T::iterator it = container.begin();
-    if (cont_name == "Vector : ")
-        std::cout << YELLOW << cont_name << RESET;
-    if (cont_name == "Deque  : ")
-        std::cout << YELLOW << cont_name << RESET;
+    std::cout << YELLOW << cont_name << RESET;
     while (it != container.end())
     {
         std::cout << *it << " ";
