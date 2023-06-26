@@ -4,24 +4,28 @@
 # include <iostream>
 # include <algorithm>
 # include <vector>
-# include <list>
+# include <deque>
 # include <string>
 # include <exception>
 # include <cstdlib>
 # include <limits>
 # include <time.h>
 
+#define YELLOW "\033[0;33m"
+#define RED	"\033[0;31m"
+#define RESET "\033[0m"
+#define THRESHOLD 10
 
 class PMergeMe
 {
 private:
     std::vector<int> _vec;
-    std::list<int> _list;
+    std::deque<int> _deque;
 
     long _timeStartVec;
-    long _timeStartList;
+    long _timeStartDeque;
     long _timeEndVec;
-    long _timeEndList;
+    long _timeEndDeque;
 
 public:
     PMergeMe();
@@ -34,7 +38,7 @@ public:
     void sortContainers();
 
     std::vector<int> getVec();
-    std::list<int> getList();
+    std::deque<int> getDeque();
 
     class BadInputException : public std::exception
     {
@@ -43,5 +47,7 @@ public:
     };
 };
 
+template <typename T> void printContainer(T &container, std::string cont_name);
+template <typename T> void mergeInsertionSort(T& A, int start, int end);
 
 #endif
