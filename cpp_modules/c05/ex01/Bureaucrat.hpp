@@ -10,7 +10,7 @@ class Form;
 class Bureaucrat
 {
 private:
-    std::string _name;
+    const std::string _name;
     int         _grade; // 1 is highest , 150 is lowest
 
 public:
@@ -20,7 +20,7 @@ public:
     Bureaucrat &operator=(const Bureaucrat& other);
     ~Bureaucrat();
 
-    std::string getName( void );
+    std::string getName( void ) const;
     int         getGrade( void );
 
     void        incrementGrade( void );
