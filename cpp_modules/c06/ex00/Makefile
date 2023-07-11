@@ -10,7 +10,6 @@ OBJS = $(SRCS:%.cpp=%.o)
 
 SRCS = main.cpp ScalarConverter.cpp
 
-
 all: $(NAME)
 
 $(NAME): $(OBJS)

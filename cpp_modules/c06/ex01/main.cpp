@@ -29,6 +29,8 @@ int main(void)
     data->setN(42);
 
     uintptr_t raw = Serializer::serialize(data);
+    std::cout << raw << std::endl;
+
     Data* data2 = Serializer::deserialize(raw);
 
     std::cout << data2->getS1() << std::endl;
