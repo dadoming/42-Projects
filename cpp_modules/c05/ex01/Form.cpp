@@ -7,7 +7,7 @@ Form::Form() : _name("Default"), _isSigned(false), _gradeToSign(150), _gradeToEx
 
 Form::Form(const std::string name, int gradeToSign, int gradeToExecute) : 
     _name(name), 
-    _isSigned(false), 
+    _isSigned(false),
     _gradeToSign(gradeToSign), 
     _gradeToExecute(gradeToExecute)
 {
@@ -19,10 +19,10 @@ Form::Form(const std::string name, int gradeToSign, int gradeToExecute) :
 }
 
 Form::Form(const Form& other) : 
-    _name(other.getName()), 
-    _isSigned(other.getSigned()), 
-    _gradeToSign(other.getGradeToSign()), 
-    _gradeToExecute(other.getGradeToExecute())
+    _name(other._name), 
+    _isSigned(other._isSigned),
+    _gradeToSign(other._gradeToSign), 
+    _gradeToExecute(other._gradeToExecute)
 {
     std::cout << "Copy constructor called" << std::endl;
 }
@@ -30,7 +30,8 @@ Form::Form(const Form& other) :
 Form &Form::operator=(const Form& other)
 {
     std::cout << "Copy assignment operator called" << std::endl;
-    *this = other;
+    if (this != &other)
+        *this = Form(other);
     return (*this);
 }
 
@@ -39,20 +40,6 @@ Form::~Form()
     std::cout << "Destructor called" << std::endl;
 }
 
-
-/*
-    In C++, you can declare the exceptions that a function may throw as part 
-        of its function signature. The "throw()" syntax specifies that the 
-        function does not throw any exceptions. This is known as an empty 
-        exception specification.
-
-    However, it's worth noting that starting from C++11, empty exception 
-        specifications (throw()) are deprecated and considered redundant. 
-        In modern C++, it is generally recommended to use the "noexcept" 
-        keyword instead. The "noexcept" keyword explicitly states that a 
-        function does not throw any exceptions. Here's an example of the 
-        equivalent code using "noexcept":
-*/
 const char* Form::GradeTooHighException::what() const throw()
 {
     return ("Grade too high");

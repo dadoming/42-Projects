@@ -11,16 +11,18 @@ RobotomyRequestForm::RobotomyRequestForm(const std::string target)
 
 RobotomyRequestForm::RobotomyRequestForm(const RobotomyRequestForm& other) 
     :
-    AForm(other.getName(), other.getGradeToSign(), other.getGradeToExecute()) {}
+    AForm(other) {}
 
 RobotomyRequestForm &RobotomyRequestForm::operator=(const RobotomyRequestForm& other)
 {
-    *this = other;
+    std::cout << "Copy assignment operator called" << std::endl;
+    if (this != &other)
+        *this = RobotomyRequestForm(other);
     return (*this);
 }
 
 RobotomyRequestForm::~RobotomyRequestForm() {}
- // needs to be virtual
+
 void RobotomyRequestForm::nextPhase( void ) const
 {
     std::cout << "** Drilling noises **" << std::endl;

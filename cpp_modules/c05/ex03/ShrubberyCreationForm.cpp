@@ -7,11 +7,13 @@ ShrubberyCreationForm::ShrubberyCreationForm(const std::string target)
     : AForm(target, 145, 137) {}
 
 ShrubberyCreationForm::ShrubberyCreationForm(const ShrubberyCreationForm& other) 
-    : AForm(other.getName(), other.getGradeToSign(), other.getGradeToExecute()) {}
+    : AForm(other) {}
 
 ShrubberyCreationForm &ShrubberyCreationForm::operator=(const ShrubberyCreationForm& other)
 {
-    *this = other;
+    std::cout << "Copy assignment operator called" << std::endl;
+    if (this != &other)
+        *this = ShrubberyCreationForm(other);
     return (*this);
 }
 

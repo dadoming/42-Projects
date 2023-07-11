@@ -29,8 +29,7 @@ AForm::AForm(const AForm& other) :
 
 AForm &AForm::operator=(const AForm& other)
 {
-    std::cout << "Copy assignment operator called" << std::endl;
-    *this = other;
+    (void) other;
     return (*this);
 }
 

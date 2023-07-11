@@ -11,13 +11,14 @@ PresidentialPardonForm::PresidentialPardonForm(const PresidentialPardonForm& oth
 
 PresidentialPardonForm &PresidentialPardonForm::operator=(const PresidentialPardonForm& other)
 {
-    *this = other;
+    std::cout << "Copy assignment operator called" << std::endl;
+    if (this != &other)
+        *this = PresidentialPardonForm(other);
     return (*this);
 }
 
 PresidentialPardonForm::~PresidentialPardonForm() {}
 
- // needs to be virtual
 void PresidentialPardonForm::nextPhase( void ) const
 {
     std::cout << getName() << " has been pardoned by Zafod Beeblebrox" << std::endl;

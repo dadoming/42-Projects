@@ -18,7 +18,8 @@ AForm::AForm(const std::string name, int gradeToSign, int gradeToExecute) :
         throw GradeTooHighException();
 }
 
-AForm::AForm(const AForm& other) : 
+AForm::AForm(const AForm& other) 
+    :
     _name(other.getName()), 
     _isSigned(other.getSigned()), 
     _gradeToSign(other.getGradeToSign()), 
@@ -29,8 +30,7 @@ AForm::AForm(const AForm& other) :
 
 AForm &AForm::operator=(const AForm& other)
 {
-    std::cout << "Copy assignment operator called" << std::endl;
-    *this = other;
+    (void) other;
     return (*this);
 }
 
@@ -81,7 +81,6 @@ std::ostream &operator<<(std::ostream &out, AForm &f)
     return (out);
 }
 
- // needs to be virtual
 void AForm::execute(Bureaucrat const & executor) const
 {
     if (executor.getGrade() > getGradeToExecute())

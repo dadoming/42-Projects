@@ -14,15 +14,17 @@ Bureaucrat::Bureaucrat(const std::string name, int grade) : _name(name), _grade(
         throw GradeTooLowException();
 }
 
-Bureaucrat::Bureaucrat(const Bureaucrat& other) : _name(other.getName()), _grade(other.getGrade())
+Bureaucrat::Bureaucrat(const Bureaucrat& other)
 {
     std::cout << "Copy constructor called" << std::endl;
+    *this = other;
 }
 
 Bureaucrat &Bureaucrat::operator=(const Bureaucrat& other)
 {
     std::cout << "Copy assignment operator called" << std::endl;
-    *this = other;
+    if (this != &other)
+        *this = Bureaucrat(other._name, other._grade);
     return (*this);
 }
 
