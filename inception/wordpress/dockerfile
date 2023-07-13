@@ -1,0 +1,8 @@
+FROM debian:oldstable
+
+RUN apt-get update && apt-get install -y wordpress php
+
+WORKDIR /var/www/html
+
+COPY ./wp-config.php /var/www/html
+

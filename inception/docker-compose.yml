@@ -1,0 +1,53 @@
+version: '3.8'
+
+# Services
+services:
+
+    # Wordpress Service 
+    wordpress:
+        build:
+            context: ./wordpress
+            dockerfile: dockerfile
+        ports:
+            - 443:443
+        volumes:
+            - './wordpress:/var/www/html'
+        depends_on:
+            - mariadb
+        restart: always
+
+    # Nginx Service
+    nginx:
+        build:
+            context: ./nginx
+            dockerfile: dockerfile
+        ports:
+            - 443:443
+        volumes:
+            - './nginx:/etc/nginx/conf.d'
+        restart: always
+
+    # MariaDB Service
+    mariadb:
+        image: mariadb:10.9
+        environment:
+            MYSQL_ROOT_PASSWORD: bla123
+        volumes:
+            - mysqldata:/var/lib/mysql
+        restart: always
+
+    # phpMyAdmin Service
+    phpmyadmin:
+        image: phpmyadmin/phpmyadmin:latest
+        ports:
+            - 8080:80
+        environment:
+            PMA_HOST: mariadb
+        depends_on:
+            - mariadb
+        restart: always
+
+# Volumes
+volumes:
+
+  mysqldata:
