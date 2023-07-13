@@ -78,6 +78,28 @@ void Span::fillWithRandomNumbers(unsigned int N)
     }
 }
 
+void Span::fillWithSequentialNumbers(unsigned int N)
+{
+    try
+    {
+        if (N > _max_value)
+            throw (std::length_error("CAUGHT EXCEPTION: trying to fill Span with more numbers than its capacity"));
+        
+        if (_storage.size() + N > _max_value)
+            throw SpanIsFullException();
+        
+        for (unsigned int i = 0; i < N; ++i)
+        {
+            _storage.push_back(i);
+        }
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << e.what() << std::endl;
+    }
+    
+}
+
 int Span::shortestSpan() const
 {
     try

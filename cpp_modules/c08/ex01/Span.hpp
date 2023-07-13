@@ -24,6 +24,7 @@ public:
 
     void addNumber(long int num);
     void fillWithRandomNumbers(unsigned int N);
+    void fillWithSequentialNumbers(unsigned int N);
     int shortestSpan() const;
     int longestSpan() const;
     void print() const;
