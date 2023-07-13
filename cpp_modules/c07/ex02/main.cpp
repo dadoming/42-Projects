@@ -11,7 +11,7 @@ int main( void )
         std::cout << "b_size: " << b.size() << std::endl;
         std::cout << "printing b..." << std::endl;
         ::iter(b, 3, print);
-        std::cout << "adding 1 to b..." << std::endl;
+        std::cout << "adding 1 to all of b values..." << std::endl;
         ::iter(b, 3, add1);
         std::cout << "printing b again..." << std::endl;
         ::iter(b, 3, print);
@@ -43,10 +43,11 @@ int main( void )
         std::cout << std::endl << "a_size: " << a.size() << std::endl;
         std::cout << "printing a..." << std::endl;
         a[0] = "Hello";
-        a[1] = 65.7f;
+        a[1] = 65;
         a[2] = 97;
         a[3] = "Bye";
-        ::iter(a, 4, print);
+        ::iter(a, 5, print);
+        ::iter(a, 6, print);
     }
     catch(const std::exception& e)
     {
