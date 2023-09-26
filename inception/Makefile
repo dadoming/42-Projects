@@ -1,12 +1,30 @@
+NGINX_CONTAINER_NAME = simple_nginx_html
+
 all:
-	docker-compose up -d
+	printf "Launch config $(NGINX_CONTAINER_NAME)\n"	
+	docker-compose -f ./srcs/docker-compose.yml up -d 
 
-clean:
-	docker-compose down
-	docker-compose down --rmi all
+build:
+	printf "Building config $(NGINX_CONTAINER_NAME)\n"
+	docker-compose -f ./srcs/docker-compose.yml up -d --build
 
-nginx:
-	docker-compose build --no-cache nginx
-	docker-compose up -d --no-deps nginx
+down:
+	printf "Stopping config $(NGINX_CONTAINER_NAME)\n"
+	docker-compose -f ./srcs/docker-compose.yml down
 
-.PHONY: all clean nginx
+re:
+	printf "Rebuilding config $(NGINX_CONTAINER_NAME)\n"
+	docker-compose -f ./srcs/docker-compose.yml up -d --build
+
+clean: down
+	printf "Cleaning config $(NGINX_CONTAINER_NAME)\n"
+	docker system prune -a
+
+fclean:
+	printf "Total clean of all config docker\n"
+	docker stop $$(docker ps -qa)
+	docker system prune --all --force --volumes
+	docker network prune --force
+	docker volume prune --force
+
+.PHONY: all build down re clean fclean
