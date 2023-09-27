@@ -1,4 +1,5 @@
-NGINX_CONTAINER_NAME = simple_nginx_html
+NGINX_CONTAINER_NAME = nginx_container
+MARIADB_CONTAINER_NAME = mariadb_container
 
 all:
 	printf "Launch config $(NGINX_CONTAINER_NAME)\n"	

@@ -2,13 +2,16 @@ version: '3'
 
 services:
   nginx:
-    image: nginx:stable-alpine
+    build: 
+      context: .
+      dockerfile: requirements/nginx/Dockerfile
+    container_name: nginx_container
+#      depends_on:
+#        - wordpress
+    ports:
+      - "443:443"
     volumes:
       - ./requirements/nginx/conf/:/etc/nginx/conf.d/
-      - ./public:/var/www/public/
-      - /home/${USER}/42-Projects/inception/srcs/requirements/tools:/etc/nginx/ssl/
-    restart: unless-stopped
-    ports:
-      - "80:80"
-      - "443:443"
-    container_name: simple_nginx_html
+      # for testing
+      - ./requirements/public/html/:/var/www/
+    restart: always
