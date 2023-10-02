@@ -2,23 +2,18 @@ NGINX_CONTAINER_NAME = nginx_container
 MARIADB_CONTAINER_NAME = mariadb_container
 
 all:
-	printf "Launch config $(NGINX_CONTAINER_NAME)\n"	
 	docker-compose -f ./srcs/docker-compose.yml up -d 
 
 build:
-	printf "Building config $(NGINX_CONTAINER_NAME)\n"
 	docker-compose -f ./srcs/docker-compose.yml up -d --build
 
 down:
-	printf "Stopping config $(NGINX_CONTAINER_NAME)\n"
 	docker-compose -f ./srcs/docker-compose.yml down
 
 re:
-	printf "Rebuilding config $(NGINX_CONTAINER_NAME)\n"
 	docker-compose -f ./srcs/docker-compose.yml up -d --build
 
 clean: down
-	printf "Cleaning config $(NGINX_CONTAINER_NAME)\n"
 	docker system prune -a
 
 fclean:

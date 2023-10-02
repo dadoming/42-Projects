@@ -15,10 +15,33 @@ services:
       # for testing
       - ./requirements/public/html/:/var/www/
     restart: always
-  
-  mariadb:
+    env_file:
+      - .env
+
+  wordpress:
     build:
       context: .
-      dockerfile: requirements/mariadb/Dockerfile
-    container_name: mariadb_container
+      dockerfile: requirements/wordpress/Dockerfile
+      args:
+        DB_NAME: ${DB_NAME}
+        DB_USER: ${DB_USER}
+        DB_PASS: ${DB_PASS}
+    container_name: wordpress_container
+    depends_on:
+      - mariadb
+    ports:
+      - "80:80"
+    restart: always
 
+  # mariadb:
+  #   build:
+  #     context: .
+  #     dockerfile: requirements/mariadb/Dockerfile
+  #   container_name: mariadb_container
+  #   ports:
+  #     - "3306:3306"
+  #   restart: always
+  #   env_file:
+  #     - .env
+  #   volumes:
+  #     - mariadb:/var/lib/mysql
