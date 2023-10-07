@@ -13,10 +13,13 @@ RUN curl -s https://api.github.com/repos/FiloSottile/mkcert/releases/latest | gr
     && mv mkcert /usr/local/bin/ \
     && mkdir -p /etc/nginx/ssl \
     && mkcert -cert-file /etc/nginx/ssl/dadoming.crt -key-file /etc/nginx/ssl/dadoming.key dadoming.42.fr \
-    && rm -rf mkcert
+    && rm -rf mkcert \
+    && mkdir -p /run/nginx
 
 # Expose port 443 to exchange traffic through https
 EXPOSE 443
+
+COPY requirements/nginx/conf/ /etc/nginx/conf.d/
 
 # To start: sudo systemctl start nginx
 CMD ["nginx", "-g", "daemon off;"]
