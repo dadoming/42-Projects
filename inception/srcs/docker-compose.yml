@@ -11,7 +11,7 @@ services:
     ports:
       - "443:443"
     volumes:
-      - wp-volume:/var/www/
+      - wordpress_vol:/var/www/html/wordpress
     restart: always
     networks:
       - inception
@@ -20,16 +20,12 @@ services:
     build:
       context: .
       dockerfile: requirements/wordpress/Dockerfile
-      args:
-        DB_NAME: ${DB_NAME}
-        DB_USER: ${DB_USER}
-        DB_PASS: ${DB_PASS}
     container_name: wordpress
     depends_on:
       - mariadb
     restart: always
     volumes:
-      - wp-volume:/var/www/
+      - wordpress_vol:/var/www/html/wordpress
     networks:
       - inception
     env_file:
@@ -39,11 +35,6 @@ services:
     build:
       context: .
       dockerfile: requirements/mariadb/Dockerfile
-      args:
-        - DB_NAME:${DB_NAME}
-        - DB_USER:${DB_USER}
-        - DB_PASS:${DB_PASS}
-        - DB_ROOT:${DB_ROOT}
     container_name: mariadb
     ports:
       - "3306:3306"
@@ -52,19 +43,25 @@ services:
       - inception
     env_file:
       - .env
+    volumes:
+      - mysql_vol:/var/lib/mysql
 
 volumes:
-  wp-volume:
+  mysql_vol:
+    driver: local
     driver_opts:
       type: none
+      device: /home/dadoming/data/mysql
       o: bind
-      device: /home/${USER}/data/wordpress
-    
-  db-volume:
+    name: mysql_vol
+  
+  wordpress_vol:
+    driver: local
     driver_opts:
       type: none
+      device: /home/dadoming/data/wordpress
       o: bind
-      device: /home/${USER}/data/mariadb
+    name: wordpress_vol
 
 
 networks:

@@ -5,8 +5,9 @@ all:
 build:
 	docker-compose -f ./srcs/docker-compose.yml up -d --build
 
-no-cache:
-	docker-compose -f ./srcs/docker-compose.yml up -d --build --no-cache
+no_cache:
+	docker-compose -f ./srcs/docker-compose.yml build --no-cache 
+	docker-compose -f ./srcs/docker-compose.yml up -d
 
 down:
 	docker-compose -f ./srcs/docker-compose.yml down
@@ -35,4 +36,4 @@ logs:
 	docker logs wordpress
 	@echo "\n"
 
-.PHONY: all build down re clean fclean logs no-cache
+.PHONY: all build down re clean fclean logs no_cache
