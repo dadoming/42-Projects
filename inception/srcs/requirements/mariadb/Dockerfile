@@ -10,8 +10,6 @@ RUN mkdir -p /var/run/mysqld && \
 COPY requirements/mariadb/tools/create_db.sh .
 RUN chmod 777 /create_db.sh
 
-EXPOSE 3306
-
 ENTRYPOINT ./create_db.sh
 
 ##############################################

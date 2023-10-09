@@ -22,7 +22,8 @@ services:
       dockerfile: requirements/wordpress/Dockerfile
     container_name: wordpress
     depends_on:
-      - mariadb
+      mariadb:
+        condition: service_healthy
     restart: always
     volumes:
       - wordpress_vol:/var/www/html/wordpress
@@ -30,14 +31,12 @@ services:
       - inception
     env_file:
       - .env
-
+    
   mariadb:
     build:
       context: .
       dockerfile: requirements/mariadb/Dockerfile
     container_name: mariadb
-    ports:
-      - "3306:3306"
     restart: always
     networks:
       - inception
@@ -45,6 +44,12 @@ services:
       - .env
     volumes:
       - mysql_vol:/var/lib/mysql
+    healthcheck:
+      interval: 5s
+      timeout: 30s
+      retries: 10
+      start_period: 5s
+      test: ["CMD", "mysqladmin", "ping", "--silent" ]
 
 volumes:
   mysql_vol:
@@ -62,7 +67,6 @@ volumes:
       device: /home/dadoming/data/wordpress
       o: bind
     name: wordpress_vol
-
 
 networks:
   inception:

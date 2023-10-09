@@ -17,6 +17,8 @@ RUN apt-get update && apt-get install -y \
     php${PHP_VERSION}-zip \
     php${PHP_VERSION}-redis \
     wget \
+    curl \
+    iputils-ping \
     unzip && \
     rm -rf /var/lib/apt/lists/*
 
@@ -25,13 +27,9 @@ RUN apt-get update && apt-get install -y \
 RUN mkdir -p /run/php
 RUN mkdir -p /var/www/html
 
-# Download and install WordPress
-RUN wget https://wordpress.org/latest.zip && \
-    unzip latest.zip -d wordpress && \
-    cp -rf wordpress/* /var/www/html/wordpress && \
-    rm -rf wordpress latest.gz
-
-RUN rm /etc/php/${PHP_VERSION}/fpm/pool.d/www.conf
+RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli.phar && \
+    chmod +x wp-cli.phar && \
+    mv wp-cli.phar /usr/local/bin/wp
 
 RUN touch /run/php/php${PHP_VERSION}-fpm.pid
 # Create wp-config.php
@@ -39,13 +37,15 @@ RUN touch /run/php/php${PHP_VERSION}-fpm.pid
 
 COPY ./requirements/wordpress/conf/www.conf /etc/php/${PHP_VERSION}/fpm/pool.d/www.conf
 
-COPY ./requirements/wordpress/conf/wp-config.php /var/www/html/wordpress/wp-config.php
+COPY ./requirements/wordpress/conf/wp-config.php /tmp/wp-config.php
 
 WORKDIR /var/www/html
 
 RUN chown -R www-data:www-data /var/www/html && \
     chmod -R 755 /var/www/html
 
-EXPOSE 9000
+COPY ./requirements/wordpress/conf/wp_config_create.sh .
+RUN chmod +x /var/www/html/wp_config_create.sh && \
+    ./wp_config_create.sh
 
 CMD ["php-fpm7.4", "-F", "-R"]

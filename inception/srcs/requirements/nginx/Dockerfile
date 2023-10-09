@@ -21,5 +21,4 @@ EXPOSE 443
 
 COPY requirements/nginx/conf/ /etc/nginx/conf.d/
 
-# To start: sudo systemctl start nginx
 CMD ["nginx", "-g", "daemon off;"]
