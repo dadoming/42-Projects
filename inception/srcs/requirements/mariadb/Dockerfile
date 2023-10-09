@@ -1,7 +1,26 @@
 FROM debian:11
 
-RUN apt update \
-    && apt install mariadb-server procps -y
+RUN apt-get update && apt-get install -y mariadb-server && rm -rf /var/lib/apt/lists/*
+
+RUN mkdir -p /run/mysqld && chown -R mysql:mysql /run/mysqld
+RUN mkdir -p /var/run/mysqld && \
+    chown -R mysql:mysql /var/run/mysqld && \
+    chmod 777 /var/run/mysqld
+
+COPY requirements/mariadb/tools/create_db.sh .
+RUN chmod 777 /create_db.sh
+
+EXPOSE 3306
+
+ENTRYPOINT ./create_db.sh
+
+##############################################
+
+
+#FROM debian:11
+#
+#RUN apt update \
+#    && apt install mariadb-server procps -y
 
 #COPY requirements/mariadb/tools/create_db.sh .
 
@@ -11,14 +30,7 @@ RUN apt update \
 
 #ENTRYPOINT ["bash", "-c", "/create_db.sh"]
 
-RUN mysql -u dadoming -ppass -e "CREATE DATABASE wordpress;" \
-    "CREATE USER 'dadoming'@'localhost' IDENTIFIED BY 'pass';" \
-    "GRANT ALL PRIVILEGES ON wordpress.* TO 'dadoming'@'localhost';" \
-    "FLUSH PRIVILEGES;"
-
-# generate dump
-RUN mysqldump -u dadoming -ppass wordpress > wordpress.sql
-
+############################################################
 
 #FROM debian:11
 #
