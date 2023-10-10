@@ -25,6 +25,8 @@ services:
       mariadb:
         condition: service_healthy
     restart: always
+    ports:
+      - "9000:9000"
     volumes:
       - wordpress_vol:/var/www/html/wordpress
     networks:
@@ -50,6 +52,16 @@ services:
       retries: 10
       start_period: 5s
       test: ["CMD", "mysqladmin", "ping", "--silent" ]
+  
+  website:
+    build:
+      context: .
+      dockerfile: requirements/bonus/website/Dockerfile
+    container_name: website
+    ports:
+      - "80:80"
+    restart: always
+
 
 volumes:
   mysql_vol:

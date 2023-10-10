@@ -41,11 +41,13 @@ COPY ./requirements/wordpress/conf/wp-config.php /tmp/wp-config.php
 
 WORKDIR /var/www/html
 
-RUN chown -R www-data:www-data /var/www/html && \
-    chmod -R 755 /var/www/html
 
 COPY ./requirements/wordpress/conf/wp_config_create.sh .
 RUN chmod +x /var/www/html/wp_config_create.sh && \
     ./wp_config_create.sh
+
+
+# Set filesytem permissions
+RUN chmod -R 0777 /var/www/html/wordpress/wp-content/
 
 CMD ["php-fpm7.4", "-F", "-R"]
