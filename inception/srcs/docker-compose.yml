@@ -25,8 +25,6 @@ services:
       mariadb:
         condition: service_healthy
     restart: always
-    ports:
-      - "9000:9000"
     volumes:
       - wordpress_vol:/var/www/html/wordpress
     networks:
@@ -48,7 +46,7 @@ services:
       - mysql_vol:/var/lib/mysql
     healthcheck:
       interval: 5s
-      timeout: 30s
+      timeout: 35s
       retries: 10
       start_period: 5s
       test: ["CMD", "mysqladmin", "ping", "--silent" ]
@@ -61,8 +59,7 @@ services:
     ports:
       - "80:80"
     restart: always
-
-
+  
 volumes:
   mysql_vol:
     driver: local
