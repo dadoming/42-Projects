@@ -13,7 +13,10 @@ else
 	
 	cp ../../../../tmp/wp-config.php .
 	wp core install --allow-root --url=${DOMAIN} --title="Inception" --admin_user=${WP_ADMIN_USER} --admin_password=${WP_ADMIN_PASS} --admin_email=${WP_ADMIN_EMAIL}
-	wp user create --allow-root ${WP_USER} ${WP_USER_EMAIL} --user_pass=${WP_USER_PASS};
+	wp user create --allow-root ${WP_USER} ${WP_USER_EMAIL} --user_pass=${WP_USER_PASS}
+
+	# Set filesytem permissions
+	chmod -R 0777 /var/www/html/wordpress/wp-content/
 fi
 
-exec "$@"
+php-fpm7.4 -F -R
