@@ -5,7 +5,7 @@ else
 mysql_install_db
 service mariadb start
 # Set root to not login without pass
-mysql_secure_installation << _EOF_
+mysql_secure_installation << EOF
 
 n
 Y
@@ -15,16 +15,16 @@ Y
 n
 Y
 Y
-_EOF_
+EOF
 # Create database
 # select user from mysql.user;
 mysql -u root -p"$DB_ROOT_PASS" -e "CREATE DATABASE IF NOT EXISTS $DB_NAME;" && \
 mysql -u root -p"$DB_ROOT_PASS" -e "CREATE USER IF NOT EXISTS '$DB_USER'@'%' IDENTIFIED BY '$DB_PASS';" && \
 mysql -u root -p"$DB_ROOT_PASS" -e "GRANT ALL PRIVILEGES ON $DB_NAME.* TO '$DB_USER'@'%';" && \
-mysql -u root -p"$DB_ROOT_PASS" -e "FLUSH PRIVILEGES;"
-# echo "CREATE USER '$DB_USER'@'%' IDENTIFIED BY '$DB_PASS';" | mysql -u root -p $DB_ROOT_PASS
-# echo "CREATE DATABASE IF NOT EXISTS $DB_NAME; GRANT ALL ON $DB_NAME.* TO '$DB_USER'@'%' IDENTIFIED BY '$DB_PASS'; FLUSH PRIVILEGES;" | mysql -u root -p $DB_ROOT_PASS
-fi 
+mysql -u root -p"$DB_ROOT_PASS" -e "FLUSH PRIVILEGES;" && \
+mysql -u root -p"$DB_ROOT_PASS" -e "DELETE FROM mysql.user WHERE User='root'; FLUSH PRIVILEGES;"
 sleep 5
 service mariadb stop
+fi
+# Replace current shell process to mysqld_safe and accept connections from all
 exec mysqld_safe --bind-address=0.0.0.0
