@@ -18,12 +18,12 @@ RUN apt-get update && apt-get install -y \
     php${PHP_VERSION}-redis \
     wget \
     curl \
+    ssmtp \
     iputils-ping \
     unzip && \
     rm -rf /var/lib/apt/lists/*
 
 # Create the directory for the PID and socket file
-# Configure PHP-FPM
 RUN mkdir -p /run/php
 RUN mkdir -p /var/www/html
 
@@ -32,8 +32,6 @@ RUN curl -O https://raw.githubusercontent.com/wp-cli/builds/gh-pages/phar/wp-cli
     mv wp-cli.phar /usr/local/bin/wp
 
 RUN touch /run/php/php${PHP_VERSION}-fpm.pid
-# Create wp-config.php
-## Atualizar isto para fazer copy no docker compose
 
 COPY ./requirements/wordpress/conf/www.conf /etc/php/${PHP_VERSION}/fpm/pool.d/www.conf
 
@@ -41,13 +39,12 @@ COPY ./requirements/wordpress/conf/wp-config.php /tmp/wp-config.php
 
 WORKDIR /var/www/html
 
+EXPOSE 9000
 
 COPY ./requirements/wordpress/conf/wp_config_create.sh .
-RUN chmod +x /var/www/html/wp_config_create.sh && \
-    ./wp_config_create.sh
+RUN chmod +x /var/www/html/wp_config_create.sh 
+   
 
+ENTRYPOINT ./wp_config_create.sh
 
-# Set filesytem permissions
-RUN chmod -R 0777 /var/www/html/wordpress/wp-content/
-
-CMD ["php-fpm7.4", "-F", "-R"]
+# CMD [ "tail", "-f", "/dev/null"]
