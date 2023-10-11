@@ -1,6 +1,7 @@
 
 all:
-	docker-compose -f ./srcs/docker-compose.yml up -d 
+	sh ./srcs/requirements/tools/make_dir.sh
+	docker-compose -f ./srcs/docker-compose.yml up -d --build
 
 build:
 	sh ./srcs/requirements/tools/make_dir.sh
@@ -8,7 +9,6 @@ build:
 
 no_cache:
 	docker-compose -f ./srcs/docker-compose.yml build --no-cache
-	sudo kill -9 $(sudo lsof -t -i:3306)
 	docker-compose -f ./srcs/docker-compose.yml up -d
 
 down:
@@ -28,11 +28,11 @@ fclean:
 	docker volume prune --force
 
 # clean_eval:
-# 	docker stop $(docker ps -qa)
-# 	docker rm $(docker ps -qa)
-# 	docker rmi -f $(docker images -qa)
-# 	docker volume rm $(docker volume ls -q)
-# 	docker network rm $(docker network ls -q) 2>/dev/null
+# docker stop $(docker ps -qa);
+# docker rm $(docker ps -qa);
+# docker rmi -f $(docker images -qa);
+# docker volume rm $(docker volume ls -q);
+# docker network rm $(docker network ls -q) 2>/dev/null
 
 logs:
 	@echo ">> MariaDB:\n"
