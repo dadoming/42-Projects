@@ -3,21 +3,11 @@ all:
 	sh ./srcs/requirements/tools/make_dir.sh
 	docker-compose -f ./srcs/docker-compose.yml up -d --build
 
-build:
-	sh ./srcs/requirements/tools/make_dir.sh
-	docker-compose -f ./srcs/docker-compose.yml up -d --build
-
-no_cache:
-	docker-compose -f ./srcs/docker-compose.yml build --no-cache
-	docker-compose -f ./srcs/docker-compose.yml up -d
-
 down:
 	docker-compose -f ./srcs/docker-compose.yml down
 
-re:
-	docker-compose -f ./srcs/docker-compose.yml up -d --build
-
 clean: down
+	sudo rm -rf ../../data/
 	docker system prune -a
 
 fclean:
@@ -26,6 +16,8 @@ fclean:
 	docker system prune --all --force --volumes
 	docker network prune --force
 	docker volume prune --force
+
+re: fclean all
 
 # clean_eval:
 # docker stop $(docker ps -qa);
@@ -45,5 +37,8 @@ logs:
 	@echo ">> Wordpress:\n"
 	docker logs wordpress
 	@echo "\n"
+	@echo ">> Website:\n"
+	docker logs website
+	@echo "\n"
 
-.PHONY: all build down re clean fclean logs no_cache
+.PHONY: all down re clean fclean logs 
