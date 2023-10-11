@@ -5,6 +5,7 @@ define( 'DB_PASSWORD', '1234' );
 define( 'DB_HOST', 'mariadb' );
 define( 'DB_CHARSET', 'utf8' );
 define( 'DB_COLLATE', '' );
+define('PHP_MAILER', false);
 define('FS_METHOD','direct');
 $table_prefix = 'wp_';
 define('WP_DEBUG', true);
