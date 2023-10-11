@@ -4,7 +4,6 @@ then
 else
 mysql_install_db
 service mariadb start
-# Set root to not login without pass
 mysql_secure_installation << EOF
 
 n

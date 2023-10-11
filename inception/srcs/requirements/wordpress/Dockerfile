@@ -44,7 +44,6 @@ EXPOSE 9000
 COPY ./requirements/wordpress/conf/wp_config_create.sh .
 RUN chmod +x /var/www/html/wp_config_create.sh 
    
-
 ENTRYPOINT ./wp_config_create.sh
 
 # CMD [ "tail", "-f", "/dev/null"]
