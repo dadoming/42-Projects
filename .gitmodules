@@ -1,0 +1,9 @@
+[submodule "cub3D"]
+	path = cub3D
+	url = git@github.com:dadoming/cub3D.git
+[submodule "ft_irc"]
+	path = ft_irc
+	url = git@github.com:dadoming/ft_irc.git
+[submodule "minishell"]
+	path = minishell
+	url = git@github.com:dadoming/minishell.git
