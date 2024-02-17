@@ -26,7 +26,7 @@ void RPN::calculate(std::string formula)
 {
     try
     {
-        std::stack<int> stack;
+        std::stack<float> stack;
         size_t i = 0;
         while (i < formula.length())
         {
@@ -51,9 +51,9 @@ void RPN::calculate(std::string formula)
                 throw InvalidInputException();
             if(formula[i] == '+' || formula[i] == '-' || formula[i] == '*' || formula[i] == '/')
             {
-                int a = stack.top();
+                float a = stack.top();
                 stack.pop();
-                int b = stack.top();
+                float b = stack.top();
                 stack.pop();
                 if (formula[i] == '+')
                     stack.push(b + a);
